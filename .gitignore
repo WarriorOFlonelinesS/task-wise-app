@@ -1,0 +1,59 @@
+# Project Root Specific
+/node_modules/
+/public/build/
+/public/hot
+/public/storage
+/storage/*.key
+/storage/framework/sessions/*
+/storage/framework/views/*
+/storage/framework/cache/*
+/storage/logs/*.log
+/.env
+/.env.backup
+/.phpunit.result.cache
+/Homestead.yaml
+/Homestead.json
+/npm-debug.log
+/yarn-error.log
+/phpstan-baseline.neon
+
+# Backend Specific (assuming 'backend' is your Laravel app directory)
+backend/vendor/
+backend/.env
+backend/bootstrap/cache/*
+backend/storage/framework/sessions/*
+backend/storage/framework/views/*
+backend/storage/framework/cache/data/*
+backend/storage/logs/*.log
+backend/storage/app/public/*
+!backend/storage/app/public/.gitignore
+backend/public/hot
+backend/public/storage
+backend/public/build
+backend/.phpunit.result.cache
+backend/node_modules/
+
+# Frontend Specific (assuming 'frontend' directory)
+frontend/node_modules/
+frontend/.env
+frontend/.env.*
+!frontend/.env.example
+frontend/dist/
+frontend/build/
+frontend/.DS_Store
+frontend/coverage/
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDE specific
+.idea/
+.vscode/
+*.swp
+*.swo 
