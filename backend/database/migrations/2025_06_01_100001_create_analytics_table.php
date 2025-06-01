@@ -11,14 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('settings', function (Blueprint $table) {
+        Schema::create('analytics', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->string('key');
-            $table->text('value');
+            $table->date('date');
+            $table->integer('tasks_completed')->default(0);
+            $table->float('avg_completion_time')->nullable(); // in minutes
             $table->timestamps();
-
-            $table->unique(['user_id', 'key']);
         });
     }
 
@@ -27,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('settings');
+        Schema::dropIfExists('analytics');
     }
-};
+}; 

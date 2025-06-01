@@ -11,14 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('settings', function (Blueprint $table) {
+        Schema::create('ai_subtasks', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->string('key');
-            $table->text('value');
+            $table->foreignId('task_id')->constrained()->onDelete('cascade');
+            $table->string('content');
+            $table->boolean('is_done')->default(false);
             $table->timestamps();
-
-            $table->unique(['user_id', 'key']);
         });
     }
 
@@ -27,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('settings');
+        Schema::dropIfExists('ai_subtasks');
     }
-};
+}; 
