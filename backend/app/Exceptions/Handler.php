@@ -1,10 +1,10 @@
 <?php
 
-namespace App\app\Exceptions;
+namespace App\Exceptions;
 
 use Illuminate\Auth\AuthenticationException;
 
-class Handler
+class Handler extends ExceptionHandler
 {
     public function register():void{
        $this->renderable(function(AuthenticationException $e, $request){

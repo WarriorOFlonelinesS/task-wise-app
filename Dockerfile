@@ -1,6 +1,5 @@
 FROM php:8.2-fpm-alpine
 
-# Установка зависимостей для расширений
 RUN apk add --no-cache \
     libzip-dev \
     zlib-dev \
@@ -17,7 +16,6 @@ RUN apk add --no-cache \
     git \
     linux-headers
 
-# Конфигурация GD и установка PHP-расширений
 RUN docker-php-ext-configure gd \
     --with-freetype \
     --with-jpeg \
@@ -35,20 +33,16 @@ RUN docker-php-ext-configure gd \
         xml \
         xsl
 
-# Установка Composer
+
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Рабочая директория
 WORKDIR /var/www
 
-# Копируем composer и устанавливаем зависимости
-COPY ./app/composer.* ./
+COPY ./backend/composer.json ./backend/composer.lock ./
 RUN composer install --prefer-dist --no-dev --no-scripts --no-interaction
 
-# Копируем код приложения
-COPY . .
+COPY ./backend/ .
 
-# Оптимизация автозагрузки
 RUN composer dump-autoload --optimize
 
 CMD ["php-fpm"]

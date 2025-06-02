@@ -10,7 +10,7 @@ class AuthService
         $data->validate(
             [
                 'name' => 'required',
-                'email' => 'required|email|unique:user',
+                'email' => 'required|email|unique:users',
                 'password' => 'required|min:6'
             ]
             );
@@ -18,7 +18,7 @@ class AuthService
             'name' => $data->name,
             'email' => $data->email,
             'password' => bcrypt($data->password)
-        ])
+        ]);
         
     }
 }
