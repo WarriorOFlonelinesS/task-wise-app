@@ -25,4 +25,41 @@ class AuthController extends Controller
             ], 500);
         }
     }
+    
+    public function login(Request $request, AuthService $authService)
+    {
+        try {
+            $user = $authService->loginUser($request);
+
+            return response()->json([
+                'user' => $user,
+                'message' => 'Welcome!'
+            ], 200);
+        } catch (\Exception $e) {
+            Log::error('Login error: ' . $e->getMessage());
+
+            return response()->json([
+                'error' => 'Invalid input or internal error',
+                'message' => $e->getMessage(),
+            ], 500);
+        }
+    }
+
+    public function logout(Request $request, AuthService $authService)
+    {
+        try {
+            $user = $authService->logoutUser($request);
+
+            return response()->json(
+                ['message' => 'Bye!'
+            ], 200);
+        } catch (\Exception $e) {
+            Log::error('Login error: ' . $e->getMessage());
+
+            return response()->json([
+                'error' => 'Invalid input or internal error',
+                'message' => $e->getMessage(),
+            ], 500);
+        }
+    }
 }
