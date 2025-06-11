@@ -7,18 +7,12 @@ use Illuminate\Validation\ValidationException;
 
 class AuthService
 {   
-    public function createUser($data){
-        $data->validate(
-            [
-                'name' => 'required',
-                'email' => 'required|email|unique:users',
-                'password' => 'required|min:6'
-            ]
-            );
+    public function createUser(array $data)
+    {   
         return User::create([
-            'name' => $data->name,
-            'email' => $data->email,
-            'password' => bcrypt($data->password)
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'password' => Hash::make($data['password']),
         ]);
     }
 
@@ -31,10 +25,10 @@ class AuthService
         }
 
         $token = $user->createToken('auth_token')->plainTextToken;
-        return response()->json(['user' => $user, 'token'=>$token]);
+        return ['user' => $user, 'token' => $token];
     }
 
     public function logoutUser($data){
-        $data->user()->currentAccessToken()->delete();
+       $data->user()->currentAccessToken()->delete();
     }
 }
