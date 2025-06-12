@@ -4,6 +4,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
 use Illuminate\Http\Request;
+use Illuminate\Auth\AuthenticationException;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -19,17 +20,21 @@ return Application::configure(basePath: dirname(__DIR__))
         $exceptions->render(function (\Throwable $e, Request $request) {
             if ($request->is('api/*')) {
                 $statusCode = match (true) {
+                    $e instanceof AuthenticationException => 401,
                     $e instanceof \Illuminate\Database\Eloquent\ModelNotFoundException,
                     $e instanceof \Symfony\Component\Http\Exception\NotFoundHttpException => 404,
                     $e instanceof \Illuminate\Validation\ValidationException => 422,
                     default => 500,
                 };
 
-                $response = ['message' => $e->getMessage()];
-
-                if ($e instanceof \Illuminate\Validation\ValidationException) {
-                    $response['errors'] = $e->errors();
-                }
+                $response = match (true) {
+                    $e instanceof AuthenticationException => ['message' => 'Unauthenticated.'],
+                    $e instanceof \Illuminate\Validation\ValidationException => [
+                        'message' => $e->getMessage(),
+                        'errors' => $e->errors()
+                    ],
+                    default => ['message' => $e->getMessage()]
+                };
 
                 if (config('app.debug')) {
                     $response['exception'] = get_class($e);

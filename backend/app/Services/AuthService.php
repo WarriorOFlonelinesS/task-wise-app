@@ -4,6 +4,7 @@ namespace App\Services;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Auth\AuthenticationException;
 
 class AuthService
 {   
@@ -29,6 +30,19 @@ class AuthService
     }
 
     public function logoutUser($data){
-       $data->user()->currentAccessToken()->delete();
+        try {
+            $token = $data->user()->currentAccessToken();
+            if (!$token) {
+                throw new \Illuminate\Auth\AuthenticationException('No active token found');
+            }
+            
+            $token->delete();
+            return true;
+        } catch (\Exception $e) {
+            if ($e instanceof \Illuminate\Auth\AuthenticationException) {
+                throw $e;
+            }
+            throw new \Illuminate\Auth\AuthenticationException('Failed to logout');
+        }
     }
 }

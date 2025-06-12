@@ -61,16 +61,14 @@ class AuthController extends Controller
         try {
             $authService->logoutUser($request);
 
-            return response()->json(
-                ['message' => "Goodbye! Your tasks will be waiting 📝"
+            return response()->json([
+                'message' => "Goodbye! Your tasks will be waiting 📝"
             ], 200);
         } catch (\Exception $e) {
-            Log::error('Login error: ' . $e->getMessage());
-
+            Log::error('Logout error: ' . $e->getMessage());
             return response()->json([
-                'error' => 'Invalid token or internal error',
-                'message' => $e->getMessage(),
-            ], 500);
+                'message' => 'Unauthenticated.'
+            ], 401);
         }
     }
 }
