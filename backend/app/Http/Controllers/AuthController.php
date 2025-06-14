@@ -5,6 +5,7 @@ use App\Services\AuthService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Auth\AuthenticationException;
 
 class AuthController extends Controller
 {
@@ -46,9 +47,13 @@ class AuthController extends Controller
                 'token' => $result['token'],
                 'message' => 'Welcome!'
             ], 200);
+        } catch (AuthenticationException $e) {
+            Log::error('Login authentication error: ' . $e->getMessage());
+            return response()->json([
+                'error' => 'Invalid input or internal error'
+            ], 401);
         } catch (\Exception $e) {
             Log::error('Login error: ' . $e->getMessage());
-
             return response()->json([
                 'error' => 'Invalid input or internal error',
                 'message' => $e->getMessage(),
