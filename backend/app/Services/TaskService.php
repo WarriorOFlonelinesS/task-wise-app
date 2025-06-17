@@ -18,5 +18,12 @@ class TaskService
         ]);
     }
 
-    
+    public function showTasks(User $user)
+    {   
+        return Task::where('user_id', $user->id)->get();
+    }
+    public function showTask(User $user, $id)
+    {   $tasks = Task::where('user_id', $user->id)->get();
+        return $tasks[$id];
+    }
 }
