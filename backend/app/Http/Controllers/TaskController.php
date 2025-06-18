@@ -9,9 +9,6 @@ use Illuminate\Validation\ValidationException;
 class TaskController extends Controller
 {
     
-    /**
-     * Display a listing of the resource.
-     */
     public function index(Request $request, taskService $taskService)
     {
         try {$tasks = $taskService->showTasks($request->user());
@@ -29,9 +26,7 @@ class TaskController extends Controller
         }
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+
     public function store(Request $request, TaskService $taskService)
     {
         try {
@@ -59,9 +54,7 @@ class TaskController extends Controller
         }
     }
 
-//     /**
-//      * Display the specified resource.
-//      */
+
     public function show(Request $request, taskService $taskService, string $id)
     {
         try {
@@ -80,37 +73,50 @@ class TaskController extends Controller
             }
     }
 
-//     /**
-//      * Update the specified resource in storage.
-//      */
-//     public function update(Request $request, string $id)
-//     {
-//         try {
-    $task = $taskService->showTask($request->user(), $id);
-    $userName = $request->user()->name;
-    return response()->json([
-        'task' => $task,
-        'message' => "Task of $userName"
-    ], 200);}
-    catch (\Exception $e) {
-        Log::error('Error getting task: ' . $e->getMessage());
-        return response()->json([
-            'error' => 'Failed to get task',
+
+    public function update(Request $request, taskService $taskService, string $id)
+    {
+        try {
+            $validatedData = $request->validate([
+                'title' => 'required|string|max:255',
+                'description' => 'nullable|string'
+            ]);
+
+            $task = $taskService->createTask($request->user(), $validatedData);
+
+            return response()->json([
+                'task' => $task,
+                'message' => 'Task updated!'
+            ], 200);
+        }
+        catch (\Exception $e) {
+            Log::error('Error updatting task: ' . $e->getMessage());
+            return response()->json([
+            'error' => 'Failed to update task',
             'message' => $e->getMessage()
         ], 500);
+        }
     }
-//     }
+    public function destroy(taskService $taskService, string $id)
+    {
+        try {
+            $taskService->deleteTask($id);
 
-//     /**
-//      * Remove the specified resource from storage.
-//      */
-//     public function destroy(string $id)
-//     {
-//         //
-//     }
-
+            return response()->json([
+                'message' => "Task updated under id $id was deleted!"
+            ], 200);
+        }
+        catch (\Exception $e) {
+            Log::error('Error deletting task: ' . $e->getMessage());
+            return response()->json([
+            'error' => 'Failed to delete task',
+            'message' => $e->getMessage()
+        ], 500);
+        }
+    }
+}
 //     public function filter(string $id)
 //     {
 //         //
 //     }
-}
+

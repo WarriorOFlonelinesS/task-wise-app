@@ -26,4 +26,17 @@ class TaskService
     {   $tasks = Task::where('user_id', $user->id)->get();
         return $tasks[$id];
     }
+    
+    public function updateTask(User $user, array $data, $id)
+    {   $tasks = Task::where('user_id', $user->id)->get();
+        Task::find($tasks[$id])->update([
+            'title' => $data['title'],
+            'description' => $data['description']
+        ]);
+        return $tasks[$id];
+    }
+    public function deleteTask($id)
+    {   
+        return Task::destroy($id);
+    }
 }
