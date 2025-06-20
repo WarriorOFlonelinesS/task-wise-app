@@ -18,14 +18,13 @@ class TaskController extends Controller
             'message' => "Tasks of $userName"
         ], 200);}
         catch (\Exception $e) {
-            Log::error('Error  getting task: ' . $e->getMessage());
+            Log::error('Error getting task: ' . $e->getMessage());
             return response()->json([
                 'error' => 'Failed to get tasks',
                 'message' => $e->getMessage()
             ], 500);
         }
     }
-
 
     public function store(Request $request, TaskService $taskService)
     {
@@ -54,7 +53,6 @@ class TaskController extends Controller
         }
     }
 
-
     public function show(Request $request, taskService $taskService, string $id)
     {
         try {
@@ -65,14 +63,13 @@ class TaskController extends Controller
                 'message' => "Task of $userName"
             ], 200);}
             catch (\Exception $e) {
-                Log::error('Error getting task: ' . $e->getMessage());
+                Log::error('Error geting task: ' . $e->getMessage());
                 return response()->json([
                     'error' => 'Failed to get task',
                     'message' => $e->getMessage()
                 ], 500);
             }
     }
-
 
     public function update(Request $request, taskService $taskService, string $id)
     {
@@ -90,33 +87,35 @@ class TaskController extends Controller
             ], 200);
         }
         catch (\Exception $e) {
-            Log::error('Error updatting task: ' . $e->getMessage());
+            Log::error('Error updating task: ' . $e->getMessage());
             return response()->json([
             'error' => 'Failed to update task',
             'message' => $e->getMessage()
         ], 500);
         }
     }
-    public function destroy(taskService $taskService, string $id)
+
+    public function destroy(Request $request, taskService $taskService, string $id)
     {
         try {
-            $taskService->deleteTask($id);
+            $taskService->deleteTask($request->user(), $id);
 
             return response()->json([
-                'message' => "Task updated under id $id was deleted!"
+                'message' => "Task with id $id was deleted!!"
             ], 200);
         }
         catch (\Exception $e) {
-            Log::error('Error deletting task: ' . $e->getMessage());
+            Log::error('Error deleting task: ' . $e->getMessage());
             return response()->json([
             'error' => 'Failed to delete task',
             'message' => $e->getMessage()
         ], 500);
         }
     }
+
+    public function filter(Request $request, taskService $taskService)
+    {
+        return $taskService->filterTasks($request);
+    }
 }
-//     public function filter(string $id)
-//     {
-//         //
-//     }
 
