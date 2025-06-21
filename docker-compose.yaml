@@ -6,6 +6,7 @@ services:
     container_name: laravel_app
     volumes:
       - ./backend:/var/www
+      - vendor-data:/var/www/vendor
     depends_on:
       - db
       - redis
@@ -58,6 +59,7 @@ services:
 
 volumes:
   pgdata:
+  vendor-data:
 
 networks:
   app-network:

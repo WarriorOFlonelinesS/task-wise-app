@@ -45,13 +45,27 @@ class TaskService
     }
 
     public function filterTasks($request)
-    {   $user = $request->user();
-        $tasks = Task::where('user_id', $user->id);
+    {   
+        $user = $request->user();
 
-        if($request->has("id")){
-           $tasks->where('id', $request->input('id'));
+        if(!user){
+            return response()->json([
+                'error' => 'Unauthorized'
+            ], 401);
         }
 
-        return $tasks->get();
+        $validated = $request->validate([
+            'id':'sometimes|integer',
+            'status': 'sometimes|sting',
+            'user_id': 'sometimes:integer',
+            'project_id':'sometimes|integer',
+            'titme': 'sometimes|sting',
+            'due_date': 'sometimes|dateTime',
+            'smart_score': 'sometimes|float',
+        ])
+
+        return Task::where('user_id', $user->id)
+               ->filter($validated )
+               ->get();
     }
 }

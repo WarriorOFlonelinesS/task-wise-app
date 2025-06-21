@@ -115,7 +115,16 @@ class TaskController extends Controller
 
     public function filter(Request $request, taskService $taskService)
     {
-        return $taskService->filterTasks($request);
+        try {$tasks = $taskService->filterTasks($request);
+            return response()->json([
+            'message' => 'Tasks filtered!',
+            "tasks" => $tasks
+        ], 200);  
+        } catch(\Exception $e){
+            return response()->json([
+                'message' => 'Someting went wrong',
+            ], 500);  
+        }  
     }
 }
 
