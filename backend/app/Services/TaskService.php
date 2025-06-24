@@ -48,24 +48,28 @@ class TaskService
     {   
         $user = $request->user();
 
-        if(!user){
+        if(!$user){
             return response()->json([
                 'error' => 'Unauthorized'
             ], 401);
         }
 
         $validated = $request->validate([
-            'id':'sometimes|integer',
-            'status': 'sometimes|sting',
-            'user_id': 'sometimes:integer',
-            'project_id':'sometimes|integer',
-            'titme': 'sometimes|sting',
-            'due_date': 'sometimes|dateTime',
-            'smart_score': 'sometimes|float',
-        ])
+            'id'=>'sometimes|integer',
+            'status'=> 'sometimes|sting',
+            'user_id'=> 'sometimes:integer',
+            'project_id'=>'sometimes|integer',
+            'titme'=> 'sometimes|sting',
+            'due_date'=> 'sometimes|dateTime',
+            'smart_score'=> 'sometimes|float',
+        ]);
 
-        return Task::where('user_id', $user->id)
-               ->filter($validated )
-               ->get();
+        $query = Task::where('user_id', $user->id);
+
+        foreach ($validated as $key => $value) {
+            $query->where($key, $value);
+        }
+        
+        return $query->get();
     }
 }

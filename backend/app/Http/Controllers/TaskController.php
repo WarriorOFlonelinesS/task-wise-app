@@ -122,12 +122,10 @@ class TaskController extends Controller
             return response()->json([
                 'task'=> $task,
             ], 200);
-        } catch (\Exception $e) {
-                Log::error('Error filtering task: ' . $e->getMessage());
-                return response()->json([
-                'error' => 'Failed to filter task',
-                'message' => $e->getMessage(),
-            ], 500);
+        } catch (ValidationException $e) {
+            return response()->json([
+                'errors' => $e->errors(),
+            ], 422);
         }
 
     }
