@@ -98,6 +98,7 @@ class TaskController extends Controller
     public function destroy(Request $request, taskService $taskService, string $id)
     {
         try {
+
             $taskService->deleteTask($request->user(), $id);
 
             return response()->json([
@@ -108,14 +109,25 @@ class TaskController extends Controller
             Log::error('Error deleting task: ' . $e->getMessage());
             return response()->json([
             'error' => 'Failed to delete task',
-            'message' => $e->getMessage()
+            'message' => $e->getMessage(),
         ], 500);
         }
     }
 
     public function filter(Request $request, taskService $taskService)
-    {
-        return $taskService->filterTasks($request);
+    { 
+        try {
+            $task = $taskService->filterTasks($request);
+            return response()->json([
+                'task'=> $task,
+            ], 200);
+        } catch (\Exception $e) {
+                Log::error('Error filtering task: ' . $e->getMessage());
+                return response()->json([
+                'error' => 'Failed to filter task',
+                'message' => $e->getMessage(),
+            ], 500);
+        }
     }
 }
 
