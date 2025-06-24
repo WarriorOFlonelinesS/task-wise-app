@@ -115,6 +115,7 @@ class TaskController extends Controller
     }
 
     public function filter(Request $request, taskService $taskService)
+
     { 
         try {
             $task = $taskService->filterTasks($request);
@@ -128,6 +129,7 @@ class TaskController extends Controller
                 'message' => $e->getMessage(),
             ], 500);
         }
-    }
-}
 
+    }
+
+}
