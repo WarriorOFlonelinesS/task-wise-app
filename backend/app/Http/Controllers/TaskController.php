@@ -11,7 +11,9 @@ class TaskController extends Controller
     
     public function index(Request $request, taskService $taskService)
     {
-        try {$tasks = $taskService->showTasks($request->user());
+        try {
+        
+        $tasks = $taskService->showTasks($request->user());
         $userName = $request->user()->name;
         return response()->json([
             'tasks' => $tasks,
@@ -115,7 +117,6 @@ class TaskController extends Controller
     }
 
     public function filter(Request $request, taskService $taskService)
-
     { 
         try {
             $task = $taskService->filterTasks($request);

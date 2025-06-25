@@ -6,19 +6,19 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Auth\AuthenticationException;
+use App\DTO\UserDTO;
 
 class AuthController extends Controller
 {
     public function register(Request $request, AuthService $authService)
     {
         try {
-            $validatedData = $request->validate([
-                'name' => 'required|string|max:255',
-                'email' => 'required|string|email|max:255|unique:users',
-                'password' => 'required|string|min:6|confirmed',
-            ]);
+            
+            $dto = new UserDTO($request->all());
 
-            $user = $authService->createUser($validatedData);
+            $dto->validate();
+            
+            $user = $authService->createUser($dto);
 
             return response()->json([
                 'user' => $user,
@@ -26,6 +26,7 @@ class AuthController extends Controller
             ], 201);
         } catch (ValidationException $e) {
             return response()->json([
+                'dto' => $request->all(),
                 'errors' => $e->errors(),
             ], 422);
         } catch (\Exception $e) {

@@ -5,15 +5,17 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Auth\AuthenticationException;
+use App\DTO\UserDTO;
 
 class AuthService
+
 {   
-    public function createUser(array $data)
+    public function createUser(UserDTO $dto)
     {   
         return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
+            'name' => $dto->name,
+            'email' => $dto->email,
+            'password' => Hash::make($dto->password),
         ]);
     }
 

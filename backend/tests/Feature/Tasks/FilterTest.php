@@ -73,6 +73,7 @@ class FilterTest extends TestCase
         
         $response->assertStatus(422);
     }
+
     
     /** @test */
     public function user_requests_nonexistent_tasks ()
