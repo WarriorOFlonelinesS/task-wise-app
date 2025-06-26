@@ -1,7 +1,7 @@
 <?php
 namespace App\DTO;
 
-class UserDTO
+class TaskDTO;
 {
     public $name;
     public $email;
@@ -14,4 +14,5 @@ class UserDTO
         $this->password = $data['password'] ?? null;
         $this->password_confirmation = $data['password_confirmation'] ?? null;
     }
+    
 }

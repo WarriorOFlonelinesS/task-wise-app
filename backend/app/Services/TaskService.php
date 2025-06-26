@@ -9,12 +9,12 @@ use Illuminate\Auth\AuthenticationException;
 
 class TaskService
 {   
-    public function createTask(User $user, array $data)
+    public function createTask(TaksDTO $taskDTO)
     {   
         return Task::create([
-            'user_id' => $user->id,
-            'title' => $data['title'],
-            'description' => $data['description']
+            'user_id' => auth()->user()->id,
+            'title' => $taskDTO->tite,
+            'description' => $taskDTO->description
         ]);
     }
 

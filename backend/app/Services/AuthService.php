@@ -19,9 +19,9 @@ class AuthService
         ]);
     }
 
-    public function loginUser($data){
-        $user = User::where('email', $data->email)->first();
-        if(! $user || !Hash::check($data->password, $user->password)){
+    public function loginUser(UserDTO $dto){
+        $user = User::where('email', $dto->email)->first();
+        if(! $user || !Hash::check($dto->password, $user->password)){
             throw new AuthenticationException('Invalid credentials');
         }
 
@@ -29,9 +29,9 @@ class AuthService
         return ['user' => $user, 'token' => $token];
     }
 
-    public function logoutUser($data){
+    public function logoutUser(){
         try {
-            $token = $data->user()->currentAccessToken();
+            $token = auth()->user()->currentAccessToken();
             if (!$token) {
                 throw new \Illuminate\Auth\AuthenticationException('No active token found');
             }
