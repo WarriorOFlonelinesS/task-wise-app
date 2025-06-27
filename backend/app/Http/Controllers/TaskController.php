@@ -5,11 +5,18 @@ use App\Services\TaskService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\ValidationException;
+use App\Services\TaskValidationService;
+use App\DTO\TaskDTO;
 
 class TaskController extends Controller
 {
     
-    public function index(Request $request, taskService $taskService)
+    public function __construct(Request $request, TaskService $taskService) {
+        $this->request = $request;
+        $this->taskService = $taskService;
+    }
+
+    public function index()
     {
         try {
         
@@ -28,15 +35,14 @@ class TaskController extends Controller
         }
     }
 
-    public function store(Request $request, TaskService $taskService)
-    {
-        try {
-            $validatedData = $request->validate([
-                'title' => 'required|string|max:255',
-                'description' => 'nullable|string'
-            ]);
+    public function store(TaskValidationService $validation)
+    {   
 
-            $task = $taskService->createTask($request->user(), $validatedData);
+        try {
+         
+            $validData = $validation->validate($this->request->all());
+            $dto = new TaskDTO($validData);
+            $task = $this->taskService->createTask($dto);
 
             return response()->json([
                 'task' => $task,

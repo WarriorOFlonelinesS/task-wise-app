@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-class TaskService
+class TaskValidationService
 {   
     public function validate(array $data)
     {   
