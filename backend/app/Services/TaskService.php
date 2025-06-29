@@ -9,31 +9,42 @@ use Illuminate\Auth\AuthenticationException;
 use App\DTO\TaskDTO;
 
 class TaskService
-{   
-    public function createTask(TaskDTO $taskDTO)
+{    
+    // protected $userId;
+
+    // public function __construct()
+    // {
+    //     $this->userId = auth();
+    // }
+
+
+    // public function createTask(TaskDTO $taskDTO)
+    // {   
+      
+    //     return Task::create([
+    //         'user_id' => $userId,
+    //         'title' => $taskDTO->title,
+    //         'description' => $taskDTO->description
+    //     ]);
+    // }
+
+    public function showTasks(User $user)
     {   
-        return Task::create([
-            'user_id' => auth()->user()->id,
-            'title' => $taskDTO->title,
-            'description' => $taskDTO->description
-        ]);
+        // return Task::where('user_id', $userId)->get();
+        return $user;
     }
 
-    // public function showTasks(User $user)
-    // {   
-    //     return Task::where('user_id', $user->id)->get();
-    // }
-    // public function showTask(User $user, $id)
-    // {   return Task::where('user_id', $user->id)
+    // public function showTask($id)
+    // {   return Task::where('user_id', $userId)
     //     ->where("id", $id)
     //     ->firstOrFail();
     // }
     
-    // public function updateTask(User $user, array $data, $id)
-    // {   $tasks = Task::where('user_id', $user->id)->get();
+    // public function updateTask(TaskDTO $taskDTO, string $id)
+    // {   $tasks = Task::where('user_id', $userId)->get();
     //     Task::find($id)->update([
-    //         'title' => $data['title'],
-    //         'description' => $data['description']
+    //         'title' => $taskDTO->title,
+    //         'description' => $taskDTO->title
     //     ]);
     //     return $tasks[$id];
     // }
@@ -47,25 +58,15 @@ class TaskService
 
     // public function filterTasks($request)
     // {   
-    //     $user = $request->user();
-
+    //     $user = auth()->user();
+        
     //     if(!$user){
     //         return response()->json([
     //             'error' => 'Unauthorized'
     //         ], 401);
     //     }
 
-    //     $validated = $request->validate([
-    //         'id'=>'sometimes|integer',
-    //         'status'=> 'sometimes|sting',
-    //         'user_id'=> 'sometimes:integer',
-    //         'project_id'=>'sometimes|integer',
-    //         'titme'=> 'sometimes|sting',
-    //         'due_date'=> 'sometimes|dateTime',
-    //         'smart_score'=> 'sometimes|float',
-    //     ]);
-
-    //     $query = Task::where('user_id', $user->id);
+    //     $query = Task::where('user_id', $userId);
 
     //     foreach ($validated as $key => $value) {
     //         $query->where($key, $value);

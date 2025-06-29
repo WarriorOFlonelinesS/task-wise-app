@@ -20,8 +20,8 @@ class TaskController extends Controller
     {
         try {
         
-        $tasks = $taskService->showTasks($request->user());
-        $userName = $request->user()->name;
+        $tasks = $this->taskService->showTasks( $this->request->user());
+        $userName = auth()->user()->name;
         return response()->json([
             'tasks' => $tasks,
             'message' => "Tasks of $userName"
@@ -64,8 +64,8 @@ class TaskController extends Controller
     public function show(Request $request, taskService $taskService, string $id)
     {
         try {
-            $task = $taskService->showTask($request->user(), $id);
-            $userName = $request->user()->name;
+            $task = $this->taskService->showTask($id);
+            $userName = auth()->user()->name;
             return response()->json([
                 'task' => $task,
                 'message' => "Task of $userName"
@@ -82,12 +82,9 @@ class TaskController extends Controller
     public function update(Request $request, taskService $taskService, string $id)
     {
         try {
-            $validatedData = $request->validate([
-                'title' => 'required|string|max:255',
-                'description' => 'nullable|string'
-            ]);
-
-            $task = $taskService->createTask($request->user(), $validatedData);
+            $validData = $validation->validate($this->request->all());
+            $dto = new TaskDTO($validData);
+            $task = $taskService->udateTask($dto);
 
             return response()->json([
                 'task' => $task,
@@ -107,7 +104,7 @@ class TaskController extends Controller
     {
         try {
 
-            $taskService->deleteTask($request->user(), $id);
+            $taskService->deleteTask($id);
 
             return response()->json([
                 'message' => "Task with id $id was deleted!!"
@@ -122,14 +119,17 @@ class TaskController extends Controller
         }
     }
 
-    public function filter(Request $request, taskService $taskService)
+    public function filter( taskService $taskService)
     { 
         try {
-            $task = $taskService->filterTasks($request);
+            $validData = $validation->validate($this->request->all());
+            $dto = new TaskDTO($validData);
+            
             return response()->json([
                 'task'=> $task,
             ], 200);
         } catch (ValidationException $e) {
+            Log::error('Error deleting task: ' . $e->getMessage());
             return response()->json([
                 'errors' => $e->errors(),
             ], 422);
