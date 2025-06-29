@@ -1,75 +1,92 @@
 <?php
 
 namespace App\Services;
-use App\Models\User;
 use App\Models\Task;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Auth\AuthenticationException;
+use App\DTO\TaskDTO;
+use App\Services\TaskValidationService;
 
 class TaskService
 {   
-    public function createTask(TaksDTO $taskDTO)
-    {   
-        return Task::create([
-            'user_id' => auth()->user()->id,
-            'title' => $taskDTO->tite,
-            'description' => $taskDTO->description
-        ]);
+    protected TaskValidationService $validationService;
+
+    public function __construct(TaskValidationService $validationService)
+    {
+        $this->validationService = $validationService;
     }
 
-    public function showTasks(User $user)
+    public function createTask(TaskDTO $taskDTO)
     {   
-        return Task::where('user_id', $user->id)->get();
+      
+        return Task::create([
+            'user_id' => auth()->user()->id,
+            'title' => $taskDTO->title,
+            'description' => $taskDTO->description
+        ]);
+ 
     }
-    public function showTask(User $user, $id)
-    {   return Task::where('user_id', $user->id)
+
+    public function showTasks()
+    {   
+        return Task::where('user_id', auth()->user()->id)
+               ->get();
+    
+    }
+
+    public function showTask(string $id)
+    {   return Task::where('user_id', auth()->user()->id)
         ->where("id", $id)
         ->firstOrFail();
     }
     
-    public function updateTask(User $user, array $data, $id)
-    {   $tasks = Task::where('user_id', $user->id)->get();
-        Task::find($id)->update([
-            'title' => $data['title'],
-            'description' => $data['description']
+    public function updateTask(TaskDTO $taskDTO, string $id)
+    {   
+        $task = Task::where('user_id', auth()->user()->id)
+            ->where('id', $id)
+            ->firstOrFail();
+            
+        $task->update([
+            'title' => $taskDTO->title,
+            'description' => $taskDTO->description
         ]);
-        return $tasks[$id];
+        
+        return $task;
     }
 
-    public function deleteTask(User $user, string $id)
+    public function deleteTask(string $id)
     {   
-        return Task::where('user_id', $user->id)
+        return Task::where('user_id', auth()->user()->id)
         ->where('id', $id)
         ->delete();
     }
 
-    public function filterTasks($request)
+    public function filterTasks(Request $request)
     {   
-        $user = $request->user();
-
+        $user = auth()->user();
+        
         if(!$user){
             return response()->json([
                 'error' => 'Unauthorized'
             ], 401);
         }
 
-        $validated = $request->validate([
-            'id'=>'sometimes|integer',
-            'status'=> 'sometimes|sting',
-            'user_id'=> 'sometimes:integer',
-            'project_id'=>'sometimes|integer',
-            'titme'=> 'sometimes|sting',
-            'due_date'=> 'sometimes|dateTime',
-            'smart_score'=> 'sometimes|float',
-        ]);
-
         $query = Task::where('user_id', $user->id);
-
-        foreach ($validated as $key => $value) {
-            $query->where($key, $value);
+        
+        
+        $validatedFilters = $this->validationService->validateFilters($request->all());
+        
+        foreach ($validatedFilters as $key => $value) {
+            if ($key === 'title') {
+                $query->where('title', 'like', '%' . $value . '%');
+            } else {
+                $query->where($key, $value);
+            }
         }
         
         return $query->get();
     }
+
 }
