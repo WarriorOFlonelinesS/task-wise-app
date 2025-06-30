@@ -6,19 +6,23 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Auth\AuthenticationException;
+use App\Services\UserValidationService;
 use App\DTO\UserDTO;
 
 class AuthController extends Controller
 {
-    public function register(Request $request, AuthService $authService)
-    {
-        try {
-            
-            $dto = new UserDTO($request->all());
+    public function __construct(Request $request, AuthService $authService, UserValidationService $validation ) {
+        $this->request = $request;
+        $this->authService = $authService;
+        $this->validation = $validation;
+    }
 
-            $dto->validate();
-            
-            $user = $authService->createUser($dto);
+    public function register()
+    {   
+        try {
+            $validData = $this->validation->validateRegister($this->request->all());
+            $dto = new UserDTO($validData);
+            $user = $this->authService->createUser($dto);
 
             return response()->json([
                 'user' => $user,
@@ -26,7 +30,7 @@ class AuthController extends Controller
             ], 201);
         } catch (ValidationException $e) {
             return response()->json([
-                'dto' => $request->all(),
+                'dto' => $this->request->all(),
                 'errors' => $e->errors(),
             ], 422);
         } catch (\Exception $e) {
@@ -38,14 +42,18 @@ class AuthController extends Controller
         }
     }
     
-    public function login(Request $request, AuthService $authService)
+    public function login()
     {
-        try {
-            $result = $authService->loginUser($request);
+        try {  
+            $validData = $this->validation->validateLogin($this->request->all());
+            $dto = new UserDTO($validData);
+            $result = $this->authService->loginUser($dto);
+            $user = $result['user'];
+            $token = $result['token'];
 
             return response()->json([
-                'user' => $result['user'],
-                'token' => $result['token'],
+                'user' => $user,
+                'token' => $token,
                 'message' => 'Welcome!'
             ], 200);
         } catch (AuthenticationException $e) {
@@ -62,10 +70,10 @@ class AuthController extends Controller
         }
     }
 
-    public function logout(Request $request, AuthService $authService)
+    public function logout()
     {
         try {
-            $authService->logoutUser($request);
+            $this->authService->logoutUser($this->request);
 
             return response()->json([
                 'message' => "Goodbye! Your tasks will be waiting 📝"

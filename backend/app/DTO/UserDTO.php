@@ -14,20 +14,4 @@ class UserDTO
         $this->password = $data['password'] ?? null;
         $this->password_confirmation = $data['password_confirmation'] ?? null;
     }
-    
-    public function validate()
-    {
-        return validator(
-            [
-                'name' => $this->name,
-                'email' => $this->email,
-                'password' => $this->password,
-                'password_confirmation' => $this->password_confirmation,
-            ],[
-                'name' => 'required|string|max:255',
-                'email' => 'required|string|email|max:255|unique:users',
-                'password' => 'required|string|min:6|confirmed',
-            ]
-        )->validate();
-    }
 }
