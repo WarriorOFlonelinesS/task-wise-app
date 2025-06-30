@@ -20,13 +20,12 @@ class TaskController extends Controller
     {
         try {
         
-        $tasks = $this->taskService->showTasks( $this->request->user());
-        $userName = auth()->user()->name;
+        $tasks = $this->taskService->showTasks();
+    
         return response()->json([
             'tasks' => $tasks,
-            'message' => "Tasks of $userName"
-        ], 200);}
-        catch (\Exception $e) {
+        ], 200);
+        }catch (\Exception $e) {
             Log::error('Error getting task: ' . $e->getMessage());
             return response()->json([
                 'error' => 'Failed to get tasks',
@@ -37,10 +36,8 @@ class TaskController extends Controller
 
     public function store(TaskValidationService $validation)
     {   
-
         try {
-         
-            $validData = $validation->validate($this->request->all());
+            $validData = $validation->validateCreate($this->request->all());
             $dto = new TaskDTO($validData);
             $task = $this->taskService->createTask($dto);
 
@@ -61,7 +58,7 @@ class TaskController extends Controller
         }
     }
 
-    public function show(Request $request, taskService $taskService, string $id)
+    public function show(string $id)
     {
         try {
             $task = $this->taskService->showTask($id);
@@ -69,62 +66,66 @@ class TaskController extends Controller
             return response()->json([
                 'task' => $task,
                 'message' => "Task of $userName"
-            ], 200);}
-            catch (\Exception $e) {
-                Log::error('Error geting task: ' . $e->getMessage());
-                return response()->json([
-                    'error' => 'Failed to get task',
-                    'message' => $e->getMessage()
-                ], 500);
-            }
+            ], 200);
+        } catch (\Exception $e) {
+            Log::error('Error getting task: ' . $e->getMessage());
+            return response()->json([
+                'error' => 'Failed to get task',
+                'message' => $e->getMessage()
+            ], 500);
+        }
     }
 
-    public function update(Request $request, taskService $taskService, string $id)
+    public function update(TaskValidationService $validaStion, string $id)
     {
         try {
-            $validData = $validation->validate($this->request->all());
+
+            $validData = $validation->validateUpdate($this->request->all());
             $dto = new TaskDTO($validData);
-            $task = $taskService->udateTask($dto);
+            $task = $this->taskService->updateTask($dto, $id);
 
             return response()->json([
                 'task' => $task,
                 'message' => 'Task updated!'
             ], 200);
-        }
-        catch (\Exception $e) {
+        } catch (ValidationException $e) {
+            return response()->json([
+                'errors' => $e->errors()
+            ], 422);
+        } catch (\Exception $e) {
             Log::error('Error updating task: ' . $e->getMessage());
             return response()->json([
-            'error' => 'Failed to update task',
-            'message' => $e->getMessage()
-        ], 500);
+                'error' => 'Failed to update task',
+                'message' => $e->getMessage()
+            ], 500);
         }
     }
 
-    public function destroy(Request $request, taskService $taskService, string $id)
+    public function destroy(string $id)
     {
         try {
 
-            $taskService->deleteTask($id);
+            $this->taskService->deleteTask($id);
 
             return response()->json([
-                'message' => "Task with id $id was deleted!!"
+                'message' => "Task with id $id was deleted!"
             ], 200);
-        }
-        catch (\Exception $e) {
+        } catch (\Exception $e) {
             Log::error('Error deleting task: ' . $e->getMessage());
             return response()->json([
-            'error' => 'Failed to delete task',
-            'message' => $e->getMessage(),
-        ], 500);
+                'error' => 'Failed to delete task',
+                'message' => $e->getMessage(),
+            ], 500);
         }
     }
 
-    public function filter( taskService $taskService)
+
+    public function filter()
     { 
         try {
-            $validData = $validation->validate($this->request->all());
-            $dto = new TaskDTO($validData);
-            
+
+            $task =  $this->taskService->filterTasks($this->request);
+
             return response()->json([
                 'task'=> $task,
             ], 200);
