@@ -4,7 +4,6 @@ namespace Tests\Feature\Auth;
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Laravel\Sanctum\Sanctum;
 use Tests\TestCase;
 
 class LoginTest extends TestCase
@@ -16,19 +15,19 @@ class LoginTest extends TestCase
     {
         $user = User::factory()->create([
             'email' => 'test@example.com',
-            'password' => bcrypt('password123')
+            'password' => bcrypt('password123'),
         ]);
 
         $response = $this->postJson('/api/login', [
             'email' => 'test@example.com',
-            'password' => 'password123'
+            'password' => 'password123',
         ]);
 
         $response->assertStatus(200);
         $response->assertJsonStructure([
             'user',
             'token',
-            'message'
+            'message',
         ]);
     }
 
@@ -37,17 +36,17 @@ class LoginTest extends TestCase
     {
         $user = User::factory()->create([
             'email' => 'test@example.com',
-            'password' => bcrypt('password123')
+            'password' => bcrypt('password123'),
         ]);
 
         $response = $this->postJson('/api/login', [
             'email' => 'test@example.com',
-            'password' => 'wrongpassword'
+            'password' => 'wrongpassword',
         ]);
 
         $response->assertStatus(401);
         $response->assertJson([
-            'error' => 'Invalid input or internal error'
+            'error' => 'Invalid input or internal error',
         ]);
     }
 
@@ -58,7 +57,7 @@ class LoginTest extends TestCase
 
         $response->assertStatus(401);
         $response->assertJson([
-            'error' => 'Invalid input or internal error'
+            'error' => 'Invalid input or internal error',
         ]);
     }
-} 
+}

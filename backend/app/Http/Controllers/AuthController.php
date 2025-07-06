@@ -1,24 +1,26 @@
 <?php
+
 namespace App\Http\Controllers;
 
+use App\DTO\UserDTO;
 use App\Services\AuthService;
+use App\Services\UserValidationService;
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\ValidationException;
-use Illuminate\Auth\AuthenticationException;
-use App\Services\UserValidationService;
-use App\DTO\UserDTO;
 
 class AuthController extends Controller
 {
-    public function __construct(Request $request, AuthService $authService, UserValidationService $validation ) {
+    public function __construct(Request $request, AuthService $authService, UserValidationService $validation)
+    {
         $this->request = $request;
         $this->authService = $authService;
         $this->validation = $validation;
     }
 
     public function register()
-    {   
+    {
         try {
             $validData = $this->validation->validateRegister($this->request->all());
             $dto = new UserDTO($validData);
@@ -26,7 +28,7 @@ class AuthController extends Controller
 
             return response()->json([
                 'user' => $user,
-                'message' => 'Registration successful'
+                'message' => 'Registration successful',
             ], 201);
         } catch (ValidationException $e) {
             return response()->json([
@@ -34,17 +36,18 @@ class AuthController extends Controller
                 'errors' => $e->errors(),
             ], 422);
         } catch (\Exception $e) {
-            Log::error('Registration error: ' . $e->getMessage());
+            Log::error('Registration error: '.$e->getMessage());
+
             return response()->json([
                 'error' => 'Invalid input or internal error',
                 'message' => $e->getMessage(),
             ], 422);
         }
     }
-    
+
     public function login()
     {
-        try {  
+        try {
             $validData = $this->validation->validateLogin($this->request->all());
             $dto = new UserDTO($validData);
             $result = $this->authService->loginUser($dto);
@@ -54,15 +57,17 @@ class AuthController extends Controller
             return response()->json([
                 'user' => $user,
                 'token' => $token,
-                'message' => 'Welcome!'
+                'message' => 'Welcome!',
             ], 200);
         } catch (AuthenticationException $e) {
-            Log::error('Login authentication error: ' . $e->getMessage());
+            Log::error('Login authentication error: '.$e->getMessage());
+
             return response()->json([
-                'error' => 'Invalid input or internal error'
+                'error' => 'Invalid input or internal error',
             ], 401);
         } catch (\Exception $e) {
-            Log::error('Login error: ' . $e->getMessage());
+            Log::error('Login error: '.$e->getMessage());
+
             return response()->json([
                 'error' => 'Invalid input or internal error',
                 'message' => $e->getMessage(),
@@ -76,12 +81,13 @@ class AuthController extends Controller
             $this->authService->logoutUser($this->request);
 
             return response()->json([
-                'message' => "Goodbye! Your tasks will be waiting 📝"
+                'message' => 'Goodbye! Your tasks will be waiting 📝',
             ], 200);
         } catch (\Exception $e) {
-            Log::error('Logout error: ' . $e->getMessage());
+            Log::error('Logout error: '.$e->getMessage());
+
             return response()->json([
-                'message' => 'Unauthenticated.'
+                'message' => 'Unauthenticated.',
             ], 401);
         }
     }

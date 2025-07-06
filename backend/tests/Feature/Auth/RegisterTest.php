@@ -9,6 +9,7 @@ use Tests\TestCase;
 class RegisterTest extends TestCase
 {
     use RefreshDatabase;
+
     /** @test */
     public function user_can_register_successfully(): void
     {
@@ -22,15 +23,15 @@ class RegisterTest extends TestCase
         $response->assertStatus(201);
 
         $this->assertDatabaseHas('users', [
-            'email'=>'john@example.com'
+            'email' => 'john@example.com',
         ]);
     }
-    
-     /** @test */
+
+    /** @test */
     public function registration_fails_with_missing_fields()
     {
         $response = $this->postJson('/api/register', []);
-        
+
         $response->assertStatus(422);
         $response->assertJsonValidationErrors(['name', 'email', 'password']);
     }
@@ -46,7 +47,7 @@ class RegisterTest extends TestCase
             'password' => 'password123',
             'password_confirmation' => 'password123',
         ]);
-        
+
         $response->assertStatus(422);
         $response->assertJsonValidationErrors(['email']);
     }
@@ -64,7 +65,4 @@ class RegisterTest extends TestCase
         $response->assertStatus(422);
         $response->assertJsonValidationErrors(['password']);
     }
-
-
-
 }

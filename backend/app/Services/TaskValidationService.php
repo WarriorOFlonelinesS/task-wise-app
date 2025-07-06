@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Services;
-use Illuminate\Http\Request;
+
 use Illuminate\Validation\ValidationException;
 
 class TaskValidationService
@@ -18,7 +18,7 @@ class TaskValidationService
         ];
 
         $validator = validator($filters, $rules);
-        
+
         if ($validator->fails()) {
             throw new ValidationException($validator);
         }
@@ -37,7 +37,7 @@ class TaskValidationService
         ];
 
         $validator = validator($data, $rules);
-        
+
         if ($validator->fails()) {
             throw new ValidationException($validator);
         }
@@ -56,7 +56,7 @@ class TaskValidationService
         ];
 
         $validator = validator($data, $rules);
-        
+
         if ($validator->fails()) {
             throw new ValidationException($validator);
         }

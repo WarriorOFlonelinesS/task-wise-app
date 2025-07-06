@@ -1,10 +1,10 @@
 <?php
 
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
 use Illuminate\Http\Request;
-use Illuminate\Auth\AuthenticationException;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -31,7 +31,7 @@ return Application::configure(basePath: dirname(__DIR__))
                     $e instanceof AuthenticationException => ['message' => 'Unauthenticated.'],
                     $e instanceof \Illuminate\Validation\ValidationException => [
                         'message' => $e->getMessage(),
-                        'errors' => $e->errors()
+                        'errors' => $e->errors(),
                     ],
                     default => ['message' => $e->getMessage()]
                 };

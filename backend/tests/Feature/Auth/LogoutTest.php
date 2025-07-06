@@ -21,7 +21,7 @@ class LogoutTest extends TestCase
 
         $response->assertStatus(200);
         $response->assertJson([
-            'message' => 'Goodbye! Your tasks will be waiting 📝'
+            'message' => 'Goodbye! Your tasks will be waiting 📝',
         ]);
     }
 
@@ -34,7 +34,7 @@ class LogoutTest extends TestCase
 
         $response->assertStatus(401);
         $response->assertJson([
-            'message' => 'Unauthenticated.'
+            'message' => 'Unauthenticated.',
         ]);
     }
 
@@ -43,14 +43,14 @@ class LogoutTest extends TestCase
     {
         $user = User::factory()->create();
         $token = $user->createToken('test-token', ['*'], now()->subDay());
-        
+
         $response = $this->withHeaders([
-            'Authorization' => 'Bearer ' . $token->plainTextToken,
+            'Authorization' => 'Bearer '.$token->plainTextToken,
         ])->postJson('/api/logout');
 
         $response->assertStatus(401);
         $response->assertJson([
-            'message' => 'Unauthenticated.'
+            'message' => 'Unauthenticated.',
         ]);
     }
 
@@ -63,7 +63,7 @@ class LogoutTest extends TestCase
 
         $response->assertStatus(401);
         $response->assertJson([
-            'message' => 'Unauthenticated.'
+            'message' => 'Unauthenticated.',
         ]);
     }
 
@@ -74,7 +74,7 @@ class LogoutTest extends TestCase
 
         $response->assertStatus(401);
         $response->assertJson([
-            'message' => 'Unauthenticated.'
+            'message' => 'Unauthenticated.',
         ]);
     }
-} 
+}
