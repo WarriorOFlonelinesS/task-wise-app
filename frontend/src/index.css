@@ -1,3 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+    @apply bg-gradient-to-br from-[#0f3936] to-[#184e4a] text-[#c9e7e2] font-sans min-h-screen;
+  }
