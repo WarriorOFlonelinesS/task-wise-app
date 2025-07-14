@@ -1,6 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit';
-import authReducer from './slices/authSlice';
+import authReducer from '../features/auth/authSlice';
+import createSagaMiddleware from 'redux-saga';
+import rootSaga from './rootSaga';
 
+const sagaMiddleware = createSagaMiddleware();
 
 export const store = configureStore({
   reducer: {
@@ -11,8 +14,10 @@ export const store = configureStore({
       serializableCheck: {
         ignoredActions: ['persist/PERSIST'],
       },
-    }),
+    }).concat(sagaMiddleware),
 });
+
+sagaMiddleware.run(rootSaga);
 
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;

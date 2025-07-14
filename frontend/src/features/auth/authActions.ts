@@ -11,7 +11,7 @@ export const loginSuccess = createAction<{
   token: string;
 }>('auth/loginSuccess');
 
-export const loginFailure = createAction<string>('auth/loginSuccess');
+export const loginFailure = createAction<string>('auth/loginFailure');
 
 export const registerRequest = createAction<{
   name: string;
@@ -23,15 +23,15 @@ export const registerRequest = createAction<{
 export const registerSuccess = createAction<{
   user: any;
   token: string;
-}>('auth/loginSuccess');
+}>('auth/registerSuccess');
 
-export const registerFailure = createAction<string>('auth/loginSuccess');
+export const registerFailure = createAction<string>('auth/registerFailure');
 
 export const logoutRequest = createAction<{ token: string }>('auth/logoutRequest');
 
 export const logoutSuccess = createAction<{
   user: any;
   token: string;
-}>('auth/loginSuccess');
+}>('auth/logoutSuccess');
 
-export const logoutFailure = createAction<string>('auth/loginSuccess');
+export const logoutFailure = createAction<string>('auth/logoutFailure');

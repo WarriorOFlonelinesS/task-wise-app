@@ -1,5 +1,5 @@
 import * as authApi from '../../api/authApi';
-import { all, call, put, takeEvery } from 'redux-saga/effects';
+import { call, put, takeEvery } from 'redux-saga/effects';
 import {
   loginSuccess,
   logoutFailure,
@@ -12,29 +12,30 @@ import {
   logoutRequest,
 } from './authSlice';
 
-function* loginSaga(action) {
+function* loginSaga(action: ReturnType<typeof loginRequest>) {
   try {
     const data = yield call(authApi.login, action.payload);
+
     yield put(loginSuccess(data));
-  } catch (e) {
+  } catch (e: any) {
     yield put(loginFailure(e.message || 'Login failed'));
   }
 }
 
-function* registerSaga(action) {
+function* registerSaga(action: ReturnType<typeof registerRequest>) {
   try {
     const data = yield call(authApi.register, action.payload);
     yield put(registerSuccess(data));
-  } catch (e) {
-    yield put(registerFailure(e.message || 'Login failed'));
+  } catch (e: any) {
+    yield put(registerFailure(e.message || 'Register failed'));
   }
 }
 
-function* logoutSaga(action) {
+function* logoutSaga(action: ReturnType<typeof logoutRequest>) {
   try {
-    const data = yield call(authApi.login, action.payload);
-    yield put(logoutSuccess(data));
-  } catch (e) {
+    const data = yield call(authApi.logout, action.payload);
+    yield put(logoutSuccess());
+  } catch (e: any) {
     yield put(logoutFailure(e.message || 'Logout failed'));
   }
 }

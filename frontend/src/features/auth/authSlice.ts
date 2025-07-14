@@ -1,11 +1,5 @@
-import { createSlice, PlayloadAction } from '@reduxjs/toolkit';
-
-interface AuthState {
-  user: any | null;
-  token: string | null;
-  loading: boolean;
-  error: string | null;
-}
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { AuthState } from './type';
 
 const initialState: AuthState = {
   user: null,
@@ -24,7 +18,7 @@ const authSlice = createSlice({
         name: string;
         email: string;
         password: string;
-        password_confirmation: string;
+        passwordConfirmation: string;
       }>,
     ) {
       state.loading = true;
@@ -33,6 +27,7 @@ const authSlice = createSlice({
     registerSuccess(state, action: PayloadAction<{ user: any; token: string }>) {
       state.loading = true;
       state.error = null;
+      state.user = action.payload.user;
     },
 
     registerFailure(state, action: PayloadAction<string>) {
@@ -46,7 +41,6 @@ const authSlice = createSlice({
         name: string;
         email: string;
         password: string;
-        password_confirmation: string;
       }>,
     ) {
       state.loading = true;
@@ -54,8 +48,10 @@ const authSlice = createSlice({
     },
 
     loginSuccess(state, action: PayloadAction<{ user: any; token: string }>) {
-      state.loading = true;
+      state.loading = false;
       state.error = null;
+      state.user = action.payload.user;
+      state.token = action.payload.token;
     },
 
     loginFailure(state, action: PayloadAction<string>) {
@@ -66,19 +62,17 @@ const authSlice = createSlice({
     logoutRequest(
       state,
       action: PayloadAction<{
-        name: string;
-        email: string;
-        password: string;
-        password_confirmation: string;
+        token: string;
       }>,
     ) {
       state.loading = true;
       state.error = null;
     },
 
-    logoutSuccess(state, action: PayloadAction<{ user: any; token: string }>) {
+    logoutSuccess(state, action: PayloadAction<string>) {
       state.loading = true;
       state.error = null;
+      state.token = null;
     },
 
     logoutFailure(state, action: PayloadAction<string>) {
