@@ -7,7 +7,7 @@ import { RootState } from '../../store';
 export default function LoginForm() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { loading, error, user, token } = useSelector((state: RootState) => state.auth);
+  const { loading, error, user } = useSelector((state: RootState) => state.auth);
   console.log(user);
   const [formData, setFormData] = useState({
     name: '',
@@ -28,54 +28,56 @@ export default function LoginForm() {
   };
 
   return (
-    <div className="w-96 mx-auto p-6 rounded-lg">
-      <form onSubmit={handleSubmit} className="space-y-1">
-        <div>
-          <input
-            type="text"
-            name="userName"
-            placeholder="Username"
-            value={formData.userName}
-            onChange={handleChange}
-            className="w-full mb-3 px-4 py-2 bg-transparent text-white placeholder-gray-400 border border-gray-500 rounded focus:outline-none focus:ring-2 focus:ring-blue-400"
-            required
-          />
-        </div>
+    <>
+      <h1 className="text-3xl font-bold text-center mb-8 text-white">Welcome to TaskWise</h1>
+      <div className="w-96 mx-auto p-6 rounded-lg">
+        <form onSubmit={handleSubmit} className="space-y-1">
+          <div>
+            <input
+              type="text"
+              name="userName"
+              placeholder="Username"
+              value={formData.userName}
+              onChange={handleChange}
+              className="w-full mb-3 px-4 py-2 bg-transparent text-white placeholder-gray-400 border border-gray-500 rounded focus:outline-none focus:ring-2 focus:ring-blue-400"
+              required
+            />
+          </div>
 
-        <div>
-          <input
-            type="email"
-            name="email"
-            placeholder="Email"
-            value={formData.email}
-            onChange={handleChange}
-            className="w-full mb-3 px-4 py-2 bg-transparent text-white placeholder-gray-400 border border-gray-500 rounded focus:outline-none focus:ring-2 focus:ring-blue-400"
-            required
-          />
-        </div>
+          <div>
+            <input
+              type="email"
+              name="email"
+              placeholder="Email"
+              value={formData.email}
+              onChange={handleChange}
+              className="w-full mb-3 px-4 py-2 bg-transparent text-white placeholder-gray-400 border border-gray-500 rounded focus:outline-none focus:ring-2 focus:ring-blue-400"
+              required
+            />
+          </div>
 
-        <div>
-          <input
-            type="password"
-            name="password"
-            placeholder="Password"
-            value={formData.password}
-            onChange={handleChange}
-            className="w-full mb-3 px-4 py-2 bg-transparent text-white placeholder-gray-400 border border-gray-500 rounded focus:outline-none focus:ring-2 focus:ring-blue-400"
-            required
-          />
-        </div>
+          <div>
+            <input
+              type="password"
+              name="password"
+              placeholder="Password"
+              value={formData.password}
+              onChange={handleChange}
+              className="w-full mb-3 px-4 py-2 bg-transparent text-white placeholder-gray-400 border border-gray-500 rounded focus:outline-none focus:ring-2 focus:ring-blue-400"
+              required
+            />
+          </div>
 
-        <button
-          type="submit"
-          disabled={loading}
-          className="w-full backdrop-blur-md bg-white/5 px-6 py-3 backdrop-blur-xs rounded-md border border-gray-300 hover:bg-gray-100 transition-colors"
-        >
-          {loading ? 'Loading...' : 'Login'}
-        </button>
-        <div className="p-5">
+          <button
+            type="submit"
+            disabled={loading}
+            className="w-full backdrop-blur-md bg-white/5 px-6 py-3 backdrop-blur-xs rounded-md border border-gray-300 hover:bg-gray-100 transition-colors"
+          >
+            {loading ? 'Loading...' : 'Login'}
+          </button>
+          <div className="p-5">
             <p>if you don't have an account</p>
-        </div>
+          </div>
 
           <button
             title="Sign up"
@@ -86,9 +88,10 @@ export default function LoginForm() {
           >
             Sign up
           </button>
-        
-        {error && <p className="text-red-600 text-sm text-center">{error}</p>}
-      </form>
-    </div>
+
+          {error && <p className="text-red-600 text-sm text-center">{error}</p>}
+        </form>
+      </div>
+    </>
   );
 }

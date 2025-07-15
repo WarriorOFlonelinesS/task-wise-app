@@ -2,12 +2,7 @@ import axios from 'axios';
 
 const API_URL = 'http://localhost:8000/api';
 
-export async function login(credentials: {
-  name: string;
-  email: string;
-  password: string;
-  password_confirmation: string;
-}) {
+export async function login(credentials: { email: string; password: string }) {
   const response = await axios.post(`${API_URL}/login`, credentials);
   return response.data;
 }

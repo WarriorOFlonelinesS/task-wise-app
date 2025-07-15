@@ -4,10 +4,11 @@ import Loader from '../components/Common/Loader';
 import LoginForm from '../components/Auth/LoginForm';
 import { RootState } from '../store';
 import { useSelector } from 'react-redux';
+import Dashboard from '../components/Tasks/Dashboard';
 
 export default function HomePage() {
+  const user = useSelector((state: RootState) => state.auth.user);
 
-  const user  = useSelector((state: RootState) => state.auth.user);
   const [showLoader, setShowLoader] = useState(true);
   const [fade, setFade] = useState(false);
 
@@ -32,12 +33,7 @@ export default function HomePage() {
       )}
 
       <div className="container mx-auto px-4 py-8">
-        <h1 className="text-3xl font-bold text-center mb-8 text-white">Welcome to TaskWise</h1>
-
-        <div className="flex flex-col items-center">
-          {user ? <h2>You don't have any tasks</h2> : <LoginForm />}
-         
-        </div>
+        <div className="flex flex-col items-center">{user ? <Dashboard /> : <LoginForm />}</div>
       </div>
     </div>
   );

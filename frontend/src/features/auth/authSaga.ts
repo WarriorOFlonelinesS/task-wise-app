@@ -33,8 +33,8 @@ function* registerSaga(action: ReturnType<typeof registerRequest>) {
 
 function* logoutSaga(action: ReturnType<typeof logoutRequest>) {
   try {
-    const data = yield call(authApi.logout, action.payload);
-    yield put(logoutSuccess());
+    yield call(authApi.logout, action.payload);
+    yield put(logoutSuccess('Logout successful'));
   } catch (e: any) {
     yield put(logoutFailure(e.message || 'Logout failed'));
   }

@@ -25,9 +25,10 @@ const authSlice = createSlice({
       state.error = null;
     },
     registerSuccess(state, action: PayloadAction<{ user: any; token: string }>) {
-      state.loading = true;
+      state.loading = false;
       state.error = null;
       state.user = action.payload.user;
+      state.token = action.payload.token;
     },
 
     registerFailure(state, action: PayloadAction<string>) {
@@ -70,9 +71,10 @@ const authSlice = createSlice({
     },
 
     logoutSuccess(state, action: PayloadAction<string>) {
-      state.loading = true;
+      state.loading = false;
       state.error = null;
       state.token = null;
+      state.user = null;
     },
 
     logoutFailure(state, action: PayloadAction<string>) {
