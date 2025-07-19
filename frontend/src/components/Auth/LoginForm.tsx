@@ -8,7 +8,6 @@ export default function LoginForm() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { loading, error, user } = useSelector((state: RootState) => state.auth);
-  console.log(user);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -75,21 +74,20 @@ export default function LoginForm() {
           >
             {loading ? 'Loading...' : 'Login'}
           </button>
-          <div className="p-5">
-            <p>if you don't have an account</p>
+          <div className="p-5 text-center flex justify-center flex-col">
+            <p className="p-5 ">if you don't have an account</p>
+            <button
+              title="Sign up"
+              onClick={() => {
+                navigate('/signup');
+              }}
+              className="backdrop-blur-md bg-white/5 px-6 py-3 backdrop-blur-xs rounded-md border border-gray-300 hover:bg-gray-100 transition-colors self-center"
+            >
+              Sign up
+            </button>
+
+            {error && <p className="text-red-600 text-sm text-center">{error}</p>}
           </div>
-
-          <button
-            title="Sign up"
-            onClick={() => {
-              navigate('/signup');
-            }}
-            className="backdrop-blur-md bg-white/5 px-6 py-3 backdrop-blur-xs rounded-md border border-gray-300 hover:bg-gray-100 transition-colors"
-          >
-            Sign up
-          </button>
-
-          {error && <p className="text-red-600 text-sm text-center">{error}</p>}
         </form>
       </div>
     </>

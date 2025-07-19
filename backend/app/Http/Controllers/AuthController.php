@@ -24,20 +24,21 @@ class AuthController extends Controller
         try {
             $validData = $this->validation->validateRegister($this->request->all());
             $dto = new UserDTO($validData);
-            $user = $this->authService->createUser($dto);
-
+            $result = $this->authService->createUser($dto);
+            $user = $result['user'];
+            $token = $result['token'];
+            
             return response()->json([
                 'user' => $user,
+                'token' => $token,
                 'message' => 'Registration successful',
             ], 201);
         } catch (ValidationException $e) {
             return response()->json([
-                'dto' => $this->request->all(),
                 'errors' => $e->errors(),
             ], 422);
         } catch (\Exception $e) {
             Log::error('Registration error: '.$e->getMessage());
-
             return response()->json([
                 'error' => 'Invalid input or internal error',
                 'message' => $e->getMessage(),

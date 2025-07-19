@@ -11,11 +11,14 @@ class AuthService
 {
     public function createUser(UserDTO $dto)
     {
-        return User::create([
+        $user = User::create([
             'name' => $dto->name,
             'email' => $dto->email,
             'password' => Hash::make($dto->password),
         ]);
+        $token = $user->createToken('auth_token')->plainTextToken;
+
+        return ['user' => $user, 'token' => $token];
     }
 
     public function loginUser(UserDTO $dto)

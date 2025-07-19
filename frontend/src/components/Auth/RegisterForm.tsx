@@ -33,7 +33,7 @@ export default function RegisterForm() {
     e.preventDefault();
 
     const adjustedData = { ...formData, password_confirmation: formData.passwordConfirmation };
-    dispatch(registerRequest(adjustedData as any)); // Type assertion to bypass linter for now
+    dispatch(registerRequest(adjustedData as any));
   };
 
   return (

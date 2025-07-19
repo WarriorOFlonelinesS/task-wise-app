@@ -9,7 +9,8 @@ export const LogoutButton = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (token) {  // Add null check to prevent type error
+    if (token) {
+      // Add null check to prevent type error
       dispatch(logoutRequest({ token }));
     } else {
       console.error('No token available for logout');
