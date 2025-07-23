@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\GeminiController;
 use App\Http\Controllers\TaskController;
 use Illuminate\Support\Facades\Route;
 
@@ -35,4 +36,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::put('/tasks/{id}', [TaskController::class, 'update']);
 
     Route::delete('/tasks/{id}', [TaskController::class, 'destroy']);
+    
+    Route::get('/ai/{id}', [GeminiController::class, 'analyzeData']);
 });
+

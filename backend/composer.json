@@ -11,6 +11,7 @@
     "require": {
         "php": "^8.2",
         "doctrine/dbal": "^3.0",
+        "google-gemini-php/client": "^2.5",
         "laravel/framework": "^12.19",
         "laravel/sanctum": "^4.1",
         "laravel/telescope": "^5.9",
