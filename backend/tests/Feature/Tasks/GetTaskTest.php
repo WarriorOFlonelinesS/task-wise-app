@@ -67,7 +67,7 @@ class GetTaskTest extends TestCase
     {
         $user = User::factory()->create();
         Sanctum::actingAs($user);
-        
+
         $task = Task::factory()->create([
             'user_id' => $user->id,
             'title' => 'Finish project documentation',

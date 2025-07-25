@@ -18,9 +18,6 @@ return new class extends Migration
             $table->string('title');
             $table->text('description')->nullable();
             $table->enum('status', ['pending', 'in_progress', 'done', 'deferred'])->default('pending');
-            $table->integer('priority')->default(1);
-            $table->dateTime('due_date')->nullable();
-            $table->float('smart_score')->nullable();
             $table->timestamps();
         });
     }

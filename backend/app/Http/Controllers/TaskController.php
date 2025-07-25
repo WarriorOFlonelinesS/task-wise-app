@@ -5,14 +5,15 @@ namespace App\Http\Controllers;
 use App\DTO\TaskDTO;
 use App\Services\TaskService;
 use App\Services\TaskValidationService;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\ValidationException;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class TaskController extends Controller
 {
     protected Request $request;
+
     protected TaskService $taskService;
 
     public function __construct(Request $request, TaskService $taskService)

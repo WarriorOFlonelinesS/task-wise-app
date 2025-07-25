@@ -24,7 +24,6 @@ class TaskService
             'title' => $taskDTO->title,
             'description' => $taskDTO->description,
         ]);
-
     }
 
     public function showTasks()
