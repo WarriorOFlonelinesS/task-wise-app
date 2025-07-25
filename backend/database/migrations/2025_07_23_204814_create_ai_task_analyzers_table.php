@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreign('task_id')->references('id')->on('tasks')->onDelete('cascade');
             $table->text('content');
             $table->boolean('is_done')->default(false);
-            $table->integer('priority')->default(1);
+            $table->string('priority')->default('Low');
             $table->dateTime('due_date')->nullable();
             $table->float('smart_score')->nullable();
             $table->timestamps();

@@ -1,8 +1,8 @@
-<?php
+<?php 
 
 namespace App\Services;
+require_once app_path('Helpers/extractScorePriorityAndSubtasks.php');
 
-use App\DTO\TaskDTO;
 use App\Models\Task;
 use App\Models\TaskAnalyzer;
 
@@ -21,13 +21,32 @@ class GeminiService
         ->where('id', $id)
         ->firstOrFail();
 
-        $rawResponse = $this->client->generativeModel(model: 'gemini-2.0-flash')->generateContent("Write subtasks for ($task->title) with description:($task->description)");
+        $rawResponse = $this->client->generativeModel(model: 'gemini-2.0-flash')->generateContent("Given the following task, analyze and return ONLY the following fields in this exact format:
+
+Priority: [High|Medium|Low]
+Smart Score: [an integer from 0 to 100]
+Subtasks:
+1. [First subtask]
+2. [Second subtask]
+3. [Third subtask]
+...
+
+Task: {$task->title}
+Description: {$task->description}
+
+Do not include any explanation or extra text. Only output the fields above, each on its own line, exactly as shown.");
         $content= $rawResponse->candidates[0]->content->parts[0]->text;
+
+        $priority = extractScorePriorityAndSubtasks($content)['priority'];
+        $smart_score = extractScorePriorityAndSubtasks($content)['smart_score'];
+        $subtasks = extractScorePriorityAndSubtasks($content);
         
         $taskAnalyze = TaskAnalyzer::create(
             [
                 'task_id' => $id,
-                'content' => $content,
+                'content' => json_encode($subtasks),
+                'priority' => $priority,
+                'smart_score' =>$smart_score
             ]
             );
 
