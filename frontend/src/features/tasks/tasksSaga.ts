@@ -13,7 +13,9 @@ import {
   updateTasksSuccess,
   updateTasksFailure,
   updateTasksRequest,
+  taskAnalyzeRequest,
 } from './tasksSlice';
+import { taskAnalyzeFailure, taskAnalyzeSuccess } from './tasksAction';
 
 function* getTasksSaga(action: ReturnType<typeof getTasksRequest>) {
   try {
@@ -60,11 +62,21 @@ function* updateTaskSaga(action: ReturnType<typeof updateTasksRequest>) {
   }
   try {
     const data = yield call(tasksApi.updateTasks, action.payload, token);
-    // If API returns the updated task directly, use it; otherwise use the payload
     const updatedTask = data.task || data || action.payload;
     yield put(updateTasksSuccess(updatedTask));
   } catch (e: any) {
     yield put(updateTasksFailure(e.message));
+  }
+}
+
+function* taskAnalyzeSaga(action: ReturnType<typeof taskAnalyzeRequest>) {
+  try {
+    const { id, token } = action.payload;
+
+    const data = yield call(tasksApi.taskAnalyze, id, token);
+    yield put(taskAnalyzeSuccess(data));
+  } catch (e: any) {
+    yield put(taskAnalyzeFailure(e.message || 'Login failed'));
   }
 }
 
@@ -73,4 +85,5 @@ export function* tasksSaga() {
   yield takeEvery(postTasksRequest.type, postTaskSaga);
   yield takeEvery(deleteTasksRequest.type, deleteTaskSaga);
   yield takeEvery(updateTasksRequest.type, updateTaskSaga);
+  yield takeEvery(taskAnalyzeRequest.type, taskAnalyzeSaga);
 }

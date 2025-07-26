@@ -16,12 +16,12 @@ function ProfilePage() {
   if (!user) return null;
 
   return (
-    <>
+    <div className='flex justify-center flex-col'>
       <h1 className="text-3xl font-bold text-center mb-8 text-white">Profile</h1>
       <h2 className="text-2xl font-bold text-center mb-8 text-white">Welcome, {user.name}</h2>
-      <p>{user.email}</p>
+      <p className='text-center'>{user.email}</p>
       <LogoutButton />
-    </>
+    </div>
   );
 }
 

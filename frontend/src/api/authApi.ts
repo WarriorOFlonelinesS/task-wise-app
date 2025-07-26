@@ -17,13 +17,14 @@ export async function register(data: {
   return response.data;
 }
 
-export async function logout(token: string) {
+export async function logout(data:{token:string}) {
+
   const response = await axios.post(
     `${API_URL}/logout`,
     {},
     {
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${data.token}`,
       },
     },
   );

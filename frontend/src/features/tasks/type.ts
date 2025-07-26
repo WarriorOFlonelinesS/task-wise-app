@@ -12,8 +12,16 @@ export interface Task {
 
 export interface TasksState {
   tasks: Task[] | null;
+  taskAnalyze: string | null;
   token: string | null;
   loading: boolean;
   error: string | null;
   message: string;
 }
+
+// export interface taskAnalyzer{
+//   taskAnalyze: Array<string> | null;
+//   token: string | null;
+//   loading: boolean;
+//   error: string | null;
+// }

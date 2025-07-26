@@ -6,7 +6,7 @@ import { logoutRequest } from '../../features/auth/authSlice';
 export const LogoutButton = () => {
   const dispatch = useDispatch();
   const { loading, error, token } = useSelector((state: RootState) => state.auth);
-
+  console.log(token);
   const handleSubmit = (e) => {
     e.preventDefault();
     if (token) {
@@ -18,7 +18,7 @@ export const LogoutButton = () => {
   };
 
   return (
-    <div className="w-96 mx-auto p-6 rounded-lg">
+    <div className="w-96 flex justify-center mx-auto p-6 rounded-lg">
       <form onSubmit={handleSubmit} className="space-y-1">
         <button
           type="submit"

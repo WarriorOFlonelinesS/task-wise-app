@@ -47,13 +47,13 @@ export default function Dashboard() {
     setIsOpen(false);
   };
   return (
-    <div className="h-screen overflow-hidden w-full">
+    <div className='w-full min-h-screen'>
       {error && (
         <div className="bg-red-500 text-white px-4 py-2 rounded mb-4 text-center">{error}</div>
       )}
       {isOpen ? <AddTask onClose={onClose} addToDo={addToDo} /> : null}
       <h1 className="text-3xl font-bold text-center mb-11 text-white">Task AI Manager</h1>
-      <div className="h-screen w-full overflow-y-auto no-scrollbar max-w-md mx-auto">
+      <div className="max-h-[80%] w-full overflow-y-auto no-scrollbar max-w-md mx-auto">
         {listTasks.length ? (
           listTasks.map((task, index) => (
             <Card data={task} key={task.id || `task-${index}`} onClose={onClose} />

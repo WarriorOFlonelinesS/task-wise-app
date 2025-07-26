@@ -26,3 +26,14 @@ export const updateTaskRequest = createAction<{ id: string }>('tasks/deleteTasks
 export const updateTaskSuccess = createAction<string>('tasks/deleteTasksRequest');
 
 export const updateTasksFailed = createAction<string>('tasks/deleteTasksRequest');
+
+export const taskAnalyzeRequest = createAction<{
+  id: string;
+  token: string;
+}>('tasks/taskAnalyzeRequest');
+
+export const taskAnalyzeSuccess = createAction<{
+  content: string | null;
+}>('tasks/taskAnalyzeSuccess');
+
+export const taskAnalyzeFailure = createAction<string>('tasks/taskAnalyzeFailure');

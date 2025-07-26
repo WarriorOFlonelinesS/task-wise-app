@@ -3,7 +3,6 @@ import authReducer from '../features/auth/authSlice';
 import createSagaMiddleware from 'redux-saga';
 import rootSaga from './rootSaga';
 import tasksReducer from '../features/tasks/tasksSlice';
-import taskAnalyzerReducer from '../features/taskAnalyzer/taskAnalyzerSlice';
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -11,7 +10,6 @@ export const store = configureStore({
   reducer: {
     auth: authReducer,
     tasks: tasksReducer,
-    taskAnalyzer: taskAnalyzerReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

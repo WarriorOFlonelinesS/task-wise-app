@@ -1,9 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Task, TasksState } from './type';
-import { act } from 'react';
 
 const initialState: TasksState = {
   tasks: null,
+  taskAnalyze: [],
   token: null,
   loading: false,
   error: null,
@@ -75,12 +75,37 @@ const tasksSlice = createSlice({
     updateTasksSuccess(state, action: PayloadAction<Task>) {
       if (state.tasks) {
         const index = state.tasks.findIndex((task) => task.id === action.payload.id);
+
         if (index !== -1) {
           state.tasks[index] = action.payload;
         }
       }
     },
     updateTasksFailure(state, action: PayloadAction<string>) {
+      state.error = action.payload;
+    },
+    taskAnalyzeRequest(
+      state,
+      action: PayloadAction<{
+        id: string;
+        token: string;
+      }>,
+    ) {
+      state.loading = true;
+      state.error = null;
+    },
+    taskAnalyzeSuccess(state, action: PayloadAction<{ content: string; task_id: string }>) {
+      state.loading = false;
+      state.error = null;
+      if (state.taskAnalyze) {
+        state.taskAnalyze.push(action.payload);
+      } else {
+        state.taskAnalyze = [action.payload];
+      }
+    },
+
+    taskAnalyzeFailure(state, action: PayloadAction<string>) {
+      state.loading = false;
       state.error = action.payload;
     },
   },
@@ -99,5 +124,8 @@ export const {
   updateTasksRequest,
   updateTasksSuccess,
   updateTasksFailure,
+  taskAnalyzeRequest,
+  taskAnalyzeSuccess,
+  taskAnalyzeFailure,
 } = tasksSlice.actions;
 export default tasksSlice.reducer;
