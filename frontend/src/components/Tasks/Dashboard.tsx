@@ -7,7 +7,7 @@ import { RootState } from '../../store';
 import type { Task } from '../../features/tasks/type';
 import Card from './Card';
 import AddTask from './AddTask';
-import { postTasksRequest, deleteTasksRequest, updateTasksRequest } from '../../features/tasks/tasksSlice';
+import { postTasksRequest } from '../../features/tasks/tasksSlice';
 import { getTasksRequest } from '../../features/tasks/tasksAction';
 
 export default function Dashboard() {
@@ -28,7 +28,6 @@ export default function Dashboard() {
       }),
     );
   };
- 
 
   useEffect(() => {
     if (token) {
@@ -56,9 +55,11 @@ export default function Dashboard() {
       <h1 className="text-3xl font-bold text-center mb-11 text-white">Task AI Manager</h1>
       <div className="h-screen w-full overflow-y-auto no-scrollbar max-w-md mx-auto">
         {listTasks.length ? (
-          listTasks.map((task, index) => <Card data={task} key={task.id || `task-${index}`} onClose={onClose}/>)
+          listTasks.map((task, index) => (
+            <Card data={task} key={task.id || `task-${index}`} onClose={onClose} />
+          ))
         ) : (
-          <h2 className='text-center'>You don't have tasks</h2>
+          <h2 className="text-center">You don't have tasks</h2>
         )}
       </div>
 

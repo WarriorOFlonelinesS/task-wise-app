@@ -6,7 +6,7 @@
     </p>
 </p>
 
-------
+---
 
 **Gemini PHP** is a community-maintained PHP API client that allows you to interact with the Gemini AI API.
 
@@ -14,37 +14,37 @@
 - Vytautas Smilingis [github.com/Plytas](https://github.com/Plytas)
 
 ## Table of Contents
+
 - [Prerequisites](#prerequisites)
 - [Setup](#setup)
   - [Installation](#installation)
   - [Setup your API key](#setup-your-api-key)
   - [Upgrade to 2.0](#upgrade-to-20)
 - [Usage](#usage)
-    - [Chat Resource](#chat-resource)
-      - [Text-only Input](#text-only-input)
-      - [Text-and-image Input](#text-and-image-input)
-      - [File Upload](#file-upload)
-      - [Text-and-video Input](#text-and-video-input)
-      - [Multi-turn Conversations (Chat)](#multi-turn-conversations-chat)
-      - [Stream Generate Content](#stream-generate-content)
-      - [Structured Output](#structured-output)
-      - [Function calling](#function-calling)
-      - [Speech generation](#speech-generation)
-      - [Count tokens](#count-tokens)
-      - [Configuration](#configuration)
-    - [Embedding Resource](#embedding-resource)
-    - [Models](#models)
-      - [List Models](#list-models)
-      - [Get Model](#get-model)
+  - [Chat Resource](#chat-resource)
+    - [Text-only Input](#text-only-input)
+    - [Text-and-image Input](#text-and-image-input)
+    - [File Upload](#file-upload)
+    - [Text-and-video Input](#text-and-video-input)
+    - [Multi-turn Conversations (Chat)](#multi-turn-conversations-chat)
+    - [Stream Generate Content](#stream-generate-content)
+    - [Structured Output](#structured-output)
+    - [Function calling](#function-calling)
+    - [Speech generation](#speech-generation)
+    - [Count tokens](#count-tokens)
+    - [Configuration](#configuration)
+  - [Embedding Resource](#embedding-resource)
+  - [Models](#models)
+    - [List Models](#list-models)
+    - [Get Model](#get-model)
 - [Troubleshooting](#troubleshooting)
 - [Testing](#testing)
 
-
 ## Prerequisites
+
 To complete this quickstart, make sure that your development environment meets the following requirements:
 
 - Requires [PHP 8.1+](https://php.net/releases/)
-
 
 ## Setup
 
@@ -57,11 +57,13 @@ composer require google-gemini-php/client
 ```
 
 Ensure that the `php-http/discovery` composer plugin is allowed to run or install a client manually if your project does not already have a PSR-18 client integrated.
+
 ```bash
 composer require guzzlehttp/guzzle
 ```
 
 ### Setup your API key
+
 To use the Gemini API, you'll need an API key. If you don't already have one, create a key in Google AI Studio.
 
 [Get an API key](https://aistudio.google.com/app/apikey)
@@ -77,15 +79,16 @@ composer require google-gemini-php/client:^2.0
 ```
 
 This release introduces support for new features:
-* Structured output
-* System instructions
-* File uploads
-* Function calling
-* Code execution
-* Grounding with Google Search
-* Cached content
-* Thinking model configuration
-* Speech model configuration
+
+- Structured output
+- System instructions
+- File uploads
+- Function calling
+- Code execution
+- Grounding with Google Search
+- Cached content
+- Thinking model configuration
+- Speech model configuration
 
 `\Gemini\Enums\ModelType` enum has been deprecated and will be removed in next major version. Together with this `$client->geminiPro()` and `$client->geminiFlash()` methods have been deprecated as well.
 We suggest using `$client->generativeModel()` method and pass in the model string directly. All methods that had previously accepted `ModelType` enum now accept a `BackedEnum`. We recommend implementing your own enum for convenience.
@@ -137,12 +140,12 @@ $client = Gemini::factory()
     ->make();
 ```
 
-
 ### Chat Resource
 
 For a complete list of supported input formats and methods in Gemini API v1, see the [models documentation](https://ai.google.dev/gemini-api/docs/models).
 
 #### Text-only Input
+
 Generate a response from the model given an input message.
 
 ```php
@@ -157,6 +160,7 @@ $result->text(); // Hello! How can I assist you today?
 ```
 
 #### Text-and-image Input
+
 Generate responses by providing both text prompts and images to the Gemini model.
 
 ```php
@@ -179,6 +183,7 @@ $result->text(); //  The picture shows a table with a white tablecloth. On the t
 ```
 
 #### File Upload
+
 To reference larger files and videos with various prompts, upload them to Gemini storage.
 
 ```php
@@ -209,6 +214,7 @@ echo "\n{$meta->uri}";
 ```
 
 #### Text-and-video Input
+
 Process video content and get AI-generated descriptions using the Gemini API with an uploaded video file.
 
 ```php
@@ -229,6 +235,7 @@ $result->text(); //  The picture shows a table with a white tablecloth. On the t
 ```
 
 #### Multi-turn Conversations (Chat)
+
 Using Gemini, you can build freeform conversations across multiple turns.
 
 ```php
@@ -250,6 +257,7 @@ echo $response->text(); // In the heart of England's lush countryside, amidst em
 ```
 
 #### Stream Generate Content
+
 By default, the model returns a response after completing the entire generation process. You can achieve faster interactions by not waiting for the entire result, and instead use streaming to handle partial results.
 
 ```php
@@ -263,6 +271,7 @@ foreach ($stream as $response) {
 ```
 
 #### Structured Output
+
 Gemini generates unstructured text by default, but some applications require structured text. For these use cases, you can constrain Gemini to respond with JSON, a structured data format suitable for automated processing. You can also constrain the model to respond with one of the options specified in an enum.
 
 ```php
@@ -319,6 +328,7 @@ $result->json();
 ```
 
 #### Function calling
+
 Gemini provides the ability to define and utilize custom functions that the model can call during conversations. This enables the model to perform specific actions or calculations through your defined functions.
 
 ```php
@@ -391,6 +401,7 @@ echo $response->text(); // 4 + 3 = 7
 ```
 
 #### Speech generation
+
 Gemini allows generating [speech from a text](https://ai.google.dev/gemini-api/docs/speech-generation). To use that, make sure to use a model that supports this functionality. The model will output base64 encoded audio string.
 
 ##### Single speaker
@@ -449,6 +460,7 @@ $response = $gemini->generativeModel('gemini-2.5-flash-preview-tts')->withGenera
 ```
 
 #### Count tokens
+
 When using long prompts, it might be useful to count tokens before sending any content to the model.
 
 ```php
@@ -460,10 +472,10 @@ echo $response->totalTokens; // 9
 ```
 
 #### Configuration
+
 Every prompt you send to the model includes parameter values that control how the model generates a response. The model can generate different results for different parameter values. Learn more about [model parameters](https://ai.google.dev/docs/concepts#model_parameters).
 
 Also, you can use safety settings to adjust the likelihood of getting responses that may be considered harmful. By default, safety settings block content with medium and/or high probability of being unsafe content across all dimensions. Learn more about [safety settings](https://ai.google.dev/docs/concepts#safety_setting).
-
 
 ```php
 use Gemini\Data\GenerationConfig;
@@ -500,6 +512,7 @@ $generativeModel = $client
 ```
 
 ### Embedding Resource
+
 Embedding is a technique used to represent information as a list of floating point numbers in an array. With Gemini, you can represent text (words, sentences, and blocks of text) in a vectorized form, making it easier to compare and contrast embeddings. For example, two texts that share a similar subject matter or sentiment should have similar embeddings, which can be identified through mathematical comparison techniques such as cosine similarity.
 
 Use the `text-embedding-004` model with either `embedContents` or `batchEmbedContents`:
@@ -569,17 +582,17 @@ print_r($response->embeddings);
 We recommend checking [Google documentation](https://ai.google.dev/gemini-api/docs/models) for the latest supported models.
 
 #### List Models
+
 Use list models to see the available Gemini models programmatically:
 
 - **pageSize (optional)**:
-    The maximum number of Models to return (per page). <br>
-    If unspecified, 50 models will be returned per page. This method returns at most 1000 models per page, even if you pass a larger pageSize.
-
+  The maximum number of Models to return (per page). <br>
+  If unspecified, 50 models will be returned per page. This method returns at most 1000 models per page, even if you pass a larger pageSize.
 
 - **nextPageToken (optional)**:
-    A page token, received from a previous models.list call. <br>
-    Provide the pageToken returned by one request as an argument to the next request to retrieve the next page.
-    When paginating, all other parameters provided to models.list must match the call that provided the page token.
+  A page token, received from a previous models.list call. <br>
+  Provide the pageToken returned by one request as an argument to the next request to retrieve the next page.
+  When paginating, all other parameters provided to models.list must match the call that provided the page token.
 
 ```php
 $response = $client->models()->list(pageSize: 3, nextPageToken: 'ChFtb2RlbHMvZ2VtaW5pLXBybw==');
@@ -612,12 +625,15 @@ $response->models;
 //        )
 //]
 ```
+
 ```php
 $response->nextPageToken // Chltb2RlbHMvZ2VtaW5pLTEuMC1wcm8tMDAx
 ```
 
 #### Get Model
+
 Get information about a model, such as version, display name, input token limit, etc.
+
 ```php
 
 $response = $client->models()->retrieve('models/gemini-2.5-pro-preview-05-06');
@@ -642,6 +658,7 @@ You may run into a timeout when sending requests to the API. The default timeout
 You can increase the timeout by configuring the HTTP client and passing in to the factory.
 
 This example illustrates how to increase the timeout using Guzzle.
+
 ```php
 Gemini::factory()
     ->withApiKey($apiKey)

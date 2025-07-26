@@ -37,6 +37,6 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::delete('/tasks/{id}', [TaskController::class, 'destroy']);
     
-    Route::get('/ai/{id}', [GeminiController::class, 'analyzeData']);
+    Route::get('/ai-analyse/{id}', [GeminiController::class, 'analyzeData']);
 });
 

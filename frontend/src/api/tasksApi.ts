@@ -29,13 +29,18 @@ export async function deleteTasks(data: { id: string }, token: string) {
   return response.data;
 }
 
-export async function updateTasks(data: { id: string; title: string; description: string }, token: string) {
-  console.log(data)
-  const response = await axios.put(`${API_URL}/tasks/${data.id}`, {title: data.title, description: data.description}, {
-    headers: {
-      Authorization: `Bearer ${token}`,
+export async function updateTasks(
+  data: { id: string; title: string; description: string },
+  token: string,
+) {
+  const response = await axios.put(
+    `${API_URL}/tasks/${data.id}`,
+    { title: data.title, description: data.description },
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
     },
-  });
+  );
   return response.data;
 }
-

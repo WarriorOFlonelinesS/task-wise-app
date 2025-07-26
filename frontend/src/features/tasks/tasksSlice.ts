@@ -46,7 +46,6 @@ const tasksSlice = createSlice({
       state.error = null;
     },
     postTasksSuccess(state, action: PayloadAction<{ task: Task }>) {
-
       if (state.tasks) {
         state.tasks.push(action.payload.task);
       } else {
@@ -60,7 +59,6 @@ const tasksSlice = createSlice({
       state.error = null;
     },
     deleteTasksSuccess(state, action: PayloadAction<string>) {
-
       if (state.tasks) {
         state.tasks = state.tasks.filter((task) => task.id !== action.payload);
       }
@@ -68,14 +66,16 @@ const tasksSlice = createSlice({
     deleteTasksFailure(state, action: PayloadAction<string>) {
       state.error = action.payload;
     },
-    updateTasksRequest(state, action: PayloadAction<{id:string, title:string, description: string}>) {
+    updateTasksRequest(
+      state,
+      action: PayloadAction<{ id: string; title: string; description: string }>,
+    ) {
       state.error = null;
     },
     updateTasksSuccess(state, action: PayloadAction<Task>) {
-      console.log(action.payload.id)
       if (state.tasks) {
-        const index = state.tasks.findIndex(task => task.id === action.payload.id);
-        if(index !== -1){
+        const index = state.tasks.findIndex((task) => task.id === action.payload.id);
+        if (index !== -1) {
           state.tasks[index] = action.payload;
         }
       }

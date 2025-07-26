@@ -9,7 +9,7 @@ export default function UpdateTask({ onClose, updateToDo, data }) {
       <div className="relative rounded-lg  w-full max-w-md p-8 mx-4">
         <button
           className="absolute top-3 right-3 text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 text-2xl font-bold focus:outline-none"
-          onClick={()=>onClose()}
+          onClick={() => onClose()}
           aria-label="Close"
         >
           &times;
