@@ -34,3 +34,158 @@ body {
 .max-h-\[80\%\] {
   max-height: 80%;
 }
+
+/* Animazioni personalizzate per le subtasks */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInFromLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+@keyframes bounce {
+  0%, 20%, 53%, 80%, 100% {
+    transform: translate3d(0, 0, 0);
+  }
+  40%, 43% {
+    transform: translate3d(0, -8px, 0);
+  }
+  70% {
+    transform: translate3d(0, -4px, 0);
+  }
+  90% {
+    transform: translate3d(0, -2px, 0);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200px 0;
+  }
+  100% {
+    background-position: calc(200px + 100%) 0;
+  }
+}
+
+/* Classi di utilità per le animazioni */
+.animate-slideDown {
+  animation: slideDown 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.animate-slideInLeft {
+  animation: slideInFromLeft 0.6s ease-out;
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.4s ease-in;
+}
+
+.animate-pulse-slow {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.animate-bounce-slow {
+  animation: bounce 1s ease-in-out;
+}
+
+.animate-shimmer {
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  background-size: 200px 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+/* Stagger animation per le subtasks */
+.subtask-item {
+  animation: slideInFromLeft 0.4s ease-out;
+}
+
+.subtask-item:nth-child(1) { animation-delay: 0.1s; }
+.subtask-item:nth-child(2) { animation-delay: 0.2s; }
+.subtask-item:nth-child(3) { animation-delay: 0.3s; }
+.subtask-item:nth-child(4) { animation-delay: 0.4s; }
+.subtask-item:nth-child(5) { animation-delay: 0.5s; }
+
+/* Hover effects per le subtasks */
+.subtask-item:hover {
+  transform: translateX(5px);
+  transition: transform 0.2s ease-in-out;
+}
+
+/* Loading animation per le subtasks */
+.subtask-loading {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200px 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 4px;
+  height: 20px;
+  margin: 4px 0;
+}
+
+/* Card hover effects */
+.task-card {
+  transition: all 0.3s ease-in-out;
+}
+
+.task-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* Subtask container animation */
+.subtask-container {
+  animation: slideDown 0.6s ease-out;
+  overflow: hidden;
+}
+
+/* Checkbox animation */
+.subtask-checkbox {
+  transition: all 0.2s ease-in-out;
+}
+
+.subtask-checkbox:checked {
+  animation: bounce 0.3s ease-in-out;
+}
+
+/* Progress bar animation */
+.progress-bar {
+  transition: width 0.8s ease-in-out;
+}
+
+/* Success animation */
+.success-animation {
+  animation: bounce 0.6s ease-in-out;
+  color: #10b981;
+}

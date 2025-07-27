@@ -37,7 +37,7 @@ export default function RegisterForm() {
   };
 
   return (
-    <div className="max-w-sm mx-auto p-6 rounded-lg">
+    <div className="w-96 mx-auto p-6 rounded-lg">
       <form onSubmit={handleSubmit} className="space-y-1">
         <div>
           <input

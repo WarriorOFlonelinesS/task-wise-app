@@ -32,7 +32,7 @@ export default function HomePage() {
         </div>
       )}
 
-      <div className="container mx-auto px-4 py-1 flex w-full justify-center">
+      <div className=" mx-auto px-4 py-1 flex w-full justify-center">
         <div className="flex flex-col h-screen w-full items-center overflow-hidden">
           {user ? <Dashboard /> : <LoginForm />}
         </div>
