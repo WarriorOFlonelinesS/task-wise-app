@@ -10,7 +10,7 @@ services:
       - DB_CONNECTION=pgsql
       - DB_HOST=db
       - DB_PORT=5432
-      - DB_DATABASE=your_db
+      - DB_DATABASE=db
       - DB_USERNAME=your_user_name
       - DB_PASSWORD=your_password
       - APP_DEBUG=true
