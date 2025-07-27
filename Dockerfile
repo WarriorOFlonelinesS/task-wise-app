@@ -1,6 +1,9 @@
 FROM php:8.2-fpm-alpine
 
-# Установка зависимостей для расширений
+# Use a faster Alpine mirror for faster package downloads
+RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
+
+# Install dependencies for PHP extensions
 RUN apk add --no-cache \
     libzip-dev \
     zlib-dev \
@@ -17,7 +20,7 @@ RUN apk add --no-cache \
     git \
     linux-headers
 
-# Конфигурация GD и установка PHP-расширений
+# Configure GD and install PHP extensions
 RUN docker-php-ext-configure gd \
     --with-freetype \
     --with-jpeg \
@@ -35,20 +38,20 @@ RUN docker-php-ext-configure gd \
         xml \
         xsl
 
-# Установка Composer
+# Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Рабочая директория
+# Set working directory
 WORKDIR /var/www
 
-# Копируем composer и устанавливаем зависимости
-COPY ./app/composer.* ./
+# Copy composer files and install dependencies
+COPY ./backend/composer.* ./
 RUN composer install --prefer-dist --no-dev --no-scripts --no-interaction
 
-# Копируем код приложения
-COPY . .
+# Copy the rest of the application code
+COPY ./backend ./
 
-# Оптимизация автозагрузки
+# Optimize autoload
 RUN composer dump-autoload --optimize
 
 CMD ["php-fpm"]

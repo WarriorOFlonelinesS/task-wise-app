@@ -1,16 +1,28 @@
-version: '3.8'
-
 services:
   app:
     build:
       context: .
       dockerfile: Dockerfile
     container_name: laravel_app
+    env_file:
+      - .env
+    environment:
+      - DB_CONNECTION=pgsql
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DB_DATABASE=your_db
+      - DB_USERNAME=your_user_name
+      - DB_PASSWORD=your_password
+      - APP_DEBUG=true
+      - APP_URL=http://localhost:8000
     volumes:
       - ./backend:/var/www
+      - vendor-data:/var/www/vendor
     depends_on:
-      - db
-      - redis
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_started
     networks:
       - app-network
 
@@ -30,14 +42,22 @@ services:
   db:
     image: postgres:15
     container_name: postgres_db
+    env_file:
+      - .env
     environment:
-      POSTGRES_DB: taskwise
-      POSTGRES_USER: user
-      POSTGRES_PASSWORD: password
+      POSTGRES_DB: ${DB_DATABASE:-taskwise}
+      POSTGRES_USER: ${DB_USERNAME:-taskwise_user}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-secure_password_here}
     volumes:
       - pgdata:/var/lib/postgresql/data
     networks:
       - app-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USERNAME:-taskwise_user} -d ${DB_DATABASE:-taskwise}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
 
   redis:
     image: redis:alpine
@@ -50,6 +70,7 @@ services:
   frontend:
     build:
       context: ./frontend
+      dockerfile: Dockerfile
     container_name: react_frontend
     ports:
       - "3000:3000"
@@ -60,7 +81,8 @@ services:
 
 volumes:
   pgdata:
+  vendor-data:
 
 networks:
   app-network:
-    driver: bridge
+    driver: bridge 
