@@ -5,9 +5,7 @@ services:
     env: docker
     region: frankfurt
     plan: starter
-    buildCommand: |
-      chmod +x deploy-simple.sh
-      ./deploy-simple.sh
+    buildCommand: composer install --no-dev --optimize-autoloader && php artisan key:generate && php artisan migrate --force && php artisan config:cache && php artisan route:cache && php artisan view:cache
     startCommand: php artisan serve --host 0.0.0.0 --port $PORT
     rootDir: backend
     envVars:
