@@ -19,8 +19,8 @@ Route::get('/', function () {
 
 // Rate limited authentication routes
 Route::middleware('throttle:5,1')->group(function () {
-    Route::post('/register', [AuthController::class, 'register']);
-    Route::post('/login', [AuthController::class, 'login'])->name('login');
+Route::post('/register', [AuthController::class, 'register']);
+Route::post('/login', [AuthController::class, 'login'])->name('login');
 });
 
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');

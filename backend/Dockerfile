@@ -48,6 +48,10 @@ RUN mkdir -p /var/www/storage/logs && \
 # Copy supervisor configuration
 COPY docker/supervisor.conf /etc/supervisor/conf.d/supervisord.conf
 
+# Copy deploy script
+COPY deploy.sh /usr/local/bin/deploy.sh
+RUN chmod +x /usr/local/bin/deploy.sh
+
 # Expose port
 EXPOSE 8000
 

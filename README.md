@@ -73,31 +73,31 @@ task-wise-app/
 - Git
 
 ### 1. Clone & Setup
-```bash
-git clone <your-repository-url>
+    ```bash
+    git clone <your-repository-url>
 cd task-wise-app
-```
+    ```
 
 ### 2. Environment Configuration
-```bash
+    ```bash
 # Copy environment file
 cp docker.env.example .env
 
 # Edit .env with your settings
 nano .env
-```
+    ```
 
 ### 3. Start with Docker
-```bash
+    ```bash
 # Start all services
 docker compose up -d
 
 # Check services
 docker compose ps
-```
+    ```
 
 ### 4. Database Setup
-```bash
+      ```bash
 # Run migrations
 docker compose exec app php artisan migrate
 
@@ -116,26 +116,26 @@ docker compose exec app php artisan key:generate
 ### Local Development Setup
 
 #### Backend (Laravel)
-```bash
+    ```bash
 cd backend
 composer install
 cp .env.example .env
 php artisan key:generate
-php artisan migrate
+    php artisan migrate
 php artisan serve
-```
+    ```
 
 #### Frontend (React)
-```bash
+    ```bash
 cd frontend
 npm install
 npm run dev
-```
+    ```
 
 ### Available Scripts
 
 #### Backend
-```bash
+    ```bash
 # Development server with all services
 composer run dev
 
@@ -147,7 +147,7 @@ composer run format
 ```
 
 #### Frontend
-```bash
+      ```bash
 # Development server
 npm run dev
 
@@ -229,15 +229,15 @@ POST /api/analyze-task
 ## 🧪 Testing
 
 ### Backend Tests
-```bash
-cd backend
-php artisan test
-```
+  ```bash
+  cd backend
+  php artisan test
+  ```
 
 ### Frontend Tests
-```bash
+  ```bash
 cd frontend
-npm test
+  npm test
 ```
 
 ## 🐳 Deployment Options
@@ -253,7 +253,7 @@ See [RENDER_DEPLOYMENT.md](RENDER_DEPLOYMENT.md) for detailed Render deployment 
 # 1. Connect GitHub repository to Render
 # 2. Use render.yaml for automatic setup
 # 3. Deploy with one click
-```
+  ```
 
 ### Option 3: Docker Production
 ```bash
@@ -277,7 +277,7 @@ http://localhost:8000/telescope
 ```
 
 ### Logs
-```bash
+  ```bash
 # View application logs
 docker compose logs app
 
