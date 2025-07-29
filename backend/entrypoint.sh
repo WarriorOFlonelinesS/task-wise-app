@@ -1,7 +1,13 @@
 #!/bin/bash
 set -e
 
-echo "📦 Running Laravel setup..."
+# Wait for PostgreSQL to be ready
+until pg_isready -h $DB_HOST -p $DB_PORT -U $DB_USERNAME; do
+  echo "⏳ Waiting for PostgreSQL..."
+  sleep 2
+done
+
+echo "✅ PostgreSQL is ready"
 
 php artisan config:clear
 php artisan cache:clear
@@ -10,5 +16,4 @@ php artisan view:clear
 
 php artisan migrate --force
 
-echo "🚀 Starting Laravel server on port 8000..."
 exec php -S 0.0.0.0:8000 -t public
