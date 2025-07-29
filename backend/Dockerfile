@@ -44,13 +44,11 @@ RUN mkdir -p /var/www/storage/logs && \
 
 # Copy supervisor configuration (optional, if used)
 COPY docker/supervisor.conf /etc/supervisor/conf.d/supervisord.conf
-
 # Copy entrypoint script
 COPY entrypoint.sh /usr/local/bin/entrypoint.sh
 RUN chmod +x /usr/local/bin/entrypoint.sh
 
-# Expose port
 EXPOSE 8000
 
-# Use entrypoint to run artisan & start app
-CMD ["entrypoint.sh"]
+# Start Laravel via entrypoint
+CMD ["/usr/local/bin/entrypoint.sh"]
