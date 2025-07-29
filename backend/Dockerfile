@@ -12,7 +12,7 @@ RUN apt-get update && apt-get install -y \
     libpq-dev \
     supervisor
 
-# Clear cache
+# Clean up
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Install PHP extensions
@@ -24,42 +24,33 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 # Set working directory
 WORKDIR /var/www
 
-# Copy composer files first for better caching
+# Copy composer files for better caching
 COPY composer.json composer.lock ./
 
-# Install dependencies
+# Install PHP dependencies
 RUN composer install --no-dev --optimize-autoloader --no-scripts
 
-# Copy existing application directory
+# Copy application code
 COPY . .
 
-# Run composer scripts
-RUN composer install --no-dev --optimize-autoloader
-
 # Set permissions
-RUN chown -R www-data:www-data /var/www
-RUN chmod -R 755 /var/www/storage
-RUN chmod -R 755 /var/www/bootstrap/cache
+RUN chown -R www-data:www-data /var/www \
+    && chmod -R 755 /var/www/storage \
+    && chmod -R 755 /var/www/bootstrap/cache
 
 # Create log directory
 RUN mkdir -p /var/www/storage/logs && \
     chmod -R 775 /var/www/storage/logs
 
-# Copy supervisor configuration
+# Copy supervisor configuration (optional, if used)
 COPY docker/supervisor.conf /etc/supervisor/conf.d/supervisord.conf
 
-# Copy deploy script
-COPY deploy.sh /usr/local/bin/deploy.sh
-RUN chmod +x /usr/local/bin/deploy.sh
-# Run Laravel setup commands
-RUN php artisan config:clear \
-    && php artisan cache:clear \
-    && php artisan route:clear \
-    && php artisan view:clear \
-    && php artisan migrate --force
+# Copy entrypoint script
+COPY entrypoint.sh /usr/local/bin/entrypoint.sh
+RUN chmod +x /usr/local/bin/entrypoint.sh
 
 # Expose port
 EXPOSE 8000
 
-# Start supervisor
-CMD ["php", "-S", "0.0.0.0:8000", "-t", "public"]
+# Use entrypoint to run artisan & start app
+CMD ["entrypoint.sh"]
