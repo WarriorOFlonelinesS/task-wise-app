@@ -51,6 +51,12 @@ COPY docker/supervisor.conf /etc/supervisor/conf.d/supervisord.conf
 # Copy deploy script
 COPY deploy.sh /usr/local/bin/deploy.sh
 RUN chmod +x /usr/local/bin/deploy.sh
+# Run Laravel setup commands
+RUN php artisan config:clear \
+    && php artisan cache:clear \
+    && php artisan route:clear \
+    && php artisan view:clear \
+    && php artisan migrate --force
 
 # Expose port
 EXPOSE 8000
