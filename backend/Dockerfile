@@ -56,4 +56,4 @@ RUN chmod +x /usr/local/bin/deploy.sh
 EXPOSE 8000
 
 # Start supervisor
-CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"] 
+CMD ["php", "-S", "0.0.0.0:8000", "-t", "public"]
