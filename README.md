@@ -1,4 +1,4 @@
-# 🚀 TaskWise AI - Smart Task Management System
+<h1 align="center">🚀 TaskWise AI - Smart Task Management System</h1>
 <div align="center">
   
 **Take your task management to the next level with AI automation.**
