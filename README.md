@@ -111,9 +111,6 @@ docker compose exec app php artisan key:generate
 
 - **Frontend**: [http://localhost:3000](http://localhost:3000)
 - **Backend API**: [http://localhost:8000](http://localhost:8000)
-- **Database**: localhost:5432
-- **Redis**: localhost:6379
-
 ---
 
 ## 🛠️ Development
