@@ -327,7 +327,4 @@ MIT License – see `LICENSE`
 
 **Made with ❤️ by the TaskWise Team**
 
-[![GitHub stars](https://img.shields.io/github/stars/your-username/task-wise-app?style=social)](https://github.com/your-username/task-wise-app)
-[![GitHub forks](https://img.shields.io/github/forks/your-username/task-wise-app?style=social)](https://github.com/your-username/task-wise-app)
-
 </div>
