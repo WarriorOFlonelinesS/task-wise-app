@@ -1,7 +1,5 @@
-# 🚀 TaskWise AI - Smart Task Management System
-
 <div align="center">
-
+# 🚀 TaskWise AI - Smart Task Management System
 **Take your task management to the next level with AI automation.**
 
 🔗 **Live Demo:** [https://task-wise-ai-app.netlify.app](https://task-wise-ai-app.netlify.app)
