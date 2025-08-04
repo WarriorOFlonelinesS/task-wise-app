@@ -2,6 +2,10 @@
 
 <div align="center">
 
+**Take your task management to the next level with AI automation.**
+
+🔗 **Live Demo:** [https://task-wise-ai-app.netlify.app](https://task-wise-ai-app.netlify.app)
+
 ![TaskWise Logo](https://img.shields.io/badge/TaskWise-AI%20Powered-blue?style=for-the-badge&logo=openai)
 ![Laravel](https://img.shields.io/badge/Laravel-12.x-red?style=for-the-badge&logo=laravel)
 ![React](https://img.shields.io/badge/React-19.x-blue?style=for-the-badge&logo=react)
@@ -14,155 +18,162 @@
 
 </div>
 
----
 
 ## ✨ Features
 
-### 🎯 Core Features
-- **User Authentication & Authorization** - Secure login/register with Laravel Sanctum
-- **Task Management** - Create, edit, delete, and organize tasks
-- **AI-Powered Subtask Generation** - Automatically break down tasks using Google Gemini AI
-- **Real-time Animations** - Smooth UI transitions and loading states
-- **Responsive Design** - Works perfectly on desktop and mobile
+### 🎯 Core
 
-### 🤖 AI Features
-- **Smart Task Analysis** - AI analyzes your tasks and generates relevant subtasks
-- **Intelligent Task Breakdown** - Complex tasks automatically split into manageable steps
-- **Context-Aware Suggestions** - AI understands task context and provides relevant subtasks
+- ✅ User Authentication (Laravel Sanctum)
+- ✅ Task CRUD operations
+- ✅ Responsive UI (desktop & mobile)
+- ✅ Smooth animations & transitions
 
-### 🎨 UI/UX Features
-- **Modern Design** - Beautiful gradient backgrounds and glass-morphism effects
-- **Smooth Animations** - Staggered animations for subtasks and interactive elements
-- **Loading States** - Elegant loading animations during AI processing
-- **Hover Effects** - Interactive feedback on all clickable elements
+### 🤖 AI-Powered
 
-### 🔒 Security Features
-- **Rate Limiting** - Protection against brute force attacks
-- **CORS Protection** - Secure cross-origin requests
-- **Security Headers** - Comprehensive HTTP security headers
-- **Input Validation** - Robust validation for all user inputs
-- **Password Policy** - Strong password requirements with special characters
+- ✅ AI task analysis with Google Gemini
+- ✅ Automatic subtask generation
+- ✅ Context-aware suggestions
 
-## 🏗️ Architecture
+### 🎨 UI/UX
+
+- ✅ Modern design (glassmorphism & gradients)
+- ✅ Loading states for AI actions
+- ✅ Animated subtask transitions
+
+### 🔒 Security
+
+- ✅ Rate limiting
+- ✅ CORS protection
+- ✅ Security headers
+- ✅ Strong password policy
+- ✅ Input validation
+
+---
+
+## 🏟️ Architecture
 
 ```
 task-wise-app/
 ├── backend/                 # Laravel 12.x API
-│   ├── app/
-│   │   ├── Http/Controllers/  # API Controllers
-│   │   ├── Services/          # Business Logic
-│   │   ├── Models/            # Eloquent Models
-│   │   └── DTO/              # Data Transfer Objects
-│   ├── database/             # Migrations & Seeders
-│   └── tests/               # PHPUnit Tests
+│   ├── app/Http/Controllers/
+│   ├── app/Services/
+│   ├── app/Models/
+│   └── app/DTO/
+│
 ├── frontend/                # React 19.x SPA
-│   ├── src/
-│   │   ├── components/      # React Components
-│   │   ├── features/        # Redux Toolkit Slices
-│   │   └── store/           # Redux Store
-│   └── public/              # Static Assets
-├── nginx/                   # Web Server Configuration
-└── docker-compose.yaml      # Multi-container Setup
+│   ├── src/components/
+│   ├── src/features/
+│   └── src/store/
+│
+├── nginx/                   # Nginx configuration
+├── docker-compose.yaml      # Docker multi-service config
 ```
+
+---
 
 ## 🚀 Quick Start
 
-### Prerequisites
+### 🔧 Prerequisites
+
 - Docker & Docker Compose
-- Node.js 18+ (for local development)
+- Node.js 18+
 - Git
 
 ### 1. Clone & Setup
-    ```bash
-    git clone <your-repository-url>
+
+```bash
+git clone <your-repository-url>
 cd task-wise-app
-    ```
+```
 
 ### 2. Environment Configuration
-    ```bash
-# Copy environment file
-cp docker.env.example .env
 
-# Edit .env with your settings
+```bash
+cp docker.env.example .env
 nano .env
-    ```
+```
 
 ### 3. Start with Docker
-    ```bash
-# Start all services
-docker compose up -d
 
-# Check services
+```bash
+docker compose up -d
 docker compose ps
-    ```
+```
 
 ### 4. Database Setup
-      ```bash
-# Run migrations
-docker compose exec app php artisan migrate
 
-# Generate application key
+```bash
+docker exec -it laravel_app bash
+php artisan migrate --seed
 docker compose exec app php artisan key:generate
 ```
 
 ### 5. Access the Application
-- **Frontend**: http://localhost:3000
-- **Backend API**: http://localhost:8000
+
+- **Frontend**: [http://localhost:3000](http://localhost:3000)
+- **Backend API**: [http://localhost:8000](http://localhost:8000)
 - **Database**: localhost:5432
 - **Redis**: localhost:6379
 
+---
+
 ## 🛠️ Development
 
-### Local Development Setup
+### Backend (Laravel)
 
-#### Backend (Laravel)
-    ```bash
+```bash
 cd backend
 composer install
 cp .env.example .env
 php artisan key:generate
-    php artisan migrate
+php artisan migrate
 php artisan serve
-    ```
+```
 
-#### Frontend (React)
-    ```bash
+### Frontend (React)
+
+```bash
 cd frontend
 npm install
 npm run dev
-    ```
+```
 
-### Available Scripts
+---
 
-#### Backend
-    ```bash
-# Development server with all services
+## 🔧 Scripts
+
+### Backend
+
+```bash
+# Development server
 composer run dev
 
 # Run tests
 composer run test
 
-# Code formatting
+# Format code
 composer run format
 ```
 
-#### Frontend
-      ```bash
+### Frontend
+
+```bash
 # Development server
 npm run dev
 
-# Build for production
+# Production build
 npm run build
 
-# Lint code
+# Lint
 npm run lint
 ```
 
+---
+
 ## 🔧 Configuration
 
-### Environment Variables
+### Backend (.env)
 
-#### Backend (.env)
 ```env
 APP_NAME=TaskWise
 APP_ENV=local
@@ -183,35 +194,42 @@ REDIS_PORT=6379
 GEMINI_API_KEY=your_gemini_api_key
 ```
 
-#### Frontend (.env)
+### Frontend (.env)
+
 ```env
 VITE_API_URL=http://localhost:8000/api
 ```
 
-## 🔒 Security
+---
+
+## 🔐 Security
 
 ### Implemented Security Measures
-- ✅ **Rate Limiting** - 5 requests per minute on auth endpoints
-- ✅ **CORS Protection** - Configured for specific origins
-- ✅ **Security Headers** - X-Frame-Options, CSP, XSS Protection
-- ✅ **Input Validation** - Comprehensive validation rules
-- ✅ **Password Policy** - Minimum 8 chars, uppercase, lowercase, number, special char
-- ✅ **Token Expiration** - 24-hour token lifetime
-- ✅ **File Access Protection** - Denied access to sensitive files
 
-### Security Checklist
-See [SECURITY_CHECKLIST.md](SECURITY_CHECKLIST.md) for detailed security analysis.
+- ✅ **Rate Limiting** – 5 requests/min on auth endpoints
+- ✅ **CORS Protection** – Restricted origins only
+- ✅ **Security Headers** – X-Frame-Options, CSP, XSS Protection
+- ✅ **Input Validation** – Enforced at backend
+- ✅ **Password Policy** – Min 8 chars, mixed types
+- ✅ **Token Expiry** – 24h token lifetime
+- ✅ **Sensitive File Access Denied**
 
-## 📡 API Documentation
+For more details, refer to `SECURITY_CHECKLIST.md`.
 
-### Authentication Endpoints
+---
+
+## 📡 API
+
+### Authentication
+
 ```http
 POST /api/register
 POST /api/login
 POST /api/logout
 ```
 
-### Task Endpoints
+### Tasks
+
 ```http
 GET    /api/tasks
 POST   /api/tasks
@@ -221,91 +239,92 @@ DELETE /api/tasks/{id}
 GET    /api/tasks/filter
 ```
 
-### AI Analysis Endpoint
+### AI Endpoint
+
 ```http
 POST /api/analyze-task
 ```
 
+---
+
 ## 🧪 Testing
 
-### Backend Tests
-  ```bash
-  cd backend
-  php artisan test
-  ```
+### Backend
 
-### Frontend Tests
-  ```bash
-cd frontend
-  npm test
+```bash
+cd backend
+php artisan test
 ```
 
-## 🐳 Deployment Options
+### Frontend
 
-### Option 1: Laravel Forge
-See [FORGE_DEPLOYMENT.md](FORGE_DEPLOYMENT.md) for detailed Forge deployment guide.
-
-### Option 2: Render.com (Recommended for Hobby Projects)
-See [RENDER_DEPLOYMENT.md](RENDER_DEPLOYMENT.md) for detailed Render deployment guide.
-
-**Quick Render Setup:**
 ```bash
-# 1. Connect GitHub repository to Render
-# 2. Use render.yaml for automatic setup
-# 3. Deploy with one click
-  ```
+cd frontend
+npm test
+```
 
-### Option 3: Docker Production
+---
+
+## 🚢 Deployment
+
+### Render.com (Recommended for Hobby Projects)
+
+1. Connect GitHub repository
+2. Use `render.yaml`
+3. Deploy via UI
+
+See `RENDER_DEPLOYMENT.md` for full guide.
+
+### Docker Production
+
 ```bash
-# Use production compose file
 docker compose -f docker-compose.prod.yml up -d
 ```
 
-### Docker Services
-- **app**: Laravel API (PHP 8.2)
-- **web**: Nginx web server
-- **db**: PostgreSQL 15 database
-- **redis**: Redis cache/session store
-- **frontend**: React SPA
+### Services
+
+- **app** – Laravel API (PHP 8.2)
+- **web** – Nginx
+- **db** – PostgreSQL 15
+- **redis** – Caching & sessions
+- **frontend** – React SPA
+
+---
 
 ## 📊 Monitoring
 
-### Laravel Telescope
-Access Laravel Telescope for debugging and monitoring:
+### Telescope
+
+Laravel Telescope for debugging:
+
 ```
 http://localhost:8000/telescope
 ```
 
 ### Logs
-  ```bash
-# View application logs
-docker compose logs app
 
-# View real-time logs
+```bash
+docker compose logs app
 docker compose exec app php artisan pail
 ```
 
+---
+
 ## 🤝 Contributing
 
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-## 📝 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 🆘 Support
-
-- **Documentation**: Check the [Wiki](../../wiki) for detailed guides
-- **Issues**: Report bugs via [GitHub Issues](../../issues)
-- **Security**: Report security issues to security@taskwise.com
+1. Fork the repo
+2. Create feature branch (`git checkout -b feature/your-feature`)
+3. Commit changes
+4. Push to branch
+5. Create Pull Request
 
 ---
 
-<div align="center">
+## 📝 License
+
+MIT License – see `LICENSE`
+
+---
 
 **Made with ❤️ by the TaskWise Team**
 
