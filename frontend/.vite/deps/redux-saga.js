@@ -63,25 +63,26 @@ import {
   stringableFunc,
   symbol,
   undef,
-  wrapSagaDispatch
-} from "./chunk-KTWUVJ6G.js";
-import "./chunk-G3PMV62Z.js";
+  wrapSagaDispatch,
+} from './chunk-KTWUVJ6G.js';
+import './chunk-G3PMV62Z.js';
 
 // node_modules/@babel/runtime/helpers/esm/objectWithoutPropertiesLoose.js
 function _objectWithoutPropertiesLoose(r, e) {
   if (null == r) return {};
   var t = {};
-  for (var n in r) if ({}.hasOwnProperty.call(r, n)) {
-    if (-1 !== e.indexOf(n)) continue;
-    t[n] = r[n];
-  }
+  for (var n in r)
+    if ({}.hasOwnProperty.call(r, n)) {
+      if (-1 !== e.indexOf(n)) continue;
+      t[n] = r[n];
+    }
   return t;
 }
 
 // node_modules/@redux-saga/deferred/dist/redux-saga-deferred.esm.js
 function deferred() {
   var def = {};
-  def.promise = new Promise(function(resolve, reject) {
+  def.promise = new Promise(function (resolve, reject) {
     def.resolve = resolve;
     def.reject = reject;
   });
@@ -129,24 +130,24 @@ function flush() {
   }
 }
 var array2 = function array3(patterns) {
-  return function(input) {
-    return patterns.some(function(p) {
+  return function (input) {
+    return patterns.some(function (p) {
       return matcher(p)(input);
     });
   };
 };
 var predicate = function predicate2(_predicate) {
-  return function(input) {
+  return function (input) {
     return _predicate(input);
   };
 };
 var string2 = function string3(pattern) {
-  return function(input) {
+  return function (input) {
     return input.type === String(pattern);
   };
 };
 var symbol2 = function symbol3(pattern) {
-  return function(input) {
+  return function (input) {
     return input.type === pattern;
   };
 };
@@ -154,21 +155,35 @@ var wildcard = function wildcard2() {
   return kTrue;
 };
 function matcher(pattern) {
-  var matcherCreator = pattern === "*" ? wildcard : string(pattern) ? string2 : array(pattern) ? array2 : stringableFunc(pattern) ? string2 : func(pattern) ? predicate : symbol(pattern) ? symbol2 : null;
+  var matcherCreator =
+    pattern === '*'
+      ? wildcard
+      : string(pattern)
+        ? string2
+        : array(pattern)
+          ? array2
+          : stringableFunc(pattern)
+            ? string2
+            : func(pattern)
+              ? predicate
+              : symbol(pattern)
+                ? symbol2
+                : null;
   if (matcherCreator === null) {
-    throw new Error("invalid pattern: " + pattern);
+    throw new Error('invalid pattern: ' + pattern);
   }
   return matcherCreator(pattern);
 }
 var END = {
-  type: CHANNEL_END_TYPE
+  type: CHANNEL_END_TYPE,
 };
 var isEnd = function isEnd2(a) {
   return a && a.type === CHANNEL_END_TYPE;
 };
-var CLOSED_CHANNEL_WITH_TAKERS = "Cannot have a closed channel with pending takers";
-var INVALID_BUFFER = "invalid buffer passed to channel factory function";
-var UNDEFINED_INPUT_ERROR = "Saga or channel was provided with an undefined action\nHints:\n  - check that your Action Creator returns a non-undefined value\n  - if the Saga was started using runSaga, check that your subscribe source provides the action to its listeners";
+var CLOSED_CHANNEL_WITH_TAKERS = 'Cannot have a closed channel with pending takers';
+var INVALID_BUFFER = 'invalid buffer passed to channel factory function';
+var UNDEFINED_INPUT_ERROR =
+  'Saga or channel was provided with an undefined action\nHints:\n  - check that your Action Creator returns a non-undefined value\n  - if the Saga was started using runSaga, check that your subscribe source provides the action to its listeners';
 function channel2(buffer$1) {
   if (buffer$1 === void 0) {
     buffer$1 = expanding();
@@ -183,7 +198,7 @@ function channel2(buffer$1) {
       throw internalErr(CLOSED_CHANNEL_WITH_TAKERS);
     }
     if (takers.length && !buffer$1.isEmpty()) {
-      throw internalErr("Cannot have pending takers with non empty buffer");
+      throw internalErr('Cannot have pending takers with non empty buffer');
     }
   }
   function put(input) {
@@ -211,7 +226,7 @@ function channel2(buffer$1) {
       cb(buffer$1.take());
     } else {
       takers.push(cb);
-      cb.cancel = function() {
+      cb.cancel = function () {
         remove(takers, cb);
       };
     }
@@ -246,7 +261,7 @@ function channel2(buffer$1) {
     take,
     put,
     flush: flush2,
-    close
+    close,
   };
 }
 function eventChannel(subscribe, buffer2) {
@@ -266,7 +281,7 @@ function eventChannel(subscribe, buffer2) {
     }
     chan.close();
   };
-  unsubscribe = subscribe(function(input) {
+  unsubscribe = subscribe(function (input) {
     if (isEnd(input)) {
       close();
       return;
@@ -274,7 +289,7 @@ function eventChannel(subscribe, buffer2) {
     chan.put(input);
   });
   if (true) {
-    check(unsubscribe, func, "in eventChannel: subscribe should return a function to unsubscribe");
+    check(unsubscribe, func, 'in eventChannel: subscribe should return a function to unsubscribe');
   }
   unsubscribe = once(unsubscribe);
   if (closed) {
@@ -283,7 +298,7 @@ function eventChannel(subscribe, buffer2) {
   return {
     take: chan.take,
     flush: chan.flush,
-    close
+    close,
   };
 }
 function multicastChannel() {
@@ -307,61 +322,68 @@ function multicastChannel() {
       checkForbiddenStates();
     }
     closed = true;
-    var takers = currentTakers = nextTakers;
+    var takers = (currentTakers = nextTakers);
     nextTakers = [];
-    takers.forEach(function(taker) {
+    takers.forEach(function (taker) {
       taker(END);
     });
   };
-  return _ref = {}, _ref[MULTICAST] = true, _ref.put = function put(input) {
-    if (true) {
-      checkForbiddenStates();
-      check(input, notUndef, UNDEFINED_INPUT_ERROR);
-    }
-    if (closed) {
-      return;
-    }
-    if (isEnd(input)) {
-      close();
-      return;
-    }
-    var takers = currentTakers = nextTakers;
-    for (var i = 0, len = takers.length; i < len; i++) {
-      var taker = takers[i];
-      if (taker[MATCH](input)) {
-        taker.cancel();
-        taker(input);
+  return (
+    (_ref = {}),
+    (_ref[MULTICAST] = true),
+    (_ref.put = function put(input) {
+      if (true) {
+        checkForbiddenStates();
+        check(input, notUndef, UNDEFINED_INPUT_ERROR);
       }
-    }
-  }, _ref.take = function take(cb, matcher2) {
-    if (matcher2 === void 0) {
-      matcher2 = wildcard;
-    }
-    if (true) {
-      checkForbiddenStates();
-    }
-    if (closed) {
-      cb(END);
-      return;
-    }
-    cb[MATCH] = matcher2;
-    ensureCanMutateNextTakers();
-    nextTakers.push(cb);
-    cb.cancel = once(function() {
+      if (closed) {
+        return;
+      }
+      if (isEnd(input)) {
+        close();
+        return;
+      }
+      var takers = (currentTakers = nextTakers);
+      for (var i = 0, len = takers.length; i < len; i++) {
+        var taker = takers[i];
+        if (taker[MATCH](input)) {
+          taker.cancel();
+          taker(input);
+        }
+      }
+    }),
+    (_ref.take = function take(cb, matcher2) {
+      if (matcher2 === void 0) {
+        matcher2 = wildcard;
+      }
+      if (true) {
+        checkForbiddenStates();
+      }
+      if (closed) {
+        cb(END);
+        return;
+      }
+      cb[MATCH] = matcher2;
       ensureCanMutateNextTakers();
-      remove(nextTakers, cb);
-    });
-  }, _ref.close = close, _ref;
+      nextTakers.push(cb);
+      cb.cancel = once(function () {
+        ensureCanMutateNextTakers();
+        remove(nextTakers, cb);
+      });
+    }),
+    (_ref.close = close),
+    _ref
+  );
 }
 function stdChannel() {
   var chan = multicastChannel();
   var put = chan.put;
-  chan.put = function(input) {
+  chan.put = function (input) {
     if (input[SAGA_ACTION]) {
       put(input);
       return;
     }
-    asap(function() {
+    asap(function () {
       put(input);
     });
   };
@@ -376,25 +398,27 @@ function resolvePromise(promise2, cb) {
   if (func(cancelPromise)) {
     cb.cancel = cancelPromise;
   }
-  promise2.then(cb, function(error) {
+  promise2.then(cb, function (error) {
     cb(error, true);
   });
 }
 var current = 0;
-var nextSagaId = function() {
+var nextSagaId = function () {
   return ++current;
 };
 var _effectRunnerMap;
 function getIteratorMetaInfo(iterator2, fn) {
   if (iterator2.isSagaIterator) {
     return {
-      name: iterator2.meta.name
+      name: iterator2.meta.name,
     };
   }
   return getMetaInfo(fn);
 }
 function createTaskIterator(_ref) {
-  var context = _ref.context, fn = _ref.fn, args = _ref.args;
+  var context = _ref.context,
+    fn = _ref.fn,
+    args = _ref.args;
   try {
     var result = fn.apply(context, args);
     if (iterator(result)) {
@@ -406,25 +430,27 @@ function createTaskIterator(_ref) {
         resolved = true;
         return {
           value: result,
-          done: !promise(result)
+          done: !promise(result),
         };
       } else {
         return {
           value: arg,
-          done: true
+          done: true,
         };
       }
     };
     return makeIterator(next);
   } catch (err) {
-    return makeIterator(function() {
+    return makeIterator(function () {
       throw err;
     });
   }
 }
 function runPutEffect(env, _ref2, cb) {
-  var channel3 = _ref2.channel, action = _ref2.action, resolve = _ref2.resolve;
-  asap(function() {
+  var channel3 = _ref2.channel,
+    action = _ref2.action,
+    resolve = _ref2.resolve;
+  asap(function () {
     var result;
     try {
       result = (channel3 ? channel3.put : env.dispatch)(action);
@@ -440,7 +466,10 @@ function runPutEffect(env, _ref2, cb) {
   });
 }
 function runTakeEffect(env, _ref3, cb) {
-  var _ref3$channel = _ref3.channel, channel3 = _ref3$channel === void 0 ? env.channel : _ref3$channel, pattern = _ref3.pattern, maybe = _ref3.maybe;
+  var _ref3$channel = _ref3.channel,
+    channel3 = _ref3$channel === void 0 ? env.channel : _ref3$channel,
+    pattern = _ref3.pattern,
+    maybe = _ref3.maybe;
   var takeCb = function takeCb2(input) {
     if (input instanceof Error) {
       cb(input, true);
@@ -461,7 +490,9 @@ function runTakeEffect(env, _ref3, cb) {
   cb.cancel = takeCb.cancel;
 }
 function runCallEffect(env, _ref4, cb, _ref5) {
-  var context = _ref4.context, fn = _ref4.fn, args = _ref4.args;
+  var context = _ref4.context,
+    fn = _ref4.fn,
+    args = _ref4.args;
   var task = _ref5.task;
   try {
     var result = fn.apply(context, args);
@@ -478,7 +509,7 @@ function runCallEffect(env, _ref4, cb, _ref5) {
         getMetaInfo(fn),
         /* isRoot */
         false,
-        cb
+        cb,
       );
       return;
     }
@@ -488,7 +519,9 @@ function runCallEffect(env, _ref4, cb, _ref5) {
   }
 }
 function runCPSEffect(env, _ref6, cb) {
-  var context = _ref6.context, fn = _ref6.fn, args = _ref6.args;
+  var context = _ref6.context,
+    fn = _ref6.fn,
+    args = _ref6.args;
   try {
     var cpsCb = function cpsCb2(err, res) {
       if (undef(err)) {
@@ -506,15 +539,18 @@ function runCPSEffect(env, _ref6, cb) {
   }
 }
 function runForkEffect(env, _ref7, cb, _ref8) {
-  var context = _ref7.context, fn = _ref7.fn, args = _ref7.args, detached = _ref7.detached;
+  var context = _ref7.context,
+    fn = _ref7.fn,
+    args = _ref7.args,
+    detached = _ref7.detached;
   var parent = _ref8.task;
   var taskIterator = createTaskIterator({
     context,
     fn,
-    args
+    args,
   });
   var meta = getIteratorMetaInfo(taskIterator, fn);
-  immediately(function() {
+  immediately(function () {
     var child = proc(env, taskIterator, parent.context, current, meta, detached, void 0);
     if (detached) {
       cb(child);
@@ -536,9 +572,9 @@ function runJoinEffect(env, taskOrTasks, cb, _ref9) {
     if (taskToJoin.isRunning()) {
       var joiner = {
         task,
-        cb: cb2
+        cb: cb2,
       };
-      cb2.cancel = function() {
+      cb2.cancel = function () {
         if (taskToJoin.isRunning()) remove(taskToJoin.joiners, joiner);
       };
       taskToJoin.joiners.push(joiner);
@@ -556,7 +592,7 @@ function runJoinEffect(env, taskOrTasks, cb, _ref9) {
       return;
     }
     var childCallbacks = createAllStyleChildCallbacks(taskOrTasks, cb);
-    taskOrTasks.forEach(function(t, i) {
+    taskOrTasks.forEach(function (t, i) {
       joinSingleTask(t, childCallbacks[i]);
     });
   } else {
@@ -588,7 +624,7 @@ function runAllEffect(env, effects, cb, _ref11) {
     return;
   }
   var childCallbacks = createAllStyleChildCallbacks(effects, cb);
-  keys.forEach(function(key) {
+  keys.forEach(function (key) {
     digestEffect(effects[key], effectId, childCallbacks[key], key);
   });
 }
@@ -599,7 +635,7 @@ function runRaceEffect(env, effects, cb, _ref12) {
   var response = array(effects) ? createEmptyArray(keys.length) : {};
   var childCbs = {};
   var completed = false;
-  keys.forEach(function(key) {
+  keys.forEach(function (key) {
     var chCbAtKey = function chCbAtKey2(res, isErr) {
       if (completed) {
         return;
@@ -617,15 +653,15 @@ function runRaceEffect(env, effects, cb, _ref12) {
     chCbAtKey.cancel = noop;
     childCbs[key] = chCbAtKey;
   });
-  cb.cancel = function() {
+  cb.cancel = function () {
     if (!completed) {
       completed = true;
-      keys.forEach(function(key) {
+      keys.forEach(function (key) {
         return childCbs[key].cancel();
       });
     }
   };
-  keys.forEach(function(key) {
+  keys.forEach(function (key) {
     if (completed) {
       return;
     }
@@ -633,7 +669,8 @@ function runRaceEffect(env, effects, cb, _ref12) {
   });
 }
 function runSelectEffect(env, _ref13, cb) {
-  var selector = _ref13.selector, args = _ref13.args;
+  var selector = _ref13.selector,
+    args = _ref13.args;
   try {
     var state = selector.apply(void 0, [env.getState()].concat(args));
     cb(state);
@@ -642,7 +679,8 @@ function runSelectEffect(env, _ref13, cb) {
   }
 }
 function runChannelEffect(env, _ref14, cb) {
-  var pattern = _ref14.pattern, buffer2 = _ref14.buffer;
+  var pattern = _ref14.pattern,
+    buffer2 = _ref14.buffer;
   var chan = channel2(buffer2);
   var match = matcher(pattern);
   var taker = function taker2(action) {
@@ -652,7 +690,7 @@ function runChannelEffect(env, _ref14, cb) {
     chan.put(action);
   };
   var close = chan.close;
-  chan.close = function() {
+  chan.close = function () {
     taker.cancel();
     close();
   };
@@ -675,7 +713,24 @@ function runSetContextEffect(env, props, cb, _ref17) {
   assignWithSymbols(task.context, props);
   cb();
 }
-var effectRunnerMap = (_effectRunnerMap = {}, _effectRunnerMap[TAKE] = runTakeEffect, _effectRunnerMap[PUT] = runPutEffect, _effectRunnerMap[ALL] = runAllEffect, _effectRunnerMap[RACE] = runRaceEffect, _effectRunnerMap[CALL] = runCallEffect, _effectRunnerMap[CPS] = runCPSEffect, _effectRunnerMap[FORK] = runForkEffect, _effectRunnerMap[JOIN] = runJoinEffect, _effectRunnerMap[CANCEL2] = runCancelEffect, _effectRunnerMap[SELECT] = runSelectEffect, _effectRunnerMap[ACTION_CHANNEL] = runChannelEffect, _effectRunnerMap[CANCELLED] = runCancelledEffect, _effectRunnerMap[FLUSH] = runFlushEffect, _effectRunnerMap[GET_CONTEXT] = runGetContextEffect, _effectRunnerMap[SET_CONTEXT] = runSetContextEffect, _effectRunnerMap);
+var effectRunnerMap =
+  ((_effectRunnerMap = {}),
+  (_effectRunnerMap[TAKE] = runTakeEffect),
+  (_effectRunnerMap[PUT] = runPutEffect),
+  (_effectRunnerMap[ALL] = runAllEffect),
+  (_effectRunnerMap[RACE] = runRaceEffect),
+  (_effectRunnerMap[CALL] = runCallEffect),
+  (_effectRunnerMap[CPS] = runCPSEffect),
+  (_effectRunnerMap[FORK] = runForkEffect),
+  (_effectRunnerMap[JOIN] = runJoinEffect),
+  (_effectRunnerMap[CANCEL2] = runCancelEffect),
+  (_effectRunnerMap[SELECT] = runSelectEffect),
+  (_effectRunnerMap[ACTION_CHANNEL] = runChannelEffect),
+  (_effectRunnerMap[CANCELLED] = runCancelledEffect),
+  (_effectRunnerMap[FLUSH] = runFlushEffect),
+  (_effectRunnerMap[GET_CONTEXT] = runGetContextEffect),
+  (_effectRunnerMap[SET_CONTEXT] = runSetContextEffect),
+  _effectRunnerMap);
 function forkQueue(mainTask, onAbort, cont) {
   var tasks = [];
   var result;
@@ -691,7 +746,7 @@ function forkQueue(mainTask, onAbort, cont) {
   }
   function addTask(task) {
     tasks.push(task);
-    task.cont = function(res, isErr) {
+    task.cont = function (res, isErr) {
       if (completed) {
         return;
       }
@@ -715,7 +770,7 @@ function forkQueue(mainTask, onAbort, cont) {
       return;
     }
     completed = true;
-    tasks.forEach(function(t) {
+    tasks.forEach(function (t) {
       t.cont = noop;
       t.cancel();
     });
@@ -725,36 +780,39 @@ function forkQueue(mainTask, onAbort, cont) {
     addTask,
     cancelAll,
     abort,
-    getTasks
+    getTasks,
   };
 }
 function formatLocation(fileName, lineNumber) {
-  return fileName + "?" + lineNumber;
+  return fileName + '?' + lineNumber;
 }
 function effectLocationAsString(effect) {
   var location = getLocation(effect);
   if (location) {
-    var code = location.code, fileName = location.fileName, lineNumber = location.lineNumber;
-    var source = code + "  " + formatLocation(fileName, lineNumber);
+    var code = location.code,
+      fileName = location.fileName,
+      lineNumber = location.lineNumber;
+    var source = code + '  ' + formatLocation(fileName, lineNumber);
     return source;
   }
-  return "";
+  return '';
 }
 function sagaLocationAsString(sagaMeta) {
-  var name = sagaMeta.name, location = sagaMeta.location;
+  var name = sagaMeta.name,
+    location = sagaMeta.location;
   if (location) {
-    return name + "  " + formatLocation(location.fileName, location.lineNumber);
+    return name + '  ' + formatLocation(location.fileName, location.lineNumber);
   }
   return name;
 }
 function cancelledTasksAsString(sagaStack2) {
-  var cancelledTasks = flatMap(function(i) {
+  var cancelledTasks = flatMap(function (i) {
     return i.cancelledTasks;
   }, sagaStack2);
   if (!cancelledTasks.length) {
-    return "";
+    return '';
   }
-  return ["Tasks cancelled due to error:"].concat(cancelledTasks).join("\n");
+  return ['Tasks cancelled due to error:'].concat(cancelledTasks).join('\n');
 }
 var crashedEffect = null;
 var sagaStack = [];
@@ -770,12 +828,23 @@ var setCrashedEffect = function setCrashedEffect2(effect) {
   crashedEffect = effect;
 };
 var toString = function toString2() {
-  var firstSaga = sagaStack[0], otherSagas = sagaStack.slice(1);
-  var crashedEffectLocation = firstSaga.crashedEffect ? effectLocationAsString(firstSaga.crashedEffect) : null;
-  var errorMessage = "The above error occurred in task " + sagaLocationAsString(firstSaga.meta) + (crashedEffectLocation ? " \n when executing effect " + crashedEffectLocation : "");
-  return [errorMessage].concat(otherSagas.map(function(s) {
-    return "    created by " + sagaLocationAsString(s.meta);
-  }), [cancelledTasksAsString(sagaStack)]).join("\n");
+  var firstSaga = sagaStack[0],
+    otherSagas = sagaStack.slice(1);
+  var crashedEffectLocation = firstSaga.crashedEffect
+    ? effectLocationAsString(firstSaga.crashedEffect)
+    : null;
+  var errorMessage =
+    'The above error occurred in task ' +
+    sagaLocationAsString(firstSaga.meta) +
+    (crashedEffectLocation ? ' \n when executing effect ' + crashedEffectLocation : '');
+  return [errorMessage]
+    .concat(
+      otherSagas.map(function (s) {
+        return '    created by ' + sagaLocationAsString(s.meta);
+      }),
+      [cancelledTasksAsString(sagaStack)],
+    )
+    .join('\n');
 };
 function newTask(env, mainTask, parentContext, parentEffectId, meta, isRoot, cont) {
   var _task;
@@ -788,11 +857,18 @@ function newTask(env, mainTask, parentContext, parentEffectId, meta, isRoot, con
   var deferredEnd = null;
   var cancelledDueToErrorTasks = [];
   var context = Object.create(parentContext);
-  var queue2 = forkQueue(mainTask, function onAbort() {
-    cancelledDueToErrorTasks.push.apply(cancelledDueToErrorTasks, queue2.getTasks().map(function(t) {
-      return t.meta.name;
-    }));
-  }, end);
+  var queue2 = forkQueue(
+    mainTask,
+    function onAbort() {
+      cancelledDueToErrorTasks.push.apply(
+        cancelledDueToErrorTasks,
+        queue2.getTasks().map(function (t) {
+          return t.meta.name;
+        }),
+      );
+    },
+    end,
+  );
   function cancel() {
     if (status === RUNNING) {
       status = CANCELLED2;
@@ -813,27 +889,27 @@ function newTask(env, mainTask, parentContext, parentEffectId, meta, isRoot, con
       status = ABORTED;
       addSagaFrame({
         meta,
-        cancelledTasks: cancelledDueToErrorTasks
+        cancelledTasks: cancelledDueToErrorTasks,
       });
       if (task.isRoot) {
         var sagaStack2 = toString();
         clear();
         env.onError(result, {
-          sagaStack: sagaStack2
+          sagaStack: sagaStack2,
         });
       }
       taskError = result;
       deferredEnd && deferredEnd.reject(result);
     }
     task.cont(result, isErr);
-    task.joiners.forEach(function(joiner) {
+    task.joiners.forEach(function (joiner) {
       joiner.cb(result, isErr);
     });
     task.joiners = null;
   }
   function setContext(props) {
     if (true) {
-      check(props, object, createSetContextWarning("task", props));
+      check(props, object, createSetContextWarning('task', props));
     }
     assignWithSymbols(context, props);
   }
@@ -849,17 +925,36 @@ function newTask(env, mainTask, parentContext, parentEffectId, meta, isRoot, con
     }
     return deferredEnd.promise;
   }
-  var task = (_task = {}, _task[TASK] = true, _task.id = parentEffectId, _task.meta = meta, _task.isRoot = isRoot, _task.context = context, _task.joiners = [], _task.queue = queue2, _task.cancel = cancel, _task.cont = cont, _task.end = end, _task.setContext = setContext, _task.toPromise = toPromise, _task.isRunning = function isRunning() {
-    return status === RUNNING;
-  }, _task.isCancelled = function isCancelled() {
-    return status === CANCELLED2 || status === RUNNING && mainTask.status === CANCELLED2;
-  }, _task.isAborted = function isAborted() {
-    return status === ABORTED;
-  }, _task.result = function result() {
-    return taskResult;
-  }, _task.error = function error() {
-    return taskError;
-  }, _task);
+  var task =
+    ((_task = {}),
+    (_task[TASK] = true),
+    (_task.id = parentEffectId),
+    (_task.meta = meta),
+    (_task.isRoot = isRoot),
+    (_task.context = context),
+    (_task.joiners = []),
+    (_task.queue = queue2),
+    (_task.cancel = cancel),
+    (_task.cont = cont),
+    (_task.end = end),
+    (_task.setContext = setContext),
+    (_task.toPromise = toPromise),
+    (_task.isRunning = function isRunning() {
+      return status === RUNNING;
+    }),
+    (_task.isCancelled = function isCancelled() {
+      return status === CANCELLED2 || (status === RUNNING && mainTask.status === CANCELLED2);
+    }),
+    (_task.isAborted = function isAborted() {
+      return status === ABORTED;
+    }),
+    (_task.result = function result() {
+      return taskResult;
+    }),
+    (_task.error = function error() {
+      return taskError;
+    }),
+    _task);
   return task;
 }
 function proc(env, iterator$1, parentContext, parentEffectId, meta, isRoot, cont) {
@@ -871,12 +966,12 @@ function proc(env, iterator$1, parentContext, parentEffectId, meta, isRoot, cont
   var mainTask = {
     meta,
     cancel: cancelMain,
-    status: RUNNING
+    status: RUNNING,
   };
   var task = newTask(env, mainTask, parentContext, parentEffectId, meta, isRoot, cont);
   var executingContext = {
     task,
-    digestEffect
+    digestEffect,
   };
   function cancelMain() {
     if (mainTask.status === RUNNING) {
@@ -898,14 +993,18 @@ function proc(env, iterator$1, parentContext, parentEffectId, meta, isRoot, cont
       } else if (shouldCancel(arg)) {
         mainTask.status = CANCELLED2;
         next.cancel();
-        result = func(iterator$1.return) ? iterator$1.return(TASK_CANCEL) : {
-          done: true,
-          value: TASK_CANCEL
-        };
+        result = func(iterator$1.return)
+          ? iterator$1.return(TASK_CANCEL)
+          : {
+              done: true,
+              value: TASK_CANCEL,
+            };
       } else if (shouldTerminate(arg)) {
-        result = func(iterator$1.return) ? iterator$1.return() : {
-          done: true
-        };
+        result = func(iterator$1.return)
+          ? iterator$1.return()
+          : {
+              done: true,
+            };
       } else {
         result = iterator$1.next(arg);
       }
@@ -937,7 +1036,7 @@ function proc(env, iterator$1, parentContext, parentEffectId, meta, isRoot, cont
         meta,
         /* isRoot */
         false,
-        currCb
+        currCb,
       );
     } else if (effect && effect[IO]) {
       var effectRunner = effectRunnerMap[effect.type];
@@ -948,15 +1047,16 @@ function proc(env, iterator$1, parentContext, parentEffectId, meta, isRoot, cont
   }
   function digestEffect(effect, parentEffectId2, cb, label) {
     if (label === void 0) {
-      label = "";
+      label = '';
     }
     var effectId = nextSagaId();
-    env.sagaMonitor && env.sagaMonitor.effectTriggered({
-      effectId,
-      parentEffectId: parentEffectId2,
-      label,
-      effect
-    });
+    env.sagaMonitor &&
+      env.sagaMonitor.effectTriggered({
+        effectId,
+        parentEffectId: parentEffectId2,
+        label,
+        effect,
+      });
     var effectSettled;
     function currCb(res, isErr) {
       if (effectSettled) {
@@ -977,7 +1077,7 @@ function proc(env, iterator$1, parentContext, parentEffectId, meta, isRoot, cont
       cb(res, isErr);
     }
     currCb.cancel = noop;
-    cb.cancel = function() {
+    cb.cancel = function () {
       if (effectSettled) {
         return;
       }
@@ -989,14 +1089,27 @@ function proc(env, iterator$1, parentContext, parentEffectId, meta, isRoot, cont
     finalRunEffect(effect, effectId, currCb);
   }
 }
-var RUN_SAGA_SIGNATURE = "runSaga(options, saga, ...args)";
-var NON_GENERATOR_ERR = RUN_SAGA_SIGNATURE + ": saga argument must be a Generator function!";
+var RUN_SAGA_SIGNATURE = 'runSaga(options, saga, ...args)';
+var NON_GENERATOR_ERR = RUN_SAGA_SIGNATURE + ': saga argument must be a Generator function!';
 function runSaga(_ref, saga) {
-  var _ref$channel = _ref.channel, channel3 = _ref$channel === void 0 ? stdChannel() : _ref$channel, dispatch = _ref.dispatch, getState = _ref.getState, _ref$context = _ref.context, context = _ref$context === void 0 ? {} : _ref$context, sagaMonitor = _ref.sagaMonitor, effectMiddlewares = _ref.effectMiddlewares, _ref$onError = _ref.onError, onError = _ref$onError === void 0 ? logError : _ref$onError;
+  var _ref$channel = _ref.channel,
+    channel3 = _ref$channel === void 0 ? stdChannel() : _ref$channel,
+    dispatch = _ref.dispatch,
+    getState = _ref.getState,
+    _ref$context = _ref.context,
+    context = _ref$context === void 0 ? {} : _ref$context,
+    sagaMonitor = _ref.sagaMonitor,
+    effectMiddlewares = _ref.effectMiddlewares,
+    _ref$onError = _ref.onError,
+    onError = _ref$onError === void 0 ? logError : _ref$onError;
   if (true) {
     check(saga, func, NON_GENERATOR_ERR);
   }
-  for (var _len = arguments.length, args = new Array(_len > 2 ? _len - 2 : 0), _key = 2; _key < _len; _key++) {
+  for (
+    var _len = arguments.length, args = new Array(_len > 2 ? _len - 2 : 0), _key = 2;
+    _key < _len;
+    _key++
+  ) {
     args[_key - 2] = arguments[_key];
   }
   var iterator$1 = saga.apply(void 0, args);
@@ -1014,30 +1127,30 @@ function runSaga(_ref, saga) {
     sagaMonitor.rootSagaStarted({
       effectId,
       saga,
-      args
+      args,
     });
   }
   if (true) {
     if (notUndef(dispatch)) {
-      check(dispatch, func, "dispatch must be a function");
+      check(dispatch, func, 'dispatch must be a function');
     }
     if (notUndef(getState)) {
-      check(getState, func, "getState must be a function");
+      check(getState, func, 'getState must be a function');
     }
     if (notUndef(effectMiddlewares)) {
-      var MIDDLEWARE_TYPE_ERROR = "effectMiddlewares must be an array of functions";
+      var MIDDLEWARE_TYPE_ERROR = 'effectMiddlewares must be an array of functions';
       check(effectMiddlewares, array, MIDDLEWARE_TYPE_ERROR);
-      effectMiddlewares.forEach(function(effectMiddleware) {
+      effectMiddlewares.forEach(function (effectMiddleware) {
         return check(effectMiddleware, func, MIDDLEWARE_TYPE_ERROR);
       });
     }
-    check(onError, func, "onError passed to the redux-saga is not a function!");
+    check(onError, func, 'onError passed to the redux-saga is not a function!');
   }
   var finalizeRunEffect;
   if (effectMiddlewares) {
     var middleware = compose.apply(void 0, effectMiddlewares);
     finalizeRunEffect = function finalizeRunEffect2(runEffect) {
-      return function(effect, effectId2, currCb) {
+      return function (effect, effectId2, currCb) {
         var plainRunEffect = function plainRunEffect2(eff) {
           return runEffect(eff, effectId2, currCb);
         };
@@ -1053,9 +1166,9 @@ function runSaga(_ref, saga) {
     getState,
     sagaMonitor,
     onError,
-    finalizeRunEffect
+    finalizeRunEffect,
   };
-  return immediately(function() {
+  return immediately(function () {
     var task = proc(
       env,
       iterator$1,
@@ -1064,7 +1177,7 @@ function runSaga(_ref, saga) {
       getMetaInfo(saga),
       /* isRoot */
       true,
-      void 0
+      void 0,
     );
     if (sagaMonitor) {
       sagaMonitor.effectResolved(effectId, task);
@@ -1073,22 +1186,32 @@ function runSaga(_ref, saga) {
   });
 }
 function sagaMiddlewareFactory(_temp) {
-  var _ref = _temp === void 0 ? {} : _temp, _ref$context = _ref.context, context = _ref$context === void 0 ? {} : _ref$context, _ref$channel = _ref.channel, channel3 = _ref$channel === void 0 ? stdChannel() : _ref$channel, sagaMonitor = _ref.sagaMonitor, options = _objectWithoutPropertiesLoose(_ref, ["context", "channel", "sagaMonitor"]);
+  var _ref = _temp === void 0 ? {} : _temp,
+    _ref$context = _ref.context,
+    context = _ref$context === void 0 ? {} : _ref$context,
+    _ref$channel = _ref.channel,
+    channel3 = _ref$channel === void 0 ? stdChannel() : _ref$channel,
+    sagaMonitor = _ref.sagaMonitor,
+    options = _objectWithoutPropertiesLoose(_ref, ['context', 'channel', 'sagaMonitor']);
   var boundRunSaga;
   if (true) {
-    check(channel3, channel, "options.channel passed to the Saga middleware is not a channel");
+    check(channel3, channel, 'options.channel passed to the Saga middleware is not a channel');
   }
   function sagaMiddleware(_ref2) {
-    var getState = _ref2.getState, dispatch = _ref2.dispatch;
-    boundRunSaga = runSaga.bind(null, _extends({}, options, {
-      context,
-      channel: channel3,
-      dispatch,
-      getState,
-      sagaMonitor
-    }));
-    return function(next) {
-      return function(action) {
+    var getState = _ref2.getState,
+      dispatch = _ref2.dispatch;
+    boundRunSaga = runSaga.bind(
+      null,
+      _extends({}, options, {
+        context,
+        channel: channel3,
+        dispatch,
+        getState,
+        sagaMonitor,
+      }),
+    );
+    return function (next) {
+      return function (action) {
         if (sagaMonitor && sagaMonitor.actionDispatched) {
           sagaMonitor.actionDispatched(action);
         }
@@ -1098,15 +1221,17 @@ function sagaMiddlewareFactory(_temp) {
       };
     };
   }
-  sagaMiddleware.run = function() {
+  sagaMiddleware.run = function () {
     if (!boundRunSaga) {
-      throw new Error("Before running a Saga, you must mount the Saga middleware on the Store using applyMiddleware");
+      throw new Error(
+        'Before running a Saga, you must mount the Saga middleware on the Store using applyMiddleware',
+      );
     }
     return boundRunSaga.apply(void 0, arguments);
   };
-  sagaMiddleware.setContext = function(props) {
+  sagaMiddleware.setContext = function (props) {
     if (true) {
-      check(props, object, createSetContextWarning("sagaMiddleware", props));
+      check(props, object, createSetContextWarning('sagaMiddleware', props));
     }
     assignWithSymbols(context, props);
   };
@@ -1128,6 +1253,6 @@ export {
   isEnd,
   multicastChannel,
   runSaga,
-  stdChannel
+  stdChannel,
 };
 //# sourceMappingURL=redux-saga.js.map

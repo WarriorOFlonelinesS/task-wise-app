@@ -3,16 +3,30 @@ import { useDispatch, useSelector } from 'react-redux';
 import { loginRequest } from '../../features/auth/authSlice';
 import { useNavigate } from 'react-router-dom';
 import { RootState } from '../../store';
+import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline';
+
 
 export default function LoginForm() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { loading, error, user } = useSelector((state: RootState) => state.auth);
+  const [hiddenPassword, setHidden] = useState(true)
+  const [type, setType] = useState('password')
+  const { loading, error } = useSelector((state: RootState) => state.auth);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     password: '',
   });
+
+  const showPassword = () => {
+    if(type === 'password'){
+      setHidden(true)
+      setType('text')
+    }else{
+      setHidden(false)
+      setType('password')
+    }
+  }
 
   const handleChange = (e) => {
     setFormData((prev) => ({
@@ -31,7 +45,6 @@ export default function LoginForm() {
       <h1 className="text-3xl font-bold text-center mb-8 text-white">Welcome to TaskWise</h1>
       <div className="w-96 mx-auto p-6 rounded-lg">
         <form onSubmit={handleSubmit} className="space-y-1">
-    
           <div>
             <input
               type="email"
@@ -44,17 +57,19 @@ export default function LoginForm() {
             />
           </div>
 
-          <div>
-            <input
-              type="password"
-              name="password"
-              placeholder="Password"
-              value={formData.password}
-              onChange={handleChange}
-              className="w-full mb-3 px-4 py-2 bg-transparent text-white placeholder-gray-400 border border-gray-500 rounded focus:outline-none focus:ring-2 focus:ring-blue-400"
-              required
-            />
-          </div>
+          <div  className='flex items-center border border-gray-500 rounded py-1 pr-3 !mb-4'>
+          
+          <input
+            type={type}
+            name="password"
+            placeholder="Password"
+            value={formData.password}
+            onChange={handleChange}
+            className="w-full mb-1 px-4  bg-transparent text-white placeholder-gray-400 focus:outline-none"
+            required
+          />
+                 <span onClick={showPassword}>{hiddenPassword ? <EyeSlashIcon className='w-6'/> : <EyeIcon className='w-6'/>}</span>
+        </div>
 
           <button
             type="submit"

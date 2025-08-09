@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'https://task-wise-app.onrender.com/api/';
+const API_URL = 'https://task-wise-app.online/api';
 
 export async function login(credentials: { email: string; password: string }) {
   const response = await axios.post(`${API_URL}/login`, credentials);
@@ -17,8 +17,7 @@ export async function register(data: {
   return response.data;
 }
 
-export async function logout(data:{token:string}) {
-
+export async function logout(data: { token: string }) {
   const response = await axios.post(
     `${API_URL}/logout`,
     {},

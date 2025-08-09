@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'https://task-wise-app.onrender.com/api/';
+const API_URL = 'https://task-wise-app.online/api';
 
 export async function getTasks(token: string) {
   const response = await axios.get(`${API_URL}/tasks`, {
