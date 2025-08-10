@@ -35,7 +35,8 @@ class AuthController extends Controller
             ], 201);
         } catch (ValidationException $e) {
             return response()->json([
-                'errors' => $e->errors(),
+                'error' => 'Invalid input or internal error',
+                'message' => $e->getMessage(),
             ], 422);
         } catch (\Exception $e) {
             Log::error('Registration error: '.$e->getMessage());
@@ -64,13 +65,14 @@ class AuthController extends Controller
             Log::error('Login authentication error: '.$e->getMessage());
 
             return response()->json([
-                'error' => 'Invalid input or internal error',
+                'error' => 'Wrong email or password',
+                   'message' => $e->getMessage(),
             ], 401);
         } catch (\Exception $e) {
             Log::error('Login error: '.$e->getMessage());
 
             return response()->json([
-                'error' => 'Invalid input or internal error',
+                'error' => 'Login authentication error:',
                 'message' => $e->getMessage(),
             ], 401);
         }

@@ -11,6 +11,7 @@ import {
   registerRequest,
   logoutRequest,
 } from './authSlice';
+import { handleErrors } from '../../helpers/handleErrors';
 
 function* loginSaga(action: ReturnType<typeof loginRequest>) {
   try {
@@ -18,7 +19,7 @@ function* loginSaga(action: ReturnType<typeof loginRequest>) {
 
     yield put(loginSuccess(data));
   } catch (e: any) {
-    yield put(loginFailure(e.message || 'Login failed'));
+    yield put(loginFailure(handleErrors(e)));
   }
 }
 
@@ -27,7 +28,8 @@ function* registerSaga(action: ReturnType<typeof registerRequest>) {
     const data = yield call(authApi.register, action.payload);
     yield put(registerSuccess(data));
   } catch (e: any) {
-    yield put(registerFailure(e.message || 'Register failed'));
+ console.log(e)
+    yield put(registerFailure(handleErrors(e)));
   }
 }
 
@@ -36,7 +38,7 @@ function* logoutSaga(action: ReturnType<typeof logoutRequest>) {
     yield call(authApi.logout, action.payload);
     yield put(logoutSuccess('Logout successful'));
   } catch (e: any) {
-    yield put(logoutFailure(e.message || 'Logout failed'));
+    yield put(logoutFailure(handleErrors(e)));
   }
 }
 

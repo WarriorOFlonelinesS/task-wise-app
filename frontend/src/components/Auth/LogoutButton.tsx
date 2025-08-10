@@ -6,7 +6,6 @@ import { logoutRequest } from '../../features/auth/authSlice';
 export const LogoutButton = () => {
   const dispatch = useDispatch();
   const { loading, error, token } = useSelector((state: RootState) => state.auth);
-  console.log(token);
   const handleSubmit = (e) => {
     e.preventDefault();
     if (token) {

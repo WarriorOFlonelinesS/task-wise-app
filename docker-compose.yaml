@@ -10,9 +10,9 @@ services:
       - DB_CONNECTION=pgsql
       - DB_HOST=db
       - DB_PORT=5432
-      - DB_DATABASE=db
-      - DB_USERNAME=your_user_name
-      - DB_PASSWORD=your_password
+      - DB_DATABASE=${DB_DATABASE:-taskwise}
+      - DB_USERNAME=${DB_USERNAME:-taskwise_user}
+      - DB_PASSWORD=${DB_PASSWORD:-secure_password_here_change_this_in_production}
       - APP_DEBUG=true
       - APP_URL=http://localhost:8000
     volumes:

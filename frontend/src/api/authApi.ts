@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'https://task-wise-app.online/api';
+const API_URL = 'http://localhost:8000/api';
 
 export async function login(credentials: { email: string; password: string }) {
   const response = await axios.post(`${API_URL}/login`, credentials);

@@ -13,7 +13,7 @@ export default function RegisterForm() {
   const [type, setType] = useState('password')
   const [hiddenConfPassword, setConfHidden] = useState(false)
   const [typeConfPass, setTypeConfPass] = useState('password')
-
+  console.log(error)
   const [formData, setFormData] = useState({
     name: '',
     email: '',

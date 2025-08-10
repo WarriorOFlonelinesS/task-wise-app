@@ -15,11 +15,10 @@ class UserValidationService
                 'min:8',
                 'max:255',
                 'confirmed',
-                'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]/',
+              
             ],
             'password_confirmation' => 'required|same:password',
         ], [
-            'password.regex' => 'Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character.',
             'name.regex' => 'Name can only contain letters and spaces.',
         ])->validate();
     }
@@ -28,7 +27,7 @@ class UserValidationService
     {
         return validator($data, [
             'email' => 'required|string|email|max:255',
-            'password' => 'required|string|min:1',
+            'password' => 'required|string|min:8',
         ])->validate();
     }
 }

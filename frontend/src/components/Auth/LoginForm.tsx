@@ -9,9 +9,10 @@ import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline';
 export default function LoginForm() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [hiddenPassword, setHidden] = useState(true)
+  const [hiddenPassword, setHidden] = useState(false)
   const [type, setType] = useState('password')
   const { loading, error } = useSelector((state: RootState) => state.auth);
+  console.log(error)
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -89,7 +90,7 @@ export default function LoginForm() {
             >
               Sign up
             </button>
-
+          
             {error && <p className="text-red-600 text-sm text-center">{error}</p>}
           </div>
         </form>
