@@ -27,7 +27,7 @@ class AuthController extends Controller
             $result = $this->authService->createUser($dto);
             $user = $result['user'];
             $token = $result['token'];
-            
+
             return response()->json([
                 'user' => $user,
                 'token' => $token,
@@ -40,6 +40,7 @@ class AuthController extends Controller
             ], 422);
         } catch (\Exception $e) {
             Log::error('Registration error: '.$e->getMessage());
+
             return response()->json([
                 'error' => 'Invalid input or internal error',
                 'message' => $e->getMessage(),
@@ -66,7 +67,7 @@ class AuthController extends Controller
 
             return response()->json([
                 'error' => 'Wrong email or password',
-                   'message' => $e->getMessage(),
+                'message' => $e->getMessage(),
             ], 401);
         } catch (\Exception $e) {
             Log::error('Login error: '.$e->getMessage());

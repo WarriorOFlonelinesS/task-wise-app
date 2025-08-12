@@ -15,7 +15,7 @@ class UserValidationService
                 'min:8',
                 'max:255',
                 'confirmed',
-              
+
             ],
             'password_confirmation' => 'required|same:password',
         ], [

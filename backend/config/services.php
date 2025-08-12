@@ -28,8 +28,8 @@ return [
         'key' => env('RESEND_KEY'),
     ],
 
-    "gemini" =>[
-        'api_key' =>env('GEMINI_AI_API_KEY')
+    'gemini' => [
+        'api_key' => env('GEMINI_AI_API_KEY'),
     ],
 
     'slack' => [

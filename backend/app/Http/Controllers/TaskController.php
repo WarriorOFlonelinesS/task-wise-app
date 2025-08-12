@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\DTO\TaskDTO;
+use App\Services\GeminiService;
 use App\Services\TaskService;
 use App\Services\TaskValidationService;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\ValidationException;
 
@@ -16,10 +18,13 @@ class TaskController extends Controller
 
     protected TaskService $taskService;
 
-    public function __construct(Request $request, TaskService $taskService)
+    protected GeminiService $geminiService;
+
+    public function __construct(Request $request, TaskService $taskService, GeminiService $geminiService)
     {
         $this->request = $request;
         $this->taskService = $taskService;
+        $this->geminiService = $geminiService;
     }
 
     public function index()
@@ -27,9 +32,11 @@ class TaskController extends Controller
         try {
 
             $tasks = $this->taskService->showTasks();
+            $analyzesOfTasks = $this->geminiService->showTasksAnalizes();
 
             return response()->json([
                 'tasks' => $tasks,
+                'analyzesOfTasks' => $analyzesOfTasks,
             ], 200);
         } catch (\Exception $e) {
             Log::error('Error getting task: '.$e->getMessage());
@@ -68,7 +75,7 @@ class TaskController extends Controller
     {
         try {
             $task = $this->taskService->showTask($id);
-            $userName = auth()->user()->name;
+            $userName = Auth::user()->name;
 
             return response()->json([
                 'task' => $task,

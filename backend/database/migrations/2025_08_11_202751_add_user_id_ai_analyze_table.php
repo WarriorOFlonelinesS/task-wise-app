@@ -9,17 +9,20 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up()
+    public function up(): void
     {
         Schema::table('ai_task_analyzers', function (Blueprint $table) {
-            $table->text('content')->change();
+            $table->foreignId('user_id')->nullable();
         });
     }
 
-    public function down()
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
     {
         Schema::table('ai_task_analyzers', function (Blueprint $table) {
-            $table->string('content', 255)->change();
+            $table->dropColumn('user_id');
         });
     }
 };

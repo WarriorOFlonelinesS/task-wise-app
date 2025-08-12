@@ -1,6 +1,7 @@
 <?php
 
-function extractScorePriorityAndSubtasks($text) {
+function extractScorePriorityAndSubtasks($text)
+{
     $priority = null;
     $smart_score = null;
     $subtasks = [];
@@ -12,7 +13,7 @@ function extractScorePriorityAndSubtasks($text) {
     }
 
     $validPriorities = ['high', 'medium', 'low'];
-    if ($priority && !in_array(strtolower($priority), $validPriorities)) {
+    if ($priority && ! in_array(strtolower($priority), $validPriorities)) {
         $priority = null;
     }
 
@@ -30,10 +31,10 @@ function extractScorePriorityAndSubtasks($text) {
         $smart_score = round(floatval($smart_score));
     }
 
-    if(preg_match('/Subtasks:\s*((?:\d+\.\s.*\n?)+)/i', $text, $matches)){
+    if (preg_match('/Subtasks:\s*((?:\d+\.\s.*\n?)+)/i', $text, $matches)) {
         $subtasksBlock = $matches[1];
 
-        if(preg_match_all('/\d+\.\s*(.+)/', $subtasksBlock, $subtasksMatches)){
+        if (preg_match_all('/\d+\.\s*(.+)/', $subtasksBlock, $subtasksMatches)) {
             $subtasks = $subtasksMatches[1];
         }
     }
@@ -41,6 +42,6 @@ function extractScorePriorityAndSubtasks($text) {
     return [
         'subtasks' => $subtasks,
         'priority' => $priority,
-        'smart_score' => $smart_score
+        'smart_score' => $smart_score,
     ];
 }
