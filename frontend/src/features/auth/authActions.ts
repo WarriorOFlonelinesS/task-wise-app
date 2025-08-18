@@ -6,6 +6,10 @@ export const loginRequest = createAction<{
   password: string;
 }>('auth/loginRequest');
 
+export const loginRequestWithToken = createAction<{
+  token: string;
+}>('auth/loginRequestWithToken');
+
 export const loginSuccess = createAction<{
   user: any;
   token: string;

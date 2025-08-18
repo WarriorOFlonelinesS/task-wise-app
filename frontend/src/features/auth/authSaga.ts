@@ -10,13 +10,22 @@ import {
   loginRequest,
   registerRequest,
   logoutRequest,
+  loginRequestWithToken
 } from './authSlice';
 import { handleErrors } from '../../helpers/handleErrors';
 
 function* loginSaga(action: ReturnType<typeof loginRequest>) {
   try {
     const data = yield call(authApi.login, action.payload);
+    yield put(loginSuccess(data));
+  } catch (e: any) {
+    yield put(loginFailure(handleErrors(e)));
+  }
+}
 
+function* loginWithTokenSaga(action: ReturnType<typeof loginRequest>) {
+  try {
+    const data = yield call(authApi.loginWithToken, action.payload);
     yield put(loginSuccess(data));
   } catch (e: any) {
     yield put(loginFailure(handleErrors(e)));
@@ -28,7 +37,7 @@ function* registerSaga(action: ReturnType<typeof registerRequest>) {
     const data = yield call(authApi.register, action.payload);
     yield put(registerSuccess(data));
   } catch (e: any) {
- console.log(e)
+    console.log(e);
     yield put(registerFailure(handleErrors(e)));
   }
 }
@@ -44,6 +53,7 @@ function* logoutSaga(action: ReturnType<typeof logoutRequest>) {
 
 export function* authSaga() {
   yield takeEvery(loginRequest.type, loginSaga);
+  yield takeEvery( loginRequestWithToken.type, loginWithTokenSaga);
   yield takeEvery(registerRequest.type, registerSaga);
   yield takeEvery(logoutRequest.type, logoutSaga);
 }

@@ -14,7 +14,7 @@ export default function Dashboard() {
   const tasks = useSelector((state: RootState) => state.tasks.tasks);
   const token = useSelector((state: RootState) => state.auth.token);
   const error = useSelector((state: RootState) => state.tasks.error);
-console.log(error)
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [listTasks, setTasks] = useState<Task[]>([]);
@@ -49,7 +49,7 @@ console.log(error)
   return (
     <div className="w-full min-h-screen">
       {error && (
-        <div className="bg-red-500 text-white px-4 py-2 rounded mb-4 text-center">{error.errors}</div>
+        <div className="bg-red-500 text-white px-4 py-2 rounded mb-4 text-center">{error}</div>
       )}
       {isOpen ? <AddTask onClose={onClose} addToDo={addToDo} /> : null}
       <h1 className="text-3xl font-bold text-center mb-11 text-white">Task AI Manager</h1>

@@ -11,6 +11,8 @@ class UserDTO
     public $password;
 
     public $password_confirmation;
+    
+    public $token;
 
     public function __construct(array $data)
     {
@@ -18,5 +20,6 @@ class UserDTO
         $this->email = $data['email'] ?? null;
         $this->password = $data['password'] ?? null;
         $this->password_confirmation = $data['password_confirmation'] ?? null;
+        $this->token = trim($data['token']) ?? null;
     }
 }

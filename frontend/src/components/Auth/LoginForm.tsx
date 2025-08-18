@@ -9,25 +9,24 @@ import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline';
 export default function LoginForm() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [hiddenPassword, setHidden] = useState(false)
-  const [type, setType] = useState('password')
-  const { loading, error } = useSelector((state: RootState) => state.auth);
-  console.log(error)
+  const [hiddenPassword, setHidden] = useState(false);
+  const [type, setType] = useState('password');
+  const { loading, error, token } = useSelector((state: RootState) => state.auth);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     password: '',
-  });
+  }); 
 
   const showPassword = () => {
-    if(type === 'password'){
-      setHidden(true)
-      setType('text')
-    }else{
-      setHidden(false)
-      setType('password')
+    if (type === 'password') {
+      setHidden(true);
+      setType('text');
+    } else {
+      setHidden(false);
+      setType('password');
     }
-  }
+  };
 
   const handleChange = (e) => {
     setFormData((prev) => ({
@@ -58,19 +57,20 @@ export default function LoginForm() {
             />
           </div>
 
-          <div  className='flex items-center border border-gray-500 rounded py-1 pr-3 !mb-4'>
-          
-          <input
-            type={type}
-            name="password"
-            placeholder="Password"
-            value={formData.password}
-            onChange={handleChange}
-            className="w-full mb-1 px-4  bg-transparent text-white placeholder-gray-400 focus:outline-none"
-            required
-          />
-                 <span onClick={showPassword}>{hiddenPassword ? <EyeSlashIcon className='w-6'/> : <EyeIcon className='w-6'/>}</span>
-        </div>
+          <div className="flex items-center border border-gray-500 rounded py-1 pr-3 !mb-4">
+            <input
+              type={type}
+              name="password"
+              placeholder="Password"
+              value={formData.password}
+              onChange={handleChange}
+              className="w-full mb-1 px-4  bg-transparent text-white placeholder-gray-400 focus:outline-none"
+              required
+            />
+            <span onClick={showPassword}>
+              {hiddenPassword ? <EyeSlashIcon className="w-6" /> : <EyeIcon className="w-6" />}
+            </span>
+          </div>
 
           <button
             type="submit"
@@ -90,7 +90,7 @@ export default function LoginForm() {
             >
               Sign up
             </button>
-          
+
             {error && <p className="text-red-600 text-sm text-center">{error}</p>}
           </div>
         </form>

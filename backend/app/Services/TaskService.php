@@ -5,7 +5,6 @@ namespace App\Services;
 use App\DTO\TaskDTO;
 use App\Models\Task;
 use Illuminate\Http\Request;
-
 use Illuminate\Validation\ValidationException;
 
 class TaskService
@@ -19,7 +18,6 @@ class TaskService
 
     public function createTask(TaskDTO $taskDTO)
     {
-
 
         return Task::create([
             'user_id' => auth()->user()->id,

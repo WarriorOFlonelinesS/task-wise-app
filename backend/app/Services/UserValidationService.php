@@ -7,7 +7,7 @@ class UserValidationService
     public function validateRegister(array $data)
     {
         return validator($data, [
-            'name' => 'required|string|max:255|regex:/^[a-zA-Z\s]+$/',
+            'name' => 'required|string|max:255|regex:/^[a-zA-Zа-яА-Я\s]+$/',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => [
                 'required',
@@ -26,8 +26,16 @@ class UserValidationService
     public function validateLogin(array $data)
     {
         return validator($data, [
-            'email' => 'required|string|email|max:255',
-            'password' => 'required|string|min:8',
+            'email'    => 'required_without:token|string|email|max:255',
+            'password' => 'required_with:email|string|min:8|max:255',
+            'token'    => ['required_without:email','string'],
         ])->validate();
+    }
+
+    public function validateToken(array $data)
+    {
+        return validator($data, [
+'token' => ['sometimes', 'string']
+       ])->validate();
     }
 }

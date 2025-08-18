@@ -30,7 +30,7 @@ class AuthController extends Controller
 
             return response()->json([
                 'user' => $user,
-                'token' => $token,
+                'token'=>$token,
                 'message' => 'Registration successful',
             ], 201);
         } catch (ValidationException $e) {
@@ -51,7 +51,8 @@ class AuthController extends Controller
     public function login()
     {
         try {
-            $validData = $this->validation->validateLogin($this->request->all());
+            $validData = $this->validation->validateLogin($this->request->all()) ;
+            
             $dto = new UserDTO($validData);
             $result = $this->authService->loginUser($dto);
             $user = $result['user'];
@@ -78,7 +79,36 @@ class AuthController extends Controller
             ], 401);
         }
     }
+    public function loginWithToken()
+    {
+        try {
+            $validData = $this->validation->validateToken($this->request->all());
+            $dto = new UserDTO($validData);
+            $result = $this->authService->loginUserWithToken($dto);
+            $user = $result['user'];
+            $token = $result['token'];
 
+            return response()->json([
+                'user' => $user,
+                'token' => $token,
+                'message' => 'Welcome!',
+            ], 200);
+        } catch (AuthenticationException $e) {
+            Log::error('Login authentication error: '.$e->getMessage());
+
+            return response()->json([
+                'error' => 'Wrong email or password',
+                'message' => $e->getMessage(),
+            ], 401);
+        } catch (\Exception $e) {
+            Log::error('Login error: '.$e->getMessage());
+
+            return response()->json([
+                'error' => 'Login authentication error:',
+                'message' => $e->getMessage(),
+            ], 401);
+        }
+    }
     public function logout()
     {
         try {

@@ -18,9 +18,10 @@ Route::get('/', function () {
 });
 
 // Rate limited authentication routes
-Route::middleware('throttle:5,1')->group(function () {
+Route::middleware('throttle:20,1')->group(function () {
     Route::post('/register', [AuthController::class, 'register']);
     Route::post('/login', [AuthController::class, 'login'])->name('login');
+    Route::post('/loginwithtoken', [AuthController::class, 'loginWithToken'])->name('loginWithToken');
 });
 
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');

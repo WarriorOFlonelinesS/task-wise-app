@@ -32,6 +32,7 @@ const tasksSlice = createSlice({
       state.loading = false;
       state.error = null;
       state.tasks = action.payload.tasks;
+      state.taskAnalyze = action.payload.analyzesOfTasks;
     },
     getTasksFailure(state, action: PayloadAction<string>) {
       state.error = action.payload;

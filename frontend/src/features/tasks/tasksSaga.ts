@@ -75,6 +75,7 @@ function* taskAnalyzeSaga(action: ReturnType<typeof taskAnalyzeRequest>) {
     const { id, token } = action.payload;
 
     const data = yield call(tasksApi.taskAnalyze, id, token);
+
     yield put(taskAnalyzeSuccess(data));
   } catch (e: any) {
     yield put(taskAnalyzeFailure(handleErrors(e)));

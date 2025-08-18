@@ -2,6 +2,7 @@ import React, { Component, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store';
 import { logoutRequest } from '../../features/auth/authSlice';
+import Cookies from 'js-cookie';
 
 export const LogoutButton = () => {
   const dispatch = useDispatch();
@@ -9,8 +10,8 @@ export const LogoutButton = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (token) {
-      // Add null check to prevent type error
       dispatch(logoutRequest({ token }));
+      Cookies.remove('token')
     } else {
       console.error('No token available for logout');
     }

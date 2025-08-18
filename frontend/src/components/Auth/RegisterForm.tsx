@@ -5,41 +5,43 @@ import { useNavigate } from 'react-router-dom';
 import { RootState } from '../../store';
 import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline';
 
+
 export default function RegisterForm() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { loading, error, user } = useSelector((state: RootState) => state.auth);
-  const [hiddenPassword, setHidden] = useState(false)
-  const [type, setType] = useState('password')
-  const [hiddenConfPassword, setConfHidden] = useState(false)
-  const [typeConfPass, setTypeConfPass] = useState('password')
-  console.log(error)
+  const [hiddenPassword, setHidden] = useState(false);
+  const [type, setType] = useState('password');
+  const [hiddenConfPassword, setConfHidden] = useState(false);
+  const [typeConfPass, setTypeConfPass] = useState('password');
+  const [showSuccess, setShowSuccess] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     password: '',
     passwordConfirmation: '',
   });
-
+  
   const showPassword = () => {
-    if(type === 'password'){
-      setHidden(true)
-      setType('text')
-    }else{
-      setHidden(false)
-      setType('password')
+;
+    if (type === 'password') {
+      setHidden(true);
+      setType('text');
+    } else {
+      setHidden(false);
+      setType('password');
     }
-  }
+  };
 
   const showConfPassword = () => {
-    if(typeConfPass === 'password'){
-      setConfHidden(false)
-      setTypeConfPass('text')
-    }else{
-      setConfHidden(true)
-      setTypeConfPass('password')
+    if (typeConfPass === 'password') {
+      setConfHidden(true);
+      setTypeConfPass('text');
+    } else {
+      setConfHidden(false);
+      setTypeConfPass('password');
     }
-  }
+  };
 
   const handleChange = (e) => {
     setFormData((prev) => ({
@@ -50,7 +52,10 @@ export default function RegisterForm() {
 
   useEffect(() => {
     if (user) {
-      navigate('/');
+      setShowSuccess(true);
+      setTimeout(() => {
+        navigate('/');
+      }, 2000); 
     }
   }, [user, navigate]);
 
@@ -63,6 +68,11 @@ export default function RegisterForm() {
 
   return (
     <div className="w-96 mx-auto p-6 rounded-lg">
+      {showSuccess && (
+        <div className="mb-4 p-3 bg-green-500 text-white rounded text-center">
+          Registration successful! Redirecting to login...
+        </div>
+      )}
       <form onSubmit={handleSubmit} className="space-y-1">
         <div>
           <input
@@ -86,8 +96,7 @@ export default function RegisterForm() {
             required
           />
         </div>
-        <div  className='flex items-center border border-gray-500 rounded py-1 pr-3 !mb-4'>
-          
+        <div className="flex items-center border border-gray-500 rounded py-1 pr-3 !mb-4">
           <input
             type={type}
             name="password"
@@ -97,9 +106,11 @@ export default function RegisterForm() {
             className="w-full mb-1 px-4  bg-transparent text-white placeholder-gray-400 focus:outline-none"
             required
           />
-                 <span onClick={showPassword}>{hiddenPassword ? <EyeSlashIcon className='w-6'/> : <EyeIcon className='w-6'/>}</span>
+          <span onClick={showPassword}>
+            {hiddenPassword ? <EyeSlashIcon className="w-6" /> : <EyeIcon className="w-6" />}
+          </span>
         </div>
-        <div className='flex items-center border border-gray-500 rounded  py-1 pr-3'>
+        <div className="flex items-center border border-gray-500 rounded  py-1 pr-3">
           <input
             type={typeConfPass}
             name="passwordConfirmation"
@@ -109,8 +120,10 @@ export default function RegisterForm() {
             className="w-full mb-1 px-4  bg-transparent text-white placeholder-gray-400 focus:outline-none"
             required
           />
-        
-        <span onClick={showConfPassword}>{hiddenConfPassword ? <EyeSlashIcon className='w-6'/> : <EyeIcon className='w-6'/>}</span>
+
+          <span onClick={showConfPassword}>
+            {hiddenConfPassword ? <EyeSlashIcon className="w-6" /> : <EyeIcon className="w-6" />}
+          </span>
         </div>
         <p className="text-center font-thin italic py-2">Minimum 8 symbols, maximum 225</p>
         <button

@@ -46,7 +46,7 @@ Do not include any explanation or extra text. Only output the fields above, each
         $subtasks = extractScorePriorityAndSubtasks($content);
 
         $taskAnalyze = TaskAnalyzer::create(
-            [   
+            [
                 'user_id' => auth()->user()->id,
                 'task_id' => $id,
                 'content' => json_encode($subtasks),
@@ -58,8 +58,9 @@ Do not include any explanation or extra text. Only output the fields above, each
         return json_encode($taskAnalyze, true);
     }
 
-    public function showTasksAnalizes() {
+    public function showTasksAnalizes()
+    {
         return TaskAnalyzer::where('user_id', auth()->user()->id)
-        ->get();
+            ->get();
     }
 }

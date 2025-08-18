@@ -38,6 +38,30 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Token Table
+    |--------------------------------------------------------------------------
+    |
+    | This value controls the database table name that Sanctum will use to
+    | store personal access tokens.
+    |
+    */
+
+    'token_table' => 'personal_access_tokens',
+
+    /*
+    |--------------------------------------------------------------------------
+    | Token Model
+    |--------------------------------------------------------------------------
+    |
+    | This value controls the model class that Sanctum will use to create
+    | and manage personal access tokens.
+    |
+    */
+
+    'token_model' => \Laravel\Sanctum\PersonalAccessToken::class,
+
+    /*
+    |--------------------------------------------------------------------------
     | Expiration Minutes
     |--------------------------------------------------------------------------
     |
