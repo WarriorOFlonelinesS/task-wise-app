@@ -1,15 +1,17 @@
 import axios from 'axios';
+import Cookies from 'js-cookie';
 
 const API_URL = 'http://localhost:8000/api';
 
 
 export async function login(credentials: { email: string; password: string }) {
   const response = await axios.post(`${API_URL}/login`, credentials);
+  Cookies.set('token', response.data.token, { expires: 7, path: '/' });
   return response.data;
 }
 
-export async function loginWithToken(token:string|null) {
-  const response = await axios.post(`${API_URL}/loginwithtoken`, token);
+export async function loginWithToken(token: string) {
+  const response = await axios.post(`${API_URL}/loginwithtoken`, { token });
   return response.data;
 }
 

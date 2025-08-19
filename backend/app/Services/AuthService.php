@@ -19,17 +19,7 @@ class AuthService
         ]);
       
             $token = $user->createToken('auth_token')->plainTextToken;
-         
-            PersonalAccessToken::create(
-                [
-                    'tokenable_id' => $user->id,
-                   
-                    'tokenable_type' => User::class,
-                    'name' => 'API Token',
-                    'token' => hash('sha256', $token),
-                    'abilities' => json_encode(['read', 'write']),
-                ]
-            );
+    
 
         return ['user' => $user, 'token'=>$token];
     }
@@ -42,30 +32,25 @@ class AuthService
         }
         $token = $user->createToken('auth_token')->plainTextToken;
        
-        PersonalAccessToken::create(
-            [   
-                'tokenable_id' => $user->id,
-                'tokenable_type' => User::class,
-                'name' => 'API Token',
-                'token' => hash('sha256', $token),
-                'abilities' => json_encode(['read', 'write']),
-            ]
-        );
+     
         return ['user' => $user, 'token' => $token];
     }
 
     public function loginUserWithToken(UserDTO $dto){
 
-        [$id, $token] = explode('|', $dto->token, 2);
-
-        $hashed = hash('sha256', $token);
-        $token = PersonalAccessToken::where('id', $id)->where('token', $hashed)->first();
+        [$id, $plainToken] = explode('|', $dto->token, 2);
+        $id = (int) trim($id);
+        $plainToken = trim($plainToken);
     
-        if (hash('sha256', $token)) {      
-          $user = User::where('id',  $token->tokenable_id)->first();
-          return ['user' => $user, 'token' => $token];
-        }
-        return;
+        $hashed = hash('sha256', $plainToken);
+        $tokenRecord = PersonalAccessToken::where('id', $id)
+        ->where('token', $hashed)
+        ->first();
+    
+    
+          $user = User::find($tokenRecord->tokenable_id);
+      
+          return ['user' => $user, 'token' =>  $plainToken];
     }
 
     public function logoutUser()

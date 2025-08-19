@@ -37,7 +37,6 @@ function* registerSaga(action: ReturnType<typeof registerRequest>) {
     const data = yield call(authApi.register, action.payload);
     yield put(registerSuccess(data));
   } catch (e: any) {
-    console.log(e);
     yield put(registerFailure(handleErrors(e)));
   }
 }

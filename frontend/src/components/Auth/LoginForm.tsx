@@ -11,7 +11,7 @@ export default function LoginForm() {
   const dispatch = useDispatch();
   const [hiddenPassword, setHidden] = useState(false);
   const [type, setType] = useState('password');
-  const { loading, error, token } = useSelector((state: RootState) => state.auth);
+  const { loading, error } = useSelector((state: RootState) => state.auth);
   const [formData, setFormData] = useState({
     name: '',
     email: '',

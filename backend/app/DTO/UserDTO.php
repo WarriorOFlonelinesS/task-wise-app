@@ -20,6 +20,6 @@ class UserDTO
         $this->email = $data['email'] ?? null;
         $this->password = $data['password'] ?? null;
         $this->password_confirmation = $data['password_confirmation'] ?? null;
-        $this->token = trim($data['token']) ?? null;
+        $this->token = isset($data['token']) ? $data['token'] : null;
     }
 }
