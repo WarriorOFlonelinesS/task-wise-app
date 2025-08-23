@@ -59,6 +59,14 @@ export default function RegisterForm() {
     }
   }, [user, navigate]);
 
+  const handleChangeChecked = (e) => {
+    setFormData((prev) => ({
+      ...prev,
+      ['remember']: e.target.checked,
+    }));
+  };
+
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -125,6 +133,12 @@ export default function RegisterForm() {
             {hiddenConfPassword ? <EyeSlashIcon className="w-6" /> : <EyeIcon className="w-6" />}
           </span>
         </div>
+        <div className='justify-center flex items-center'>
+          <input id="default-checkbox" type="checkbox" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 mr-2"
+          name='remember'
+          onChange={handleChangeChecked}/> Remember me
+          </div>
+
         <p className="text-center font-thin italic py-2">Minimum 8 symbols, maximum 225</p>
         <button
           type="submit"

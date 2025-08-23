@@ -28,7 +28,6 @@ const authSlice = createSlice({
       state.error = null;
       state.user = action.payload.user;
       state.token = String(action.payload.token);
-      console.log(state.token)
     },
 
     registerFailure(state, action: PayloadAction<string>) {
@@ -42,6 +41,7 @@ const authSlice = createSlice({
         name: string;
         email: string;
         password: string;
+        remember: boolean
       }>,
     ) {
       state.loading = true;

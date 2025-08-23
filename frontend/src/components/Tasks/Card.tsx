@@ -6,16 +6,21 @@ import UpdateTask from './UpdateTask';
 import { updateTasksRequest } from '../../features/tasks/tasksSlice';
 
 export default function Card({ data }) {
+  const priorityColor = {
+    'High' : '#e53935',
+    'Medium' : '#ffb300',
+    'Low': '#43a047'
+  }
   const token = useSelector((state: any) => state.auth.token);
   const taskAnalizeArray = useSelector((state: any) => state.tasks.taskAnalyze);
-
+  console.log(taskAnalizeArray);
   const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(false);
   const taskAnalizeItem = taskAnalizeArray.filter((task) => Number(task.task_id) === data.id);
 
   const subtasks = taskAnalizeItem[0] ? JSON.parse(taskAnalizeItem[0].content).subtasks : null;
+  const priority = taskAnalizeItem[0] ? JSON.parse(taskAnalizeItem[0].content).priority : null;
 
-  // Stato per l'animazione di caricamento
   const [isAnalyzing, setIsAnalyzing] = useState(false);
 
   const updateToDo = (id, title, description) => {
@@ -89,17 +94,19 @@ export default function Card({ data }) {
           </>
         ) : null}
       </div>
-      <div className="flex justify-end space-x-2 '">
-        <button title="Update Task" onClick={() => setIsOpen(true)} className="hover:scale-110">
+      <div className='flex justify-between mt-2'>
+        {priority ? <p className={`text-[${priorityColor[priority]}]`}>{priority}</p> : null}
+      <div className="flex justify-end space-x-2'">
+        <button title="Update Task" onClick={() => setIsOpen(true)} className="hover:scale-110 mr-3">
           <PencilIcon className="h-5 w-5 " />
         </button>
-        <button title="Delete Task" onClick={() => deleteToDo(data.id)} className="hover:scale-110">
+        <button title="Delete Task" onClick={() => deleteToDo(data.id)} className="hover:scale-110 mr-3">
           <TrashIcon className="h-5 w-5" />
         </button>
         <button
           title="Analyze Task"
           onClick={() => taskAnalize(data.id)}
-          className={`transition-all duration-200 ${isAnalyzing ? 'animate-pulse-slow' : 'hover:scale-110'}`}
+          className={`transition-all duration-200 ${isAnalyzing ? 'animate-pulse-slow' : 'hover:scale-110'} `}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -118,6 +125,7 @@ export default function Card({ data }) {
             />
           </svg>
         </button>
+      </div>
       </div>
     </div>
   );

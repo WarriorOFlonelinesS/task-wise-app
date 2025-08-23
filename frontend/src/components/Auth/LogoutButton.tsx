@@ -18,7 +18,7 @@ export const LogoutButton = () => {
   };
 
   return (
-    <div className="w-96 flex justify-center mx-auto p-6 rounded-lg">
+    <div className="flex justify-center mx-auto p-6 rounded-lg">
       <form onSubmit={handleSubmit} className="space-y-1">
         <button
           type="submit"

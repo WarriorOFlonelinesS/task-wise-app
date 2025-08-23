@@ -16,7 +16,9 @@ export default function LoginForm() {
     name: '',
     email: '',
     password: '',
+    remember: false,
   }); 
+
 
   const showPassword = () => {
     if (type === 'password') {
@@ -32,6 +34,13 @@ export default function LoginForm() {
     setFormData((prev) => ({
       ...prev,
       [e.target.name]: e.target.value,
+    }));
+  };
+
+  const handleChangeChecked = (e) => {
+    setFormData((prev) => ({
+      ...prev,
+      ['remember']: e.target.checked,
     }));
   };
 
@@ -80,12 +89,19 @@ export default function LoginForm() {
             {loading ? 'Loading...' : 'Login'}
           </button>
           <div className="p-5 text-center flex justify-center flex-col">
+          <div className='justify-center flex items-center'>
+          <input id="default-checkbox" type="checkbox" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 mr-2"
+          name='remember'
+          onChange={handleChangeChecked}/> Remember me
+          </div>
             <p className="p-5 ">if you don't have an account</p>
             <button
               title="Sign up"
               onClick={() => {
                 navigate('/signup');
               }}
+
+              
               className="backdrop-blur-md bg-white/5 px-6 py-3 backdrop-blur-xs rounded-md border border-gray-300 hover:bg-gray-100 transition-colors self-center"
             >
               Sign up

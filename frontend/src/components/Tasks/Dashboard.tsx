@@ -64,10 +64,10 @@ export default function Dashboard() {
       </div>
 
       <div className="flex justify-center">
-        <div className="w-3/6 fixed bottom-0 left-1/2 transform -translate-x-1/2 backdrop-blur-md bg-white/5 px-6 py-2 backdrop-blur-xs rounded-md border border-gray-300 flex items-center justify-around">
+        <div className="w-3/4 fixed bottom-0 left-1/2 transform -translate-x-1/2 backdrop-blur-md bg-white/5 px-6 py-2 backdrop-blur-xs rounded-md border border-gray-300 flex items-center justify-around">
           <button
             title="Add new task"
-            className="backdrop-blur-md bg-white/5 p-0.5 backdrop-blur-xs rounded-md border border-gray-300 hover:bg-gray-100 transition-colors flex items-center gap-2"
+            className="backdrop-blur-md bg-white/5 p-0.5 backdrop-blur-xs rounded-md border border-gray-300 hover:bg-gray-100 transition-colors flex items-center w-9 h-9"
             onClick={() => setIsOpen(true)}
           >
             <svg
@@ -76,7 +76,7 @@ export default function Dashboard() {
               viewBox="0 0 24 24"
               strokeWidth={1.5}
               stroke="currentColor"
-              className="size-6"
+              className="size-9"
             >
               <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
             </svg>
@@ -86,9 +86,9 @@ export default function Dashboard() {
             onClick={() => {
               navigate('/profile');
             }}
-            className="backdrop-blur-md bg-white/5 p-1 backdrop-blur-xs rounded-md border border-gray-300 hover:bg-gray-100 transition-colors flex items-center gap-2"
+            className="backdrop-blur-md bg-white/5 p-1 backdrop-blur-xs rounded-md border border-gray-300 hover:bg-gray-100 transition-colors flex items-center gap-2 w-9 h-9"
           >
-            <UserIcon className="h-5 w-5" />
+            <UserIcon className="h-9 w-9" />
           </button>
         </div>
       </div>

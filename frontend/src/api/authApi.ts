@@ -6,7 +6,9 @@ const API_URL = 'http://localhost:8000/api';
 
 export async function login(credentials: { email: string; password: string }) {
   const response = await axios.post(`${API_URL}/login`, credentials);
-  Cookies.set('token', response.data.token, { expires: 7, path: '/' });
+  if(credentials.remember){
+    Cookies.set('token', response.data.token, { expires: 7, path: '/' });
+  }
   return response.data;
 }
 
@@ -22,7 +24,9 @@ export async function register(data: {
   password_confirmation: string;
 }) {
   const response = await axios.post(`${API_URL}/register`, data);
-
+  if(data.remember){
+    Cookies.set('token', response.data.token, { expires: 7, path: '/' });
+  }
   return response.data;
 }
 
