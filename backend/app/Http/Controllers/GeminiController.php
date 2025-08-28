@@ -19,7 +19,7 @@ class GeminiController extends Controller
         try {
             $response = $this->geminiService->makeRequest($id);
 
-            return Response::json(json_decode($response, true));
+            return Response::json($response);
         } catch (\Exception $e) {
             return Response::json(['error' => $e->getMessage()], 500);
         }

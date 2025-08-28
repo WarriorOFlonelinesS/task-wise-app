@@ -1,26 +1,28 @@
 import { PencilIcon, TrashIcon } from '@heroicons/react/24/outline';
 import React, { useState } from 'react';
-import { deleteTaskRequest, taskAnalyzeRequest } from '../../features/tasks/tasksAction';
+import { deleteTasksRequest, taskAnalyzeRequest, updateTasksRequest } from '../../features/tasks/tasksAction';
 import { useDispatch, useSelector } from 'react-redux';
 import UpdateTask from './UpdateTask';
-import { updateTasksRequest } from '../../features/tasks/tasksSlice';
 
 export default function Card({ data }) {
-  const priorityColor = {
-    'High' : '#e53935',
-    'Medium' : '#ffb300',
-    'Low': '#43a047'
-  }
+  const priorityClasses = {
+    High: "text-red-400",
+    Medium: "text-yellow-400",
+    Low: "text-green-400",
+  };
+
   const token = useSelector((state: any) => state.auth.token);
   const taskAnalizeArray = useSelector((state: any) => state.tasks.taskAnalyze);
-  console.log(taskAnalizeArray);
+ 
   const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(false);
-  const taskAnalizeItem = taskAnalizeArray.filter((task) => Number(task.task_id) === data.id);
+  const taskAnalizeItem = taskAnalizeArray.filter((task) => String(task.task_id) === String(data.id));
+
+  // Debug logging
+
 
   const subtasks = taskAnalizeItem[0] ? JSON.parse(taskAnalizeItem[0].content).subtasks : null;
-  const priority = taskAnalizeItem[0] ? JSON.parse(taskAnalizeItem[0].content).priority : null;
-
+  const priority = taskAnalizeItem[0] ? taskAnalizeItem[0].priority : null;
   const [isAnalyzing, setIsAnalyzing] = useState(false);
 
   const updateToDo = (id, title, description) => {
@@ -34,14 +36,14 @@ export default function Card({ data }) {
   };
 
   const deleteToDo = (id) => {
-    dispatch(deleteTaskRequest(id));
+    dispatch(deleteTasksRequest(id));
   };
 
   const taskAnalize = (id) => {
     setIsAnalyzing(true);
     dispatch(taskAnalyzeRequest({ id, token }));
 
-    // Reset dello stato dopo un po'
+
     setTimeout(() => {
       setIsAnalyzing(false);
     }, 3000);
@@ -52,7 +54,7 @@ export default function Card({ data }) {
   };
 
   return (
-    <div className="bg-white/5 border border-gray-300 rounded-lg p-4 mb-4 mx-4 shadow-md text-white">
+    <div className="bg-white/5 border border-gray-300  rounded-lg p-4 mb-4 mx-4 shadow-md text-white">
       {isOpen ? (
         <UpdateTask onClose={closeUpdateModal} updateToDo={updateToDo} data={data} />
       ) : null}
@@ -94,8 +96,10 @@ export default function Card({ data }) {
           </>
         ) : null}
       </div>
-      <div className='flex justify-between mt-2'>
-        {priority ? <p className={`text-[${priorityColor[priority]}]`}>{priority}</p> : null}
+      <div className='flex justify-between mt-2 items-center'>
+        <div className="flex items-center gap-3">
+          {priority ? <p className={`${priorityClasses[priority]}`}>{priority}</p> : null}
+        </div>
       <div className="flex justify-end space-x-2'">
         <button title="Update Task" onClick={() => setIsOpen(true)} className="hover:scale-110 mr-3">
           <PencilIcon className="h-5 w-5 " />

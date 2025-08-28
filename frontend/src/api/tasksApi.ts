@@ -20,8 +20,8 @@ export async function postTasks(data: { title: string; description: string }, to
   return response.data;
 }
 
-export async function deleteTasks(data: { id: string }, token: string) {
-  const response = await axios.delete(`${API_URL}/tasks/${data}`, {
+export async function deleteTasks(id: string, token: string) {
+  const response = await axios.delete(`${API_URL}/tasks/${id}`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },

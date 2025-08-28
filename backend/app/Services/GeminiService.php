@@ -55,7 +55,7 @@ Do not include any explanation or extra text. Only output the fields above, each
             ]
         );
 
-        return json_encode($taskAnalyze, true);
+        return $taskAnalyze;
     }
 
     public function showTasksAnalizes()

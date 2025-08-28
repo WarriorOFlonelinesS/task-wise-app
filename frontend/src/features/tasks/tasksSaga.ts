@@ -12,10 +12,9 @@ import {
   deleteTasksFailure,
   updateTasksSuccess,
   updateTasksFailure,
-  updateTasksRequest,
   taskAnalyzeRequest,
 } from './tasksSlice';
-import { taskAnalyzeFailure, taskAnalyzeSuccess } from './tasksAction';
+import { taskAnalyzeFailure, taskAnalyzeSuccess, updateTasksRequest } from './tasksAction';
 import { handleErrors } from '../../helpers/handleErrors';
 
 function* getTasksSaga(action: ReturnType<typeof getTasksRequest>) {
@@ -41,7 +40,7 @@ function* postTaskSaga(action: ReturnType<typeof postTasksRequest>) {
   }
 }
 
-function* deleteTaskSaga(action: ReturnType<typeof postTasksRequest>) {
+function* deleteTaskSaga(action: ReturnType<typeof deleteTasksRequest>) {
   const token = yield select((state) => state.auth.token);
   if (!token) {
     yield put(deleteTasksFailure('No auth token found'));
