@@ -25,8 +25,6 @@ export default function Dashboard() {
   const [showLoader, setShowLoader] = useState(true);
   const [isSorted, setIsSorted] = useState(false);
   const sortedTasksList = useSelector(selectSortedTasks);
-  const taskAnalyze = useSelector((state: any) => state.tasks.taskAnalyze);
-  
 
   const addToDo = (title, description) => {
     setIsSorted(false);
@@ -42,13 +40,10 @@ export default function Dashboard() {
 
     
     if (isSorted) {
-      // Reset to original order
       setTasks(tasks || []);
       setIsSorted(false);
 
     } else {
-      // Sort by smart score
-  
       setTasks(sortedTasksList);
       setIsSorted(true);
 

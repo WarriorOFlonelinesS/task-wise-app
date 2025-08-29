@@ -18,9 +18,6 @@ export default function Card({ data }) {
   const [isOpen, setIsOpen] = useState(false);
   const taskAnalizeItem = taskAnalizeArray.filter((task) => String(task.task_id) === String(data.id));
 
-  // Debug logging
-
-
   const subtasks = taskAnalizeItem[0] ? JSON.parse(taskAnalizeItem[0].content).subtasks : null;
   const priority = taskAnalizeItem[0] ? taskAnalizeItem[0].priority : null;
   const [isAnalyzing, setIsAnalyzing] = useState(false);

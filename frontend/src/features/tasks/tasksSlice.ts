@@ -110,10 +110,8 @@ const tasksSlice = createSlice({
           (item) => item.task_id === action.payload.task_id
         );
         if (existingIndex !== -1) {
-          // Update existing analysis
           state.taskAnalyze[existingIndex] = action.payload;
         } else {
-          // Add new analysis
           state.taskAnalyze.push(action.payload);
         }
       } else {
