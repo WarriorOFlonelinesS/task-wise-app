@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\DTO\UserDTO;
+use App\Models\PersonalAccessToken;
 use App\Models\User;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Support\Facades\Hash;
@@ -16,21 +17,40 @@ class AuthService
             'email' => $dto->email,
             'password' => Hash::make($dto->password),
         ]);
-        $token = $user->createToken('auth_token')->plainTextToken;
+      
+            $token = $user->createToken('auth_token')->plainTextToken;
+    
 
-        return ['user' => $user, 'token' => $token];
+        return ['user' => $user, 'token'=>$token];
     }
 
     public function loginUser(UserDTO $dto)
     {
-        $user = User::where('email', $dto->email)->first();
+        $user = User::where('email', $dto->email)->firstOrFail();
         if (! $user || ! Hash::check($dto->password, $user->password)) {
             throw new AuthenticationException('Invalid credentials');
         }
-
         $token = $user->createToken('auth_token')->plainTextToken;
-
+       
+     
         return ['user' => $user, 'token' => $token];
+    }
+
+    public function loginUserWithToken(UserDTO $dto){
+
+        [$id, $plainToken] = explode('|', $dto->token, 2);
+        $id = (int) trim($id);
+        $plainToken = trim($plainToken);
+    
+        $hashed = hash('sha256', $plainToken);
+        $tokenRecord = PersonalAccessToken::where('id', $id)
+        ->where('token', $hashed)
+        ->first();
+    
+    
+          $user = User::find($tokenRecord->tokenable_id);
+      
+          return ['user' => $user, 'token' =>  $plainToken];
     }
 
     public function logoutUser()

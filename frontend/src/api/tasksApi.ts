@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'https://task-wise-app.onrender.com/api/';
+const API_URL = 'http://localhost:8000/api';
 
 export async function getTasks(token: string) {
   const response = await axios.get(`${API_URL}/tasks`, {
@@ -20,8 +20,8 @@ export async function postTasks(data: { title: string; description: string }, to
   return response.data;
 }
 
-export async function deleteTasks(data: { id: string }, token: string) {
-  const response = await axios.delete(`${API_URL}/tasks/${data}`, {
+export async function deleteTasks(id: string, token: string) {
+  const response = await axios.delete(`${API_URL}/tasks/${id}`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },

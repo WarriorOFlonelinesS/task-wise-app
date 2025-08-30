@@ -30,7 +30,6 @@ class TaskService
     {
         return Task::where('user_id', auth()->user()->id)
             ->get();
-
     }
 
     public function showTask(string $id)

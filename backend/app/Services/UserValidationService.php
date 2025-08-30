@@ -7,7 +7,7 @@ class UserValidationService
     public function validateRegister(array $data)
     {
         return validator($data, [
-            'name' => 'required|string|max:255|regex:/^[a-zA-Z\s]+$/',
+            'name' => 'required|string|max:255|regex:/^[a-zA-Zа-яА-Я\s]+$/',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => [
                 'required',
@@ -15,11 +15,10 @@ class UserValidationService
                 'min:8',
                 'max:255',
                 'confirmed',
-                'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]/',
+
             ],
             'password_confirmation' => 'required|same:password',
         ], [
-            'password.regex' => 'Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character.',
             'name.regex' => 'Name can only contain letters and spaces.',
         ])->validate();
     }
@@ -27,8 +26,16 @@ class UserValidationService
     public function validateLogin(array $data)
     {
         return validator($data, [
-            'email' => 'required|string|email|max:255',
-            'password' => 'required|string|min:1',
+            'email'    => 'required_without:token|string|email|max:255',
+            'password' => 'required_with:email|string|min:8|max:255',
+            'token'    => ['required_without:email','string'],
         ])->validate();
+    }
+
+    public function validateToken(array $data)
+    {
+        return validator($data, [
+'token' => ['sometimes', 'string']
+       ])->validate();
     }
 }

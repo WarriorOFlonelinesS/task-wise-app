@@ -116,4 +116,4 @@ return [
         'log_errors' => true,
     ],
 
-]; 
+];

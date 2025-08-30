@@ -2,23 +2,23 @@ import React, { Component, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store';
 import { logoutRequest } from '../../features/auth/authSlice';
+import Cookies from 'js-cookie';
 
 export const LogoutButton = () => {
   const dispatch = useDispatch();
   const { loading, error, token } = useSelector((state: RootState) => state.auth);
-  console.log(token);
   const handleSubmit = (e) => {
     e.preventDefault();
     if (token) {
-      // Add null check to prevent type error
       dispatch(logoutRequest({ token }));
+      Cookies.remove('token')
     } else {
       console.error('No token available for logout');
     }
   };
 
   return (
-    <div className="w-96 flex justify-center mx-auto p-6 rounded-lg">
+    <div className="flex justify-center mx-auto p-6 rounded-lg">
       <form onSubmit={handleSubmit} className="space-y-1">
         <button
           type="submit"

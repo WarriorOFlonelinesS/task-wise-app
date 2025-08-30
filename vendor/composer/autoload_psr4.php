@@ -27,9 +27,6 @@ return array(
     'Gemini\\' => array($vendorDir . '/google-gemini-php/client/src'),
     'Fruitcake\\Cors\\' => array($vendorDir . '/fruitcake/laravel-cors/src', $vendorDir . '/fruitcake/php-cors/src'),
     'Doctrine\\Inflector\\' => array($vendorDir . '/doctrine/inflector/lib/Doctrine/Inflector'),
-    'Database\\Seeders\\' => array($vendorDir . '/laravel/pint/database/seeders'),
-    'Database\\Factories\\' => array($vendorDir . '/laravel/pint/database/factories'),
     'Carbon\\Doctrine\\' => array($vendorDir . '/carbonphp/carbon-doctrine-types/src/Carbon/Doctrine'),
     'Carbon\\' => array($vendorDir . '/nesbot/carbon/src/Carbon'),
-    'App\\' => array($vendorDir . '/laravel/pint/app'),
 );

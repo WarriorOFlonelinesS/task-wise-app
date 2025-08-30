@@ -1,18 +1,26 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+
 import Loader from '../components/Common/Loader';
 import LoginForm from '../components/Auth/LoginForm';
 import { RootState } from '../store';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Dashboard from '../components/Tasks/Dashboard';
+import { loginRequestWithToken } from '../features/auth/authSlice';
+import Cookies from 'js-cookie';
 
 export default function HomePage() {
-  const user = useSelector((state: RootState) => state.auth.user);
+  const token = useSelector((state: RootState) => state.auth.token)
+  const tokenFromCookie = Cookies.get('token')
 
+  const user = useSelector((state: RootState) => state.auth.user);
   const [showLoader, setShowLoader] = useState(true);
   const [fade, setFade] = useState(false);
+  const dispatch = useDispatch();
 
   useEffect(() => {
+    if (tokenFromCookie !== undefined) {
+      dispatch(loginRequestWithToken(tokenFromCookie));
+    }
     const timer = setTimeout(() => {
       setFade(true);
       setTimeout(() => setShowLoader(false), 1000);

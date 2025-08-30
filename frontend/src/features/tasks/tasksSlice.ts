@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Task, TasksState } from './type';
 
+
 const initialState: TasksState = {
   tasks: null,
   taskAnalyze: [],
@@ -27,11 +28,13 @@ const tasksSlice = createSlice({
       state,
       action: PayloadAction<{
         tasks: Task[];
+        analyzesOfTasks: any[];
       }>,
     ) {
       state.loading = false;
       state.error = null;
       state.tasks = action.payload.tasks;
+      state.taskAnalyze = action.payload.analyzesOfTasks;
     },
     getTasksFailure(state, action: PayloadAction<string>) {
       state.error = action.payload;
@@ -62,6 +65,10 @@ const tasksSlice = createSlice({
       if (state.tasks) {
         state.tasks = state.tasks.filter((task) => task.id !== action.payload);
       }
+
+      if (state.taskAnalyze) {
+        state.taskAnalyze = state.taskAnalyze.filter((analysis) => analysis.task_id !== action.payload);
+      }
     },
     deleteTasksFailure(state, action: PayloadAction<string>) {
       state.error = action.payload;
@@ -80,6 +87,7 @@ const tasksSlice = createSlice({
           state.tasks[index] = action.payload;
         }
       }
+      
     },
     updateTasksFailure(state, action: PayloadAction<string>) {
       state.error = action.payload;
@@ -94,11 +102,18 @@ const tasksSlice = createSlice({
       state.loading = true;
       state.error = null;
     },
-    taskAnalyzeSuccess(state, action: PayloadAction<{ content: string; task_id: string }>) {
+    taskAnalyzeSuccess(state, action: PayloadAction<any>) {
       state.loading = false;
       state.error = null;
       if (state.taskAnalyze) {
-        state.taskAnalyze.push(action.payload);
+        const existingIndex = state.taskAnalyze.findIndex(
+          (item) => item.task_id === action.payload.task_id
+        );
+        if (existingIndex !== -1) {
+          state.taskAnalyze[existingIndex] = action.payload;
+        } else {
+          state.taskAnalyze.push(action.payload);
+        }
       } else {
         state.taskAnalyze = [action.payload];
       }
@@ -127,5 +142,6 @@ export const {
   taskAnalyzeRequest,
   taskAnalyzeSuccess,
   taskAnalyzeFailure,
+  tasksSortBySmartScore,
 } = tasksSlice.actions;
 export default tasksSlice.reducer;
