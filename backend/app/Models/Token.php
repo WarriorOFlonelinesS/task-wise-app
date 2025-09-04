@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Token extends Model
 {
     use HasFactory;
-    
+
     protected $fillable = [
         'token',
         'name',
@@ -16,8 +16,8 @@ class Token extends Model
         'abilities',
     ];
 
-    protected $casts =[
-        'abilities' => "array",
+    protected $casts = [
+        'abilities' => 'array',
     ];
 
     public function tokenable()
@@ -25,10 +25,3 @@ class Token extends Model
         return $this->morphTo();
     }
 }
-
-
-
-
-
-
-

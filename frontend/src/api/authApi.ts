@@ -1,7 +1,7 @@
 import axios from 'axios';
 import Cookies from 'js-cookie';
 
-const API_URL = 'http://localhost:8000/api';
+const API_URL = 'https://task-wise-app.online/api';
 
 
 export async function login(credentials: { email: string; password: string }) {

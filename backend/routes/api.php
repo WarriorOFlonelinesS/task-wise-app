@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\GeminiController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TaskController;
 use Illuminate\Support\Facades\Route;
 
@@ -41,4 +42,10 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::delete('/tasks/{id}', [TaskController::class, 'destroy']);
 
     Route::get('/ai-analyse/{id}', [GeminiController::class, 'analyzeData']);
+
+    Route::get('/profile/{id}', [ProfileController::class, 'show']);
+
+    Route::put('/profile/{id}', [ProfileController::class, 'update']);
+
+    Route::delete('/profile/{id}', [ProfileController::class, 'destroy']);
 });

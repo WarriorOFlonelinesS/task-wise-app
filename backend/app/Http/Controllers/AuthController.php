@@ -30,7 +30,7 @@ class AuthController extends Controller
 
             return response()->json([
                 'user' => $user,
-                'token'=>$token,
+                'token' => $token,
                 'message' => 'Registration successful',
             ], 201);
         } catch (ValidationException $e) {
@@ -51,8 +51,8 @@ class AuthController extends Controller
     public function login()
     {
         try {
-            $validData = $this->validation->validateLogin($this->request->all()) ;
-            
+            $validData = $this->validation->validateLogin($this->request->all());
+
             $dto = new UserDTO($validData);
             $result = $this->authService->loginUser($dto);
             $user = $result['user'];
@@ -79,6 +79,7 @@ class AuthController extends Controller
             ], 401);
         }
     }
+
     public function loginWithToken()
     {
         try {
@@ -109,6 +110,7 @@ class AuthController extends Controller
             ], 401);
         }
     }
+
     public function logout()
     {
         try {

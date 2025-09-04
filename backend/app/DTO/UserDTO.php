@@ -11,8 +11,10 @@ class UserDTO
     public $password;
 
     public $password_confirmation;
-    
+
     public $token;
+
+    public $avatarUrl;
 
     public function __construct(array $data)
     {
@@ -21,5 +23,6 @@ class UserDTO
         $this->password = $data['password'] ?? null;
         $this->password_confirmation = $data['password_confirmation'] ?? null;
         $this->token = isset($data['token']) ? $data['token'] : null;
+        $this->avatarUrl = isset($data['avatar_url']) ? $data['avatar_url'] : null;
     }
 }
