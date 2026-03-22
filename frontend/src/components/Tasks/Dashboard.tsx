@@ -6,16 +6,15 @@ import { RootState } from '../../store';
 import type { Task } from '../../features/tasks/type';
 import Card from './Card';
 import AddTask from './AddTask';
-import { postTasksRequest} from '../../features/tasks/tasksSlice';
+import { postTasksRequest } from '../../features/tasks/tasksSlice';
 import { getTasksRequest } from '../../features/tasks/tasksAction';
-import {selectSortedTasks} from '../../features/tasks/selectors/selectSortedTasks'
+import { selectSortedTasks } from '../../features/tasks/selectors/selectSortedTasks';
 import Magic from './Magic';
 
 export default function Dashboard() {
   const tasks = useSelector((state: RootState) => state.tasks.tasks);
   const token = useSelector((state: RootState) => state.auth.token);
   const error = useSelector((state: RootState) => state.tasks.error);
- 
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -37,31 +36,26 @@ export default function Dashboard() {
   };
 
   const sortTasks = () => {
-
-    
     if (isSorted) {
       setTasks(tasks || []);
       setIsSorted(false);
-
     } else {
       setTasks(sortedTasksList);
       setIsSorted(true);
-
     }
-    
+
     setIsLoaded(true);
     const timer = setTimeout(() => {
       setIsLoaded(false);
       setTimeout(() => setShowLoader(false), 1000);
     }, 5000);
     return () => clearTimeout(timer);
-  };  
+  };
 
   useEffect(() => {
     if (token) {
       dispatch(getTasksRequest(token));
     }
-    
   }, [dispatch, token]);
 
   useEffect(() => {
@@ -83,17 +77,17 @@ export default function Dashboard() {
       {isOpen ? <AddTask onClose={onClose} addToDo={addToDo} /> : null}
       <h1 className="text-3xl font-bold text-center mb-11 text-white">Task AI Manager</h1>
       <div className="max-h-[80%] w-full overflow-y-auto no-scrollbar max-w-md mx-auto">
-        {load ? <Magic
-          className={`fixed inset-0 flex items-center justify-center transition-opacity duration-1000 z-50
+        {load ? (
+          <Magic
+            className={`fixed inset-0 flex items-center justify-center transition-opacity duration-1000 z-50
             ${load ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}
           `}
-        /> : (listTasks.length ? (
-          listTasks.map((task, index) => (
-            <Card data={task} key={task.id || `task-${index}`} />
-          ))
+          />
+        ) : listTasks.length ? (
+          listTasks.map((task, index) => <Card data={task} key={task.id || `task-${index}`} />)
         ) : (
           <h2 className="text-center">You don't have tasks</h2>
-        ))}
+        )}
       </div>
 
       <div className="flex justify-center">
@@ -115,11 +109,32 @@ export default function Dashboard() {
             </svg>
           </button>
           <button
-            title={isSorted ? "Reset to original order" : "Sort tasks by smart score"}
+            title={isSorted ? 'Reset to original order' : 'Sort tasks by smart score'}
             className="backdrop-blur-md bg-white/5 p-0.5 backdrop-blur-xs rounded-md border border-gray-300 hover:bg-gray-100 transition-colors flex items-center w-9 h-9"
             onClick={sortTasks}
           >
-            <svg fill="#ffffff" height="200px" width="200px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" viewBox="0 0 490 490" xmlSpace="preserve"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <polygon points="85.877,154.014 85.877,428.309 131.706,428.309 131.706,154.014 180.497,221.213 217.584,194.27 108.792,44.46 0,194.27 37.087,221.213 "></polygon> <polygon points="404.13,335.988 404.13,61.691 358.301,61.691 358.301,335.99 309.503,268.787 272.416,295.73 381.216,445.54 490,295.715 452.913,268.802 "></polygon> </g> </g></svg>
+            <svg
+              fill="#ffffff"
+              height="200px"
+              width="200px"
+              version="1.1"
+              id="Capa_1"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlnsXlink="http://www.w3.org/1999/xlink"
+              viewBox="0 0 490 490"
+              xmlSpace="preserve"
+            >
+              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+              <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+              <g id="SVGRepo_iconCarrier">
+                {' '}
+                <g>
+                  {' '}
+                  <polygon points="85.877,154.014 85.877,428.309 131.706,428.309 131.706,154.014 180.497,221.213 217.584,194.27 108.792,44.46 0,194.27 37.087,221.213 "></polygon>{' '}
+                  <polygon points="404.13,335.988 404.13,61.691 358.301,61.691 358.301,335.99 309.503,268.787 272.416,295.73 381.216,445.54 490,295.715 452.913,268.802 "></polygon>{' '}
+                </g>{' '}
+              </g>
+            </svg>
           </button>
           <button
             title="Profile"

@@ -9,8 +9,7 @@ import { loginRequestWithToken } from '../features/auth/authSlice';
 import Cookies from 'js-cookie';
 
 export default function HomePage() {
-  const token = useSelector((state: RootState) => state.auth.token)
-  const tokenFromCookie = Cookies.get('token')
+  const tokenFromCookie = Cookies.get('token');
 
   const user = useSelector((state: RootState) => state.auth.user);
   const [showLoader, setShowLoader] = useState(true);

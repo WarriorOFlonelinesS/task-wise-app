@@ -11,7 +11,7 @@ export const LogoutButton = () => {
     e.preventDefault();
     if (token) {
       dispatch(logoutRequest({ token }));
-      Cookies.remove('token')
+      Cookies.remove('token');
     } else {
       console.error('No token available for logout');
     }

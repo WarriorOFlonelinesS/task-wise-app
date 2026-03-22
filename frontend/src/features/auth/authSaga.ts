@@ -10,7 +10,7 @@ import {
   loginRequest,
   registerRequest,
   logoutRequest,
-  loginRequestWithToken
+  loginRequestWithToken,
 } from './authSlice';
 import { handleErrors } from '../../helpers/handleErrors';
 
@@ -52,7 +52,7 @@ function* logoutSaga(action: ReturnType<typeof logoutRequest>) {
 
 export function* authSaga() {
   yield takeEvery(loginRequest.type, loginSaga);
-  yield takeEvery( loginRequestWithToken.type, loginWithTokenSaga);
+  yield takeEvery(loginRequestWithToken.type, loginWithTokenSaga);
   yield takeEvery(registerRequest.type, registerSaga);
   yield takeEvery(logoutRequest.type, logoutSaga);
 }

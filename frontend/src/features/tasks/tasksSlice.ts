@@ -1,7 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Task, TasksState } from './type';
 
-
 const initialState: TasksState = {
   tasks: null,
   taskAnalyze: [],
@@ -67,7 +66,9 @@ const tasksSlice = createSlice({
       }
 
       if (state.taskAnalyze) {
-        state.taskAnalyze = state.taskAnalyze.filter((analysis) => analysis.task_id !== action.payload);
+        state.taskAnalyze = state.taskAnalyze.filter(
+          (analysis) => analysis.task_id !== action.payload,
+        );
       }
     },
     deleteTasksFailure(state, action: PayloadAction<string>) {
@@ -87,7 +88,6 @@ const tasksSlice = createSlice({
           state.tasks[index] = action.payload;
         }
       }
-      
     },
     updateTasksFailure(state, action: PayloadAction<string>) {
       state.error = action.payload;
@@ -107,7 +107,7 @@ const tasksSlice = createSlice({
       state.error = null;
       if (state.taskAnalyze) {
         const existingIndex = state.taskAnalyze.findIndex(
-          (item) => item.task_id === action.payload.task_id
+          (item) => item.task_id === action.payload.task_id,
         );
         if (existingIndex !== -1) {
           state.taskAnalyze[existingIndex] = action.payload;
