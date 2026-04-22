@@ -8,6 +8,7 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import UpdateTask from './UpdateTask';
 import ContextMenuApp from '../Tasks/ContextMenu';
+import { HiglihterContainer } from './Highliter/HighlighterContainer';
 
 export default function Card({ data }) {
   const priorityClasses = {
@@ -28,6 +29,15 @@ export default function Card({ data }) {
   const subtasks = taskAnalizeItem[0] ? JSON.parse(taskAnalizeItem[0].content).subtasks : null;
   const priority = taskAnalizeItem[0] ? taskAnalizeItem[0].priority : null;
   const [isAnalyzing, setIsAnalyzing] = useState(false);
+  const [selections, setSelections] = useState<string[]>([]);
+  const addSelection = (selectedText: string) => {
+    const value = selectedText.trim();
+    if (!value) return;
+
+    setSelections((prev) => 
+      prev.some((s) => s.toLocaleLowerCase() === value.toLowerCase()) ? prev : [...prev, value]
+    )
+  }
 
   const updateToDo = (id, title, description) => {
     dispatch(
@@ -62,10 +72,24 @@ export default function Card({ data }) {
         <UpdateTask onClose={closeUpdateModal} updateToDo={updateToDo} data={data} />
       ) : null}
       <h3 className="text-lg font-semibold mb-2">
-        <ContextMenuApp> {data.title} </ContextMenuApp>
+      <ContextMenuApp onHighlight={addSelection}>
+        <HiglihterContainer
+          text={data.title}
+          selection={selections}
+          color="#FFD700"
+        />
+      </ContextMenuApp>
       </h3>
 
-      <div className="text-sm mb-4">{data.description}</div>
+      <div className="text-sm mb-4">
+      <ContextMenuApp onHighlight={addSelection}>
+        <HiglihterContainer
+          text={data.description}
+          selection={selections}
+          color="#FFD700"
+        />
+      </ContextMenuApp>
+      </div>
       <div className="animate-slideDown">
         {subtasks ? (
           <>
@@ -93,7 +117,13 @@ export default function Card({ data }) {
                     className="text-sm subtask-item hover:bg-white/5 p-1 rounded transition-all duration-200"
                     style={{ animationDelay: `${index * 0.1}s` }}
                   >
-                    {subtask}
+                      <ContextMenuApp onHighlight={addSelection}>
+                        <HiglihterContainer
+                          text={subtask}
+                          selection={selections}
+                          color="#FFD700"
+                        />
+                      </ContextMenuApp>
                   </li>
                 );
               })}

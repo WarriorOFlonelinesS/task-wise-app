@@ -1,10 +1,11 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { Higlihter } from './Highliter';
-// import { TextSelector } from '../../helpers/textHelper';
-const ContextMenuApp = ({ children }) => {
+import { HighlighterView } from './Highliter/HighlighterView';
+import { HiglihterContainer } from './Highliter/HighlighterContainer';
+import { select } from 'redux-saga/effects';
+const ContextMenuApp = ({ children, onHighlight }) => {
   const [visible, setVisible] = useState(false);
   const [position, setPosition] = useState({ x: 0, y: 0 });
-  const [selectedFragments, setSelectedFragments] = useState([]);
+
 
   const handleContextMenu = (e) => {
     e.preventDefault();
@@ -16,13 +17,11 @@ const ContextMenuApp = ({ children }) => {
     if (visible) setVisible(false);
   }, [visible]);
 
-  const handleHighlithgtClick = () => {
-    const selection = window.getSelection()?.toString();
-
-    if (selection && selection.trim() !== '') {
-      setSelectedFragments((prev) => [...prev, selection.trim()]);
-      console.log(selectedFragments)
-    }
+  const handleHighlightClick = () => {
+    const selection = window.getSelection()?.toString().trim();
+    if (!selection) return;
+    onHighlight(selection);
+    setVisible(false);
   };
 
   useEffect(() => {
@@ -34,21 +33,20 @@ const ContextMenuApp = ({ children }) => {
 
   return (
     <div onContextMenu={handleContextMenu}>
-      <Higlihter text={children[1]} selection={selectedFragments} color={'#FFD700'} />
-
+      {children}
       {visible && (
         <div
           style={{
             position: 'absolute',
             top: `${position.y}px`,
-            left: `${position.x}ptt@ttt.ttx`,
+            left: `${position.x}px`,
             backgroundColor: 'transparent',
             zIndex: 1000,
           }}
           onClick={(e) => e.stopPropagation()}
         >
           <button
-            onClick={handleHighlithgtClick}
+            onClick={handleHighlightClick}
             className="bg-[#184e4a] p-1 rounded-sm border border-gray-400 text-sm shadow-md"
           >
             <svg

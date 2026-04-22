@@ -21,16 +21,12 @@ const highlightSlice = createSlice({
       action: PayloadAction<{
         selection: string;
         color?: string;
-        sourceText?: string;
         taskId?: string | number | null;
       }>,
     ) {
       state.text.selection = action.payload.selection;
       if (action.payload.color !== undefined) {
         state.text.color = action.payload.color;
-      }
-      if (action.payload.sourceText !== undefined) {
-        state.text.sourceText = action.payload.sourceText;
       }
       if (action.payload.taskId !== undefined) {
         state.text.taskId = action.payload.taskId;

@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { highlighterSaga } from '../features/highlighter/highlightSaga';
 
 const API_URL = 'http://localhost:8000/api';
 
