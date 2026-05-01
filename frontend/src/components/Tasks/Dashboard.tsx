@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { UserIcon } from '@heroicons/react/24/outline';
+
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store';
 import type { Task } from '../../features/tasks/type';
@@ -10,6 +10,7 @@ import { postTasksRequest } from '../../features/tasks/tasksSlice';
 import { getTasksRequest } from '../../features/tasks/tasksAction';
 import { selectSortedTasks } from '../../features/tasks/selectors/selectSortedTasks';
 import Magic from './Magic';
+import { UserRound } from 'lucide-react';
 
 export default function Dashboard() {
   const tasks = useSelector((state: RootState) => state.tasks.tasks);
@@ -75,7 +76,7 @@ export default function Dashboard() {
         <div className="bg-red-500 text-white px-4 py-2 rounded mb-4 text-center">{error}</div>
       )}
       {isOpen ? <AddTask onClose={onClose} addToDo={addToDo} /> : null}
-      <h1 className="text-3xl font-bold text-center mb-11 text-white">Task AI Manager</h1>
+      <h1 className="text-3xl font-bold text-center mb-11 text-white">Dashboard</h1>
       <div className="max-h-[80%] w-full overflow-y-auto no-scrollbar max-w-md mx-auto">
         {load ? (
           <Magic
@@ -143,7 +144,7 @@ export default function Dashboard() {
             }}
             className="backdrop-blur-md bg-white/5 p-1 backdrop-blur-xs rounded-md border border-gray-300 hover:bg-gray-100 transition-colors flex items-center gap-2 w-9 h-9"
           >
-            <UserIcon className="h-9 w-9" />
+            <UserRound className="h-9 w-9" />
           </button>
         </div>
       </div>

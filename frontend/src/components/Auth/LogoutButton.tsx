@@ -18,12 +18,12 @@ export const LogoutButton = () => {
   };
 
   return (
-    <div className="flex justify-center mx-auto p-6 rounded-lg">
+    <div className="flex justify-center mx-auto p-2 rounded-lg">
       <form onSubmit={handleSubmit} className="space-y-1">
         <button
           type="submit"
           disabled={loading}
-          className="w- backdrop-blur-md bg-white/5 px-6 py-3 backdrop-blur-xs rounded-md border border-gray-300 hover:bg-gray-100 transition-colors"
+          className="backdrop-blur-md bg-red-800 px-2 py-1 rounded-md border border-gray-300 transition-all duration-300 hover:bg-red-900 hover:shadow-[0_0_20px_rgba(185,28,28,1)]"
         >
           {loading ? 'Loading...' : 'Log out'}
         </button>

@@ -10,6 +10,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
+        "cartalyst/sentinel": "^9.0",
         "doctrine/dbal": "^3.0",
         "google-gemini-php/client": "^2.5",
         "laravel/framework": "^12.19",
