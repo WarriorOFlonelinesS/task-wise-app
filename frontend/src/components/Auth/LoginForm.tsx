@@ -4,6 +4,7 @@ import { loginRequest } from '../../features/auth/authSlice';
 import { useNavigate } from 'react-router-dom';
 import { RootState } from '../../store';
 import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline';
+import Button from '../Common/Button';
 
 export default function LoginForm() {
   const navigate = useNavigate();
@@ -82,7 +83,7 @@ export default function LoginForm() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full backdrop-blur-md bg-white/5 px-6 py-3 backdrop-blur-xs rounded-md border border-gray-300 hover:bg-gray-100 transition-colors"
+            className="w-full backdrop-blur-md bg-white/5 px-6 py-3 backdrop-blur-xs rounded-md border border-gray-500/70 hover:bg-[#00d1ff] hover:text-black hover:shadow-[0_0_25px_rgba(0,209,255,0.4)] transition-colors"
           >
             {loading ? 'Loading...' : 'Login'}
           </button>
@@ -98,15 +99,7 @@ export default function LoginForm() {
               Remember me
             </div>
             <p className="p-5 ">if you don't have an account</p>
-            <button
-              title="Sign up"
-              onClick={() => {
-                navigate('/signup');
-              }}
-              className="backdrop-blur-md bg-white/5 px-6 py-3 backdrop-blur-xs rounded-md border border-gray-300 hover:bg-gray-100 transition-colors self-center"
-            >
-              Sign up
-            </button>
+            <Button link={'/signup'} label={'Sign up'} icon={''}/>
 
             {error && <p className="text-red-600 text-sm text-center">{error}</p>}
           </div>

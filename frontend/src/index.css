@@ -205,3 +205,40 @@ body {
   animation: bounce 0.6s ease-in-out;
   color: #10b981;
 }
+
+@keyframes borderBeam {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.wrapper {
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+.wrapper > * {
+  position: relative;
+  z-index: 2;
+}
+
+.wrapper::before {
+  content: "";
+  position: absolute;
+  /* Oversized layer avoids clipping the beam while rotating */
+  inset: -150%;
+  background: conic-gradient(from 0deg, transparent 0deg, #00d1ff 38deg, transparent 72deg);
+  opacity: 0.95;
+  animation: borderBeam 4s linear infinite;
+  filter: drop-shadow(0 0 10px rgba(0, 209, 255, 0.75));
+  z-index: 0;
+}
+
+.wrapper::after {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  border-radius: 11px;
+  background: #14332f;
+  z-index: 1;
+}

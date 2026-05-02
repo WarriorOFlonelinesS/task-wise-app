@@ -92,10 +92,11 @@ export default function Dashboard() {
       </div>
 
       <div className="flex justify-center">
-        <div className="w-3/4 fixed bottom-0 left-1/2 transform -translate-x-1/2 backdrop-blur-md bg-white/5 px-6 py-2 backdrop-blur-xs rounded-md border border-gray-300 flex items-center justify-around">
+      
+        <div className="w-3/4 fixed bottom-0 left-1/2 transform -translate-x-1/2 backdrop-blur-md  px-6 py-2 backdrop-blur-xs rounded-md shadow-md border border-gray-500/70 flex items-center justify-around">
           <button
             title="Add new task"
-            className="backdrop-blur-md bg-white/5 p-0.5 backdrop-blur-xs rounded-md border border-gray-300 hover:bg-gray-100 transition-colors flex items-center w-9 h-9"
+            className="backdrop-blur-md bg-white/5 p-0.5 backdrop-blur-xs rounded-md border border-gray-500/70 hover:bg-[#00d1ff] hover:text-black hover:shadow-[0_0_25px_rgba(0,209,255,0.4)] transition-colors flex items-center w-9 h-9"
             onClick={() => setIsOpen(true)}
           >
             <svg
@@ -111,7 +112,7 @@ export default function Dashboard() {
           </button>
           <button
             title={isSorted ? 'Reset to original order' : 'Sort tasks by smart score'}
-            className="backdrop-blur-md bg-white/5 p-0.5 backdrop-blur-xs rounded-md border border-gray-300 hover:bg-gray-100 transition-colors flex items-center w-9 h-9"
+            className="backdrop-blur-md bg-white/5 p-0.5 backdrop-blur-xs rounded-md border border-gray-500/70 hover:bg-[#00d1ff] hover:text-black hover:shadow-[0_0_25px_rgba(0,209,255,0.4)]  transition-colors flex items-center w-9 h-9"
             onClick={sortTasks}
           >
             <svg
@@ -142,7 +143,7 @@ export default function Dashboard() {
             onClick={() => {
               navigate('/profile');
             }}
-            className="backdrop-blur-md bg-white/5 p-1 backdrop-blur-xs rounded-md border border-gray-300 hover:bg-gray-100 transition-colors flex items-center gap-2 w-9 h-9"
+            className="backdrop-blur-md bg-white/5 p-1 backdrop-blur-xs rounded-md border border-gray-500/70 hover:bg-[#00d1ff] hover:text-black hover:shadow-[0_0_25px_rgba(0,209,255,0.4)] transition-colors flex items-center gap-2 w-9 h-9"
           >
             <UserRound className="h-9 w-9" />
           </button>

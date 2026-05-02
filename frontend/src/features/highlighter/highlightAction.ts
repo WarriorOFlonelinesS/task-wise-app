@@ -7,12 +7,12 @@ export const getHighlightSuccess = createAction<Highlighter[]>('highlighter/getH
 
 export const getHighlightFailed = createAction<string>('highlighter/getHighlightFailed');
 
-export const postHighlightRequest = createAction<{   selection: '',
-  color: '',
-  sourceText: '',
-  taskId: '',}>(
-  'highlighter/postHighlightRequest',
-);
+export const postHighlightRequest = createAction<{
+  selection: '';
+  color: '';
+  sourceText: '';
+  taskId: '';
+}>('highlighter/postHighlightRequest');
 
 export const postHighlightSuccess = createAction<Highlighter>('highlighter/postTasksRequest');
 

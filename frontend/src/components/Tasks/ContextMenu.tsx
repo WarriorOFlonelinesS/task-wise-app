@@ -6,7 +6,6 @@ const ContextMenuApp = ({ children, onHighlight }) => {
   const [visible, setVisible] = useState(false);
   const [position, setPosition] = useState({ x: 0, y: 0 });
 
-
   const handleContextMenu = (e) => {
     e.preventDefault();
     setPosition({ x: e.clientX, y: e.clientY });

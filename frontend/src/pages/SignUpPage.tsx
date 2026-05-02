@@ -1,6 +1,7 @@
 import React from 'react';
 import RegisterForm from '../components/Auth/RegisterForm';
 import { useNavigate } from 'react-router-dom';
+import Button from '../components/Common/Button';
 
 export default function SignUpPage() {
   const navigate = useNavigate();
@@ -11,15 +12,7 @@ export default function SignUpPage() {
 
       <p className="text-center">if you have an account</p>
 
-      <button
-        title="Log in"
-        onClick={() => {
-          navigate('/');
-        }}
-        className="backdrop-blur-md bg-white/5 px-6 py-3 backdrop-blur-xs rounded-md border border-gray-300 hover:bg-gray-100 transition-colors mt-5 w-52 self-center"
-      >
-        Log in
-      </button>
+      <Button link={'/'} label={'Log in'} icon={''}/>
     </div>
   );
 }

@@ -23,7 +23,7 @@ export const LogoutButton = () => {
         <button
           type="submit"
           disabled={loading}
-          className="backdrop-blur-md bg-red-800 px-2 py-1 rounded-md border border-gray-300 transition-all duration-300 hover:bg-red-900 hover:shadow-[0_0_20px_rgba(185,28,28,1)]"
+          className="backdrop-blur-md bg-red-800 px-2 py-1 rounded-md border border-gray-500/70  transition-all duration-300 hover:bg-red-700  hover:shadow-[0_0_20px_5px_rgba(239,68,68,0.5)]"
         >
           {loading ? 'Loading...' : 'Log out'}
         </button>

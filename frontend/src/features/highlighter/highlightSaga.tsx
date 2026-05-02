@@ -1,7 +1,12 @@
 import { all, call, put, select, takeEvery } from 'redux-saga/effects';
 
 // When you add a highlighter slice, import actions and wire workers:
-import { getHighlightFailure, getHighlightRequest, getHighlightSuccess,postHighlightRequest } from './highlightSlice';
+import {
+  getHighlightFailure,
+  getHighlightRequest,
+  getHighlightSuccess,
+  postHighlightRequest,
+} from './highlightSlice';
 import * as highlighterApi from '../../api/highlightApi';
 import { handleErrors } from '../../helpers/handleErrors';
 
