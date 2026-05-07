@@ -207,8 +207,12 @@ body {
 }
 
 @keyframes borderBeam {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 .wrapper {
@@ -223,7 +227,7 @@ body {
 }
 
 .wrapper::before {
-  content: "";
+  content: '';
   position: absolute;
   /* Oversized layer avoids clipping the beam while rotating */
   inset: -150%;
@@ -235,7 +239,7 @@ body {
 }
 
 .wrapper::after {
-  content: "";
+  content: '';
   position: absolute;
   inset: 1px;
   border-radius: 11px;

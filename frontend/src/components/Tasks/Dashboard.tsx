@@ -10,7 +10,8 @@ import { postTasksRequest } from '../../features/tasks/tasksSlice';
 import { getTasksRequest } from '../../features/tasks/tasksAction';
 import { selectSortedTasks } from '../../features/tasks/selectors/selectSortedTasks';
 import Magic from './Magic';
-import { UserRound } from 'lucide-react';
+import { Plus, SortAscIcon, SortDescIcon, UserRound } from 'lucide-react';
+import Button from '../Common/Button';
 
 export default function Dashboard() {
   const tasks = useSelector((state: RootState) => state.tasks.tasks);
@@ -25,7 +26,7 @@ export default function Dashboard() {
   const [showLoader, setShowLoader] = useState(true);
   const [isSorted, setIsSorted] = useState(false);
   const sortedTasksList = useSelector(selectSortedTasks);
-
+  const buttonStyles = " backdrop-blur-md bg-white/5 px-3 py-1 backdrop-blur-xs rounded-md border duration-500 ease-in-out border-gray-500/70 hover:bg-[#00d1ff] hover:text-black hover:shadow-[0_0_25px_rgba(0,209,255,0.4)]  transition-colors";
   const addToDo = (title, description) => {
     setIsSorted(false);
     dispatch(
@@ -71,7 +72,7 @@ export default function Dashboard() {
     setIsOpen(false);
   };
   return (
-    <div className="w-full min-h-screen">
+    <div className="w-full min-h-screen ">
       {error && (
         <div className="bg-red-500 text-white px-4 py-2 rounded mb-4 text-center">{error}</div>
       )}
@@ -92,61 +93,10 @@ export default function Dashboard() {
       </div>
 
       <div className="flex justify-center">
-      
         <div className="w-3/4 fixed bottom-0 left-1/2 transform -translate-x-1/2 backdrop-blur-md  px-6 py-2 backdrop-blur-xs rounded-md shadow-md border border-gray-500/70 flex items-center justify-around">
-          <button
-            title="Add new task"
-            className="backdrop-blur-md bg-white/5 p-0.5 backdrop-blur-xs rounded-md border border-gray-500/70 hover:bg-[#00d1ff] hover:text-black hover:shadow-[0_0_25px_rgba(0,209,255,0.4)] transition-colors flex items-center w-9 h-9"
-            onClick={() => setIsOpen(true)}
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="size-9"
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-            </svg>
-          </button>
-          <button
-            title={isSorted ? 'Reset to original order' : 'Sort tasks by smart score'}
-            className="backdrop-blur-md bg-white/5 p-0.5 backdrop-blur-xs rounded-md border border-gray-500/70 hover:bg-[#00d1ff] hover:text-black hover:shadow-[0_0_25px_rgba(0,209,255,0.4)]  transition-colors flex items-center w-9 h-9"
-            onClick={sortTasks}
-          >
-            <svg
-              fill="#ffffff"
-              height="200px"
-              width="200px"
-              version="1.1"
-              id="Capa_1"
-              xmlns="http://www.w3.org/2000/svg"
-              xmlnsXlink="http://www.w3.org/1999/xlink"
-              viewBox="0 0 490 490"
-              xmlSpace="preserve"
-            >
-              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-              <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-              <g id="SVGRepo_iconCarrier">
-                {' '}
-                <g>
-                  {' '}
-                  <polygon points="85.877,154.014 85.877,428.309 131.706,428.309 131.706,154.014 180.497,221.213 217.584,194.27 108.792,44.46 0,194.27 37.087,221.213 "></polygon>{' '}
-                  <polygon points="404.13,335.988 404.13,61.691 358.301,61.691 358.301,335.99 309.503,268.787 272.416,295.73 381.216,445.54 490,295.715 452.913,268.802 "></polygon>{' '}
-                </g>{' '}
-              </g>
-            </svg>
-          </button>
-          <button
-            title="Profile"
-            onClick={() => {
-              navigate('/profile');
-            }}
-            className="backdrop-blur-md bg-white/5 p-1 backdrop-blur-xs rounded-md border border-gray-500/70 hover:bg-[#00d1ff] hover:text-black hover:shadow-[0_0_25px_rgba(0,209,255,0.4)] transition-colors flex items-center gap-2 w-9 h-9"
-          >
-            <UserRound className="h-9 w-9" />
-          </button>
+          <Button onClick={()=> setIsOpen(true)} icon={<Plus className="h-9 w-9" />} styles={buttonStyles}/>
+          <Button onClick={sortTasks} icon={<SortDescIcon className="h-9 w-9" />} styles={buttonStyles}/>
+          <Button label={''} icon={<UserRound className="h-9 w-9" />} styles={buttonStyles} to='/profile'/>
         </div>
       </div>
     </div>

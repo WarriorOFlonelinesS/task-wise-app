@@ -30,19 +30,18 @@ export async function deleteTasks(id: string, token: string) {
 }
 
 export async function updateTasks(
-  data: { id: string; title: string; description: string, status:string },
+  data: { id: string; title: string; description: string; status: string },
   token: string,
 ) {
   const response = await axios.put(
     `${API_URL}/tasks/${data.id}`,
-    { title: data.title, description: data.description },
+    { title: data.title, description: data.description, status: data.status },
     {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     },
   );
-
   return response.data;
 }
 

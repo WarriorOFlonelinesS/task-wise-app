@@ -99,7 +99,7 @@ export default function LoginForm() {
               Remember me
             </div>
             <p className="p-5 ">if you don't have an account</p>
-            <Button link={'/signup'} label={'Sign up'} icon={''}/>
+            <Button link={'/signup'} label={'Sign up'} icon={''} />
 
             {error && <p className="text-red-600 text-sm text-center">{error}</p>}
           </div>
