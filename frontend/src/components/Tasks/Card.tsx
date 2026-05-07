@@ -1,5 +1,5 @@
 import { PencilIcon, TrashIcon } from '@heroicons/react/24/outline';
-import { RefreshCw, CircleCheckBig } from 'lucide-react';
+import { RefreshCw, CircleCheckBig, Circle } from 'lucide-react';
 import React, { useState } from 'react';
 import {
   deleteTasksRequest,
@@ -29,8 +29,7 @@ export default function Card({ data }) {
   const s = (data.status ?? '').trim().toLowerCase().replace(/\s+/g, ' ');
   const isDone = s === 'done' || s === 'completed';
   const isInProgress = s === 'in progress' || s === 'in_progress';
-  const showBeam = isInProgress;
-  const showDoneIcon = isDone;
+
   const subtasks = taskAnalizeItem[0] ? JSON.parse(taskAnalizeItem[0].content).subtasks : null;
   const priority = taskAnalizeItem[0] ? taskAnalizeItem[0].priority : null;
   const [isAnalyzing, setIsAnalyzing] = useState(false);
@@ -54,6 +53,26 @@ export default function Card({ data }) {
     );
   };
 
+  const toggleStatus = () => {
+    let nextStatus = 'To Do';
+    if (s === 'pending' || s === ''){
+      nextStatus = 'In Progress';
+    } else if (isInProgress) {
+      nextStatus = 'Done';
+    } else if (isDone) {
+      nextStatus = 'To Do';
+    }
+
+    dispatch(
+      updateTasksRequest({
+        id: data.id,
+        title: data.title,
+        description: data.description,
+        status: nextStatus
+      }),
+    );
+  }
+
   const deleteToDo = (id) => {
     dispatch(deleteTasksRequest(id));
   };
@@ -74,7 +93,7 @@ export default function Card({ data }) {
   return (
     <div
       className={`mb-4 mx-4 rounded-xl ${
-        showBeam ? 'wrapper' : 'border border-gray-500/70'
+        isInProgress ? 'wrapper' : 'border border-gray-500/70'
       }`}
     >
       <div className="rounded-xl bg-white/5 p-4 text-white shadow-md">
@@ -130,18 +149,28 @@ export default function Card({ data }) {
                     );
                   })}
                 </ol>
+                {priority ? <p className={`${priorityClasses[priority]}`}>{priority}</p> : null}
               </>
             ) : null}
           </div>
           <div className="flex justify-between mt-2 items-center">
             <div className="flex items-center gap-3">
-              {showBeam ? (
-                <RefreshCw className="h-4 w-4 animate-slow-spin text-[#00d1ff] opacity-70 drop-shadow-[0_0_8px_rgba(0,209,255,0.8)]" />
-              ) : null}
-              {showDoneIcon ? (
-                <CircleCheckBig className="h-4 w-4 text-[#00ff9f] drop-shadow-[0_0_10px_rgba(0,255,159,0.85)]" />
-              ) : null}
-              {priority ? <p className={`${priorityClasses[priority]}`}>{priority}</p> : null}
+            {(!isInProgress && !isDone) && ( <button onClick={toggleStatus} className='group transition-transform active:scale-95'>
+              
+                <Circle className="h-5 w-5 text-gray-500 group-hover:text-blue-400 transition-colors shadow-[0_0_5px_rgba(255,255,255,0.1)]" />
+              
+              </button>)}
+              {isInProgress && ( <button onClick={toggleStatus} className='group transition-transform active:scale-95'>
+              
+              <RefreshCw className="h-5 w-5 animate-slow-spin text-[#00d1ff] drop-shadow-[0_0_8px_rgba(0,209,255,0.8)]" />
+            
+            </button>)}
+            {!isDone && ( <button onClick={toggleStatus} className='group transition-transform active:scale-95'>
+              
+              <CircleCheckBig className="h-5 w-5 text-[#00ff9f] drop-shadow-[0_0_10px_rgba(0,255,159,0.85)]" />
+            
+            </button>)}
+        
             </div>
             <div className="flex justify-end space-x-2'">
               <button

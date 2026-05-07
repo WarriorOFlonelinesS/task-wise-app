@@ -30,7 +30,7 @@ export async function deleteTasks(id: string, token: string) {
 }
 
 export async function updateTasks(
-  data: { id: string; title: string; description: string },
+  data: { id: string; title: string; description: string, status:string },
   token: string,
 ) {
   const response = await axios.put(

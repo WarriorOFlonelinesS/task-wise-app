@@ -22,6 +22,7 @@ class TaskService
             'user_id' => auth()->user()->id,
             'title' => $taskDTO->title,
             'description' => $taskDTO->description,
+            'status' => $taskDTO->status,
         ]);
     }
 
@@ -48,8 +49,8 @@ class TaskService
         $task->update([
             'title' => $taskDTO->title,
             'description' => $taskDTO->description,
+            'status' => $taskDTO->status,
         ]);
-
         return $task;
     }
 
