@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginRequest } from '../../features/auth/authSlice';
-import { useNavigate } from 'react-router-dom';
 import { RootState } from '../../store';
 import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline';
 import Button from '../Common/Button';
 
 export default function LoginForm() {
-  const navigate = useNavigate();
+  const buttonStyles = "w-full bg-red-800 px-2 py-1 my-2 w-32 flex justify-center backdrop-blur-md bg-white/5 px-3 py-1 backdrop-blur-xs rounded-md border duration-500 ease-in-out border-gray-500/70 hover:bg-[#00d1ff] hover:text-black hover:shadow-[0_0_25px_rgba(0,209,255,0.4)]  transition-colors";
   const dispatch = useDispatch();
   const [hiddenPassword, setHidden] = useState(false);
   const [type, setType] = useState('password');
@@ -80,13 +79,7 @@ export default function LoginForm() {
             </span>
           </div>
 
-          <button
-            type="submit"
-            disabled={loading}
-            className="w-full backdrop-blur-md bg-white/5 px-6 py-3 backdrop-blur-xs rounded-md border border-gray-500/70 hover:bg-[#00d1ff] hover:text-black hover:shadow-[0_0_25px_rgba(0,209,255,0.4)] transition-colors"
-          >
-            {loading ? 'Loading...' : 'Login'}
-          </button>
+          <Button label={loading ? 'Loading': 'Login'} styles={buttonStyles} to='/'/>
           <div className="p-5 text-center flex justify-center flex-col">
             <div className="justify-center flex items-center">
               <input
@@ -99,7 +92,7 @@ export default function LoginForm() {
               Remember me
             </div>
             <p className="p-5 ">if you don't have an account</p>
-            <Button link={'/signup'} label={'Sign up'} icon={''} />
+            <Button  label={'Sign up'} styles={buttonStyles} to='/signup' />
 
             {error && <p className="text-red-600 text-sm text-center">{error}</p>}
           </div>

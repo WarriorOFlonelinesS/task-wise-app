@@ -1,7 +1,7 @@
 import { Icon } from 'lucide-react';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-export const Button = ({ onClick= () => {}, label='', icon, styles, to='' }) => {
+export const Button = ({ onClick= () => {}, label='', icon='', styles, to='' }) => {
   const navigate = useNavigate();
 
   const handleClick = () => {

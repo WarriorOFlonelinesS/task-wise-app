@@ -4,8 +4,10 @@ import { registerRequest } from '../../features/auth/authSlice';
 import { useNavigate } from 'react-router-dom';
 import { RootState } from '../../store';
 import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline';
+import Button from '../Common/Button';
 
 export default function RegisterForm() {
+  const buttonStyles = "w-full bg-red-800 px-2 py-1 my-2 w-32 flex justify-center backdrop-blur-md bg-white/5 px-3 py-1 backdrop-blur-xs rounded-md border duration-500 ease-in-out border-gray-500/70 hover:bg-[#00d1ff] hover:text-black hover:shadow-[0_0_25px_rgba(0,209,255,0.4)]  transition-colors";
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { loading, error, user } = useSelector((state: RootState) => state.auth);
@@ -142,13 +144,8 @@ export default function RegisterForm() {
         </div>
 
         <p className="text-center font-thin italic py-2">Minimum 8 symbols, maximum 225</p>
-        <button
-          type="submit"
-          disabled={loading}
-          className="w-full backdrop-blur-md bg-white/5 px-6 py-3 backdrop-blur-xs rounded-md border border-gray-300 hover:bg-[#00d1ff] hover:text-black hover:shadow-[0_0_25px_rgba(0,209,255,0.4)] transition-colors"
-        >
-          {loading ? 'Loading...' : 'Sign up'}
-        </button>
+        <Button label={'Sign up'} styles={buttonStyles} to='/signup'>
+        {loading ? 'Loading...' : 'Sign up'}</Button>
         {error && <p className="text-red-600 text-sm text-center">{error}</p>}
       </form>
     </div>
