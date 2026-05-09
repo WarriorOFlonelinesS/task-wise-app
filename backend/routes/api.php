@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\GeminiController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TaskController;
 use Illuminate\Support\Facades\Route;
 
@@ -17,9 +18,12 @@ Route::get('/', function () {
     ]);
 });
 
-Route::post('/register', [AuthController::class, 'register']);
-
-Route::post('/login', [AuthController::class, 'login'])->name('login');
+// Rate limited authentication routes
+Route::middleware('throttle:20,1')->group(function () {
+    Route::post('/register', [AuthController::class, 'register']);
+    Route::post('/login', [AuthController::class, 'login'])->name('login');
+    Route::post('/loginwithtoken', [AuthController::class, 'loginWithToken'])->name('loginWithToken');
+});
 
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
 
@@ -36,7 +40,12 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::put('/tasks/{id}', [TaskController::class, 'update']);
 
     Route::delete('/tasks/{id}', [TaskController::class, 'destroy']);
-    
-    Route::get('/ai/{id}', [GeminiController::class, 'analyzeData']);
-});
 
+    Route::get('/ai-analyse/{id}', [GeminiController::class, 'analyzeData']);
+
+    Route::get('/profile/{id}', [ProfileController::class, 'show']);
+
+    Route::put('/profile/{id}', [ProfileController::class, 'update']);
+
+    Route::delete('/profile/{id}', [ProfileController::class, 'destroy']);
+});

@@ -5,7 +5,6 @@ namespace App\Services;
 use App\DTO\TaskDTO;
 use App\Models\Task;
 use Illuminate\Http\Request;
-use Illuminate\Validation\ValidationException;
 
 class TaskService
 {
@@ -23,6 +22,7 @@ class TaskService
             'user_id' => auth()->user()->id,
             'title' => $taskDTO->title,
             'description' => $taskDTO->description,
+            'status' => $taskDTO->status,
         ]);
     }
 
@@ -30,7 +30,6 @@ class TaskService
     {
         return Task::where('user_id', auth()->user()->id)
             ->get();
-
     }
 
     public function showTask(string $id)
@@ -50,8 +49,8 @@ class TaskService
         $task->update([
             'title' => $taskDTO->title,
             'description' => $taskDTO->description,
+            'status' => $taskDTO->status,
         ]);
-
         return $task;
     }
 
@@ -88,24 +87,24 @@ class TaskService
         return $query->get();
     }
 
-    public function update(Request $request, $id)
-    {
-        try {
-            $validData = $this->validationService->validateUpdate($request->all());
-            $task = Task::findOrFail($id);
-            $task->update($validData);
+    // public function update(Request $request, $id)
+    // {
+    //     try {
+    //         $validData = $this->validationService->validateUpdate($request->all());
+    //         $task = Task::findOrFail($id);
+    //         $task->update($validData);
 
-            return response()->json($task, 200);
-        } catch (ValidationException $e) {
-            return response()->json([
-                'errors' => $e->errors(),
-            ], 422);
-        } catch (\Exception $e) {
-            \Log::error('Error updating task: '.$e->getMessage());
+    //         return response()->json($task, 200);
+    //     } catch (ValidationException $e) {
+    //         return response()->json([
+    //             'errors' => $e->errors(),
+    //         ], 422);
+    //     } catch (\Exception $e) {
+    //         \Log::error('Error updating task: '.$e->getMessage());
 
-            return response()->json([
-                'error' => 'Internal server error',
-            ], 500);
-        }
-    }
+    //         return response()->json([
+    //             'error' => 'Internal server error',
+    //         ], 500);
+    //     }
+    // }
 }

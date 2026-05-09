@@ -13,6 +13,12 @@ class Task extends Model
         'user_id',
         'title',
         'description',
+        'status',
+        'highlights'
+    ];
+    
+    protected $casts = [
+        'highlights' => 'array',
     ];
 
     public function user()

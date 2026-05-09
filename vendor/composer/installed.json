@@ -1,6 +1,7 @@
 {
   "packages": [
     {
+<<<<<<< HEAD
       "name": "carbonphp/carbon-doctrine-types",
       "version": "3.2.0",
       "version_normalized": "3.2.0.0",
@@ -324,6 +325,8 @@
       "install-path": "../fruitcake/php-cors"
     },
     {
+=======
+>>>>>>> frontend/profile
       "name": "google-gemini-php/client",
       "version": "2.5.0",
       "version_normalized": "2.5.0.0",
@@ -729,6 +732,7 @@
       "install-path": "../guzzlehttp/psr7"
     },
     {
+<<<<<<< HEAD
       "name": "illuminate/collections",
       "version": "v9.52.16",
       "version_normalized": "9.52.16.0",
@@ -1010,6 +1014,8 @@
       "install-path": "../illuminate/support"
     },
     {
+=======
+>>>>>>> frontend/profile
       "name": "laravel/pint",
       "version": "v1.23.0",
       "version_normalized": "1.23.0.0",
@@ -1082,6 +1088,7 @@
       "install-path": "../laravel/pint"
     },
     {
+<<<<<<< HEAD
       "name": "nesbot/carbon",
       "version": "2.73.0",
       "version_normalized": "2.73.0.0",
@@ -1192,6 +1199,8 @@
       "install-path": "../nesbot/carbon"
     },
     {
+=======
+>>>>>>> frontend/profile
       "name": "php-http/discovery",
       "version": "1.20.0",
       "version_normalized": "1.20.0.0",
@@ -1274,6 +1283,7 @@
       "install-path": "../php-http/discovery"
     },
     {
+<<<<<<< HEAD
       "name": "psr/clock",
       "version": "1.0.0",
       "version_normalized": "1.0.0.0",
@@ -1381,6 +1391,8 @@
       "install-path": "../psr/container"
     },
     {
+=======
+>>>>>>> frontend/profile
       "name": "psr/http-client",
       "version": "1.0.3",
       "version_normalized": "1.0.3.0",
@@ -1550,6 +1562,7 @@
       "install-path": "../psr/http-message"
     },
     {
+<<<<<<< HEAD
       "name": "psr/simple-cache",
       "version": "3.0.0",
       "version_normalized": "3.0.0.0",
@@ -1604,6 +1617,8 @@
       "install-path": "../psr/simple-cache"
     },
     {
+=======
+>>>>>>> frontend/profile
       "name": "ralouphie/getallheaders",
       "version": "3.0.3",
       "version_normalized": "3.0.3.0",
@@ -1719,6 +1734,7 @@
         }
       ],
       "install-path": "../symfony/deprecation-contracts"
+<<<<<<< HEAD
     },
     {
       "name": "symfony/http-foundation",
@@ -2303,6 +2319,8 @@
         }
       ],
       "install-path": "../voku/portable-ascii"
+=======
+>>>>>>> frontend/profile
     }
   ],
   "dev": true,

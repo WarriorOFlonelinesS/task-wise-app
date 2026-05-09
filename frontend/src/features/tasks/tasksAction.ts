@@ -15,14 +15,29 @@ export const postTaskSuccess = createAction<Task>('tasks/postTasksRequest');
 
 export const postTasksFailed = createAction<string>('tasks/postTasksRequest');
 
-export const deleteTaskRequest = createAction<{ id: string }>('tasks/deleteTasksRequest');
+export const deleteTasksRequest = createAction<string>('tasks/deleteTasksRequest');
 
-export const deleteTaskSuccess = createAction<string>('tasks/deleteTasksRequest');
+export const deleteTasksSuccess = createAction<string>('tasks/deleteTasksSuccess');
 
-export const deleteTasksFailed = createAction<string>('tasks/deleteTasksRequest');
+export const deleteTasksFailed = createAction<string>('tasks/deleteTasksFailed');
 
-export const updateTaskRequest = createAction<{ id: string }>('tasks/deleteTasksRequest');
+export const updateTasksRequest = createAction<{ id: string; title: string; description: string }>(
+  'tasks/updateTasksRequest',
+);
 
-export const updateTaskSuccess = createAction<string>('tasks/deleteTasksRequest');
+export const updateTasksSuccess = createAction<Task>('tasks/updateTasksSuccess');
 
-export const updateTasksFailed = createAction<string>('tasks/deleteTasksRequest');
+export const updateTasksFailed = createAction<string>('tasks/updateTasksFailed');
+
+export const taskAnalyzeRequest = createAction<{
+  id: string;
+  token: string;
+}>('tasks/taskAnalyzeRequest');
+
+export const taskAnalyzeSuccess = createAction<{
+  content: string | null;
+}>('tasks/taskAnalyzeSuccess');
+
+export const taskAnalyzeFailure = createAction<string>('tasks/taskAnalyzeFailure');
+
+export const tasksSortBySmartScore = createAction<string>('tasks/tasksSortBySmartScore');

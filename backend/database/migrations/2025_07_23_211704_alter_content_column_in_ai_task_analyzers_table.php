@@ -15,7 +15,7 @@ return new class extends Migration
             $table->text('content')->change();
         });
     }
-    
+
     public function down()
     {
         Schema::table('ai_task_analyzers', function (Blueprint $table) {

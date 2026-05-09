@@ -1,6 +1,8 @@
 {
   "dependencies": {
-    "react-router-dom": "^7.6.3"
+    "nanoid": "^5.1.9",
+    "react-router-dom": "^7.6.3",
+    "react-speech-recognition": "^4.0.1"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.21",

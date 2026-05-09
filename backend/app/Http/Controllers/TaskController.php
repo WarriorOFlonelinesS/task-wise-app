@@ -3,10 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\DTO\TaskDTO;
+<<<<<<< HEAD
+=======
+use App\Services\GeminiService;
+>>>>>>> frontend/profile
 use App\Services\TaskService;
 use App\Services\TaskValidationService;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
+<<<<<<< HEAD
+=======
+use Illuminate\Support\Facades\Auth;
+>>>>>>> frontend/profile
 use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\ValidationException;
 
@@ -16,10 +24,20 @@ class TaskController extends Controller
 
     protected TaskService $taskService;
 
+<<<<<<< HEAD
     public function __construct(Request $request, TaskService $taskService)
     {
         $this->request = $request;
         $this->taskService = $taskService;
+=======
+    protected GeminiService $geminiService;
+
+    public function __construct(Request $request, TaskService $taskService, GeminiService $geminiService)
+    {
+        $this->request = $request;
+        $this->taskService = $taskService;
+        $this->geminiService = $geminiService;
+>>>>>>> frontend/profile
     }
 
     public function index()
@@ -27,9 +45,17 @@ class TaskController extends Controller
         try {
 
             $tasks = $this->taskService->showTasks();
+<<<<<<< HEAD
 
             return response()->json([
                 'tasks' => $tasks,
+=======
+            $analyzesOfTasks = $this->geminiService->showTasksAnalizes();
+
+            return response()->json([
+                'tasks' => $tasks,
+                'analyzesOfTasks' => $analyzesOfTasks,
+>>>>>>> frontend/profile
             ], 200);
         } catch (\Exception $e) {
             Log::error('Error getting task: '.$e->getMessage());
@@ -68,7 +94,11 @@ class TaskController extends Controller
     {
         try {
             $task = $this->taskService->showTask($id);
+<<<<<<< HEAD
             $userName = auth()->user()->name;
+=======
+            $userName = Auth::user()->name;
+>>>>>>> frontend/profile
 
             return response()->json([
                 'task' => $task,

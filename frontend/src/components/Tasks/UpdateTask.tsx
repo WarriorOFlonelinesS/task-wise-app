@@ -6,10 +6,10 @@ export default function UpdateTask({ onClose, updateToDo, data }) {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-md">
-      <div className="relative rounded-lg  w-full max-w-md p-8 mx-4">
+      <div className="relative rounded-lg  w-full max-w-md p-8 mx-4 border border-white">
         <button
           className="absolute top-3 right-3 text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 text-2xl font-bold focus:outline-none"
-          onClick={()=>onClose()}
+          onClick={() => onClose()}
           aria-label="Close"
         >
           &times;
@@ -33,7 +33,7 @@ export default function UpdateTask({ onClose, updateToDo, data }) {
         />
         <button
           title="Add new task"
-          className="backdrop-blur-md bg-white/5 p-2 backdrop-blur-xs rounded-md border border-gray-300 hover:bg-gray-100 transition-colors flex items-center gap-2"
+          className="w-full py-2 bg-transparent border border-[#00ff9f] text-[#00ff9f] uppercase font-mono tracking-tighter rounded-sm transition-all duration-300 hover:bg-[#00ff9f] hover:text-black hover:shadow-[0_0_15px_rgba(0,255,159,0.5)] disabled:opacity-20 disabled:grayscale disabled:border-white/20 disabled:text-white"
           onClick={() => {
             updateToDo(data.id, title, description);
             onClose();

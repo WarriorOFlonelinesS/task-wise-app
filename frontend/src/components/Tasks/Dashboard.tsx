@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { UserIcon } from '@heroicons/react/24/outline';
+
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store';
-
 import type { Task } from '../../features/tasks/type';
 import Card from './Card';
 import AddTask from './AddTask';
-import { postTasksRequest, deleteTasksRequest, updateTasksRequest } from '../../features/tasks/tasksSlice';
+import { postTasksRequest } from '../../features/tasks/tasksSlice';
 import { getTasksRequest } from '../../features/tasks/tasksAction';
+import { selectSortedTasks } from '../../features/tasks/selectors/selectSortedTasks';
+import Magic from './Magic';
+import { Plus, SortAscIcon, SortDescIcon, UserRound } from 'lucide-react';
+import Button from '../Common/Button';
 
 export default function Dashboard() {
   const tasks = useSelector((state: RootState) => state.tasks.tasks);
@@ -19,8 +22,14 @@ export default function Dashboard() {
   const navigate = useNavigate();
   const [listTasks, setTasks] = useState<Task[]>([]);
   const [isOpen, setIsOpen] = useState(false);
-
+  const [load, setIsLoaded] = useState(false);
+  const [showLoader, setShowLoader] = useState(true);
+  const [isSorted, setIsSorted] = useState(false);
+  const sortedTasksList = useSelector(selectSortedTasks);
+  const buttonStyles =
+    ' backdrop-blur-md bg-white/5 px-3 py-1 backdrop-blur-xs rounded-md border duration-500 ease-in-out border-gray-500/70 hover:bg-[#00d1ff] hover:text-black hover:shadow-[0_0_25px_rgba(0,209,255,0.4)]  transition-colors';
   const addToDo = (title, description) => {
+    setIsSorted(false);
     dispatch(
       postTasksRequest({
         title: title,
@@ -28,7 +37,23 @@ export default function Dashboard() {
       }),
     );
   };
- 
+
+  const sortTasks = () => {
+    if (isSorted) {
+      setTasks(tasks || []);
+      setIsSorted(false);
+    } else {
+      setTasks(sortedTasksList);
+      setIsSorted(true);
+    }
+
+    setIsLoaded(true);
+    const timer = setTimeout(() => {
+      setIsLoaded(false);
+      setTimeout(() => setShowLoader(false), 1000);
+    }, 5000);
+    return () => clearTimeout(timer);
+  };
 
   useEffect(() => {
     if (token) {
@@ -37,58 +62,55 @@ export default function Dashboard() {
   }, [dispatch, token]);
 
   useEffect(() => {
-    if (tasks) {
+    if (tasks && !load && !isSorted) {
       setTasks(tasks);
-    } else {
+    } else if (!tasks) {
       setTasks([]);
     }
-  }, [tasks]);
+  }, [tasks, load, isSorted]);
 
   const onClose = () => {
     setIsOpen(false);
   };
   return (
-    <div className="h-screen overflow-hidden w-full">
+    <div className="w-full min-h-screen ">
       {error && (
         <div className="bg-red-500 text-white px-4 py-2 rounded mb-4 text-center">{error}</div>
       )}
       {isOpen ? <AddTask onClose={onClose} addToDo={addToDo} /> : null}
-      <h1 className="text-3xl font-bold text-center mb-11 text-white">Task AI Manager</h1>
-      <div className="h-screen w-full overflow-y-auto no-scrollbar max-w-md mx-auto">
-        {listTasks.length ? (
-          listTasks.map((task, index) => <Card data={task} key={task.id || `task-${index}`} onClose={onClose}/>)
+      <h1 className="text-3xl font-bold text-center mb-11 text-white">Dashboard</h1>
+      <div className="max-h-[80%] w-full overflow-y-auto no-scrollbar max-w-md mx-auto">
+        {load ? (
+          <Magic
+            className={`fixed inset-0 flex items-center justify-center transition-opacity duration-1000 z-50
+            ${load ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}
+          `}
+          />
+        ) : listTasks.length ? (
+          listTasks.map((task, index) => <Card data={task} key={task.id || `task-${index}`} />)
         ) : (
-          <h2 className='text-center'>You don't have tasks</h2>
+          <h2 className="text-center">You don't have tasks</h2>
         )}
       </div>
 
       <div className="flex justify-center">
-        <div className="w-3/6 fixed bottom-0 left-1/2 transform -translate-x-1/2 backdrop-blur-md bg-white/5 px-6 py-2 backdrop-blur-xs rounded-md border border-gray-300 flex items-center justify-around">
-          <button
-            title="Add new task"
-            className="backdrop-blur-md bg-white/5 p-0.5 backdrop-blur-xs rounded-md border border-gray-300 hover:bg-gray-100 transition-colors flex items-center gap-2"
+        <div className="w-3/4 fixed bottom-0 left-1/2 transform -translate-x-1/2 backdrop-blur-md  px-6 py-2 backdrop-blur-xs rounded-md shadow-md border border-gray-500/70 flex items-center justify-around">
+          <Button
             onClick={() => setIsOpen(true)}
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="size-6"
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-            </svg>
-          </button>
-          <button
-            title="Profile"
-            onClick={() => {
-              navigate('/profile');
-            }}
-            className="backdrop-blur-md bg-white/5 p-1 backdrop-blur-xs rounded-md border border-gray-300 hover:bg-gray-100 transition-colors flex items-center gap-2"
-          >
-            <UserIcon className="h-5 w-5" />
-          </button>
+            icon={<Plus className="h-9 w-9" />}
+            styles={buttonStyles}
+          />
+          <Button
+            onClick={sortTasks}
+            icon={<SortDescIcon className="h-9 w-9" />}
+            styles={buttonStyles}
+          />
+          <Button
+            label={''}
+            icon={<UserRound className="h-9 w-9" />}
+            styles={buttonStyles}
+            to="/profile"
+          />
         </div>
       </div>
     </div>

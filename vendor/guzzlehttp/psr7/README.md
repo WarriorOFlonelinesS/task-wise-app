@@ -7,13 +7,19 @@ functionality like query string parsing.
 ![CI](https://github.com/guzzle/psr7/workflows/CI/badge.svg)
 ![Static analysis](https://github.com/guzzle/psr7/workflows/Static%20analysis/badge.svg)
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> frontend/profile
 ## Features
 
 This package comes with a number of stream implementations and stream
 decorators.
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> frontend/profile
 ## Installation
 
 ```shell
@@ -22,11 +28,18 @@ composer require guzzlehttp/psr7
 
 ## Version Guidance
 
+<<<<<<< HEAD
 | Version | Status              | PHP Version  |
 |---------|---------------------|--------------|
 | 1.x     | EOL (2024-06-30)    | >=5.4,<8.2   |
 | 2.x     | Latest              | >=7.2.5,<8.5 |
 
+=======
+| Version | Status           | PHP Version  |
+| ------- | ---------------- | ------------ |
+| 1.x     | EOL (2024-06-30) | >=5.4,<8.2   |
+| 2.x     | Latest           | >=7.2.5,<8.5 |
+>>>>>>> frontend/profile
 
 ## AppendStream
 
@@ -46,7 +59,10 @@ $composed->addStream(Psr7\Utils::streamFor(' Above all listen to me'));
 echo $composed; // abc, 123. Above all listen to me.
 ```
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> frontend/profile
 ## BufferStream
 
 `GuzzleHttp\Psr7\BufferStream`
@@ -66,7 +82,10 @@ use GuzzleHttp\Psr7;
 $buffer = new Psr7\BufferStream(1024);
 ```
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> frontend/profile
 ## CachingStream
 
 The CachingStream is used to allow seeking over previously read bytes on
@@ -91,7 +110,10 @@ echo $stream->tell();
 // 0
 ```
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> frontend/profile
 ## DroppingStream
 
 `GuzzleHttp\Psr7\DroppingStream`
@@ -112,7 +134,10 @@ $dropping->write('01234567890123456789');
 echo $stream; // 0123456789
 ```
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> frontend/profile
 ## FnStream
 
 `GuzzleHttp\Psr7\FnStream`
@@ -139,7 +164,10 @@ $fnStream->rewind();
 // Outputs: About to rewind - rewound!
 ```
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> frontend/profile
 ## InflateStream
 
 `GuzzleHttp\Psr7\InflateStream`
@@ -150,7 +178,10 @@ This stream decorator converts the provided stream to a PHP stream resource,
 then appends the zlib.inflate filter. The stream is then converted back
 to a Guzzle stream resource to be used as a Guzzle stream.
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> frontend/profile
 ## LazyOpenStream
 
 `GuzzleHttp\Psr7\LazyOpenStream`
@@ -168,7 +199,10 @@ echo $stream->read(10);
 // The file is opened and read from only when needed.
 ```
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> frontend/profile
 ## LimitStream
 
 `GuzzleHttp\Psr7\LimitStream`
@@ -192,7 +226,10 @@ echo $stream->tell();
 // >>> 0
 ```
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> frontend/profile
 ## MultipartStream
 
 `GuzzleHttp\Psr7\MultipartStream`
@@ -200,7 +237,10 @@ echo $stream->tell();
 Stream that when read returns bytes for a streaming multipart or
 multipart/form-data stream.
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> frontend/profile
 ## NoSeekStream
 
 `GuzzleHttp\Psr7\NoSeekStream`
@@ -222,7 +262,10 @@ var_export($noSeek->read(3));
 // NULL
 ```
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> frontend/profile
 ## PumpStream
 
 `GuzzleHttp\Psr7\PumpStream`
@@ -236,7 +279,10 @@ returned by the provided callable is buffered internally until drained using
 the read() function of the PumpStream. The provided callable MUST return
 false when there is no more data to read.
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> frontend/profile
 ## Implementing stream decorators
 
 Creating a stream decorator is very easy thanks to the
@@ -300,7 +346,10 @@ $eofStream->read(3);
 // echoes "EOF!"
 ```
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> frontend/profile
 ## PHP StreamWrapper
 
 You can use the `GuzzleHttp\Psr7\StreamWrapper` class if you need to use a
@@ -317,12 +366,18 @@ $resource = StreamWrapper::getResource($stream);
 echo fread($resource, 6); // outputs hello!
 ```
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> frontend/profile
 # Static API
 
 There are various static methods available under the `GuzzleHttp\Psr7` namespace.
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> frontend/profile
 ## `GuzzleHttp\Psr7\Message::toString`
 
 `public static function toString(MessageInterface $message): string`
@@ -334,7 +389,10 @@ $request = new GuzzleHttp\Psr7\Request('GET', 'http://example.com');
 echo GuzzleHttp\Psr7\Message::toString($request);
 ```
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> frontend/profile
 ## `GuzzleHttp\Psr7\Message::bodySummary`
 
 `public static function bodySummary(MessageInterface $message, int $truncateAt = 120): string|null`
@@ -343,7 +401,10 @@ Get a short summary of the message body.
 
 Will return `null` if the response is not printable.
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> frontend/profile
 ## `GuzzleHttp\Psr7\Message::rewindBody`
 
 `public static function rewindBody(MessageInterface $message): void`
@@ -353,7 +414,10 @@ Attempts to rewind a message body and throws an exception on failure.
 The body of the message will only be rewound if a call to `tell()`
 returns a value other than `0`.
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> frontend/profile
 ## `GuzzleHttp\Psr7\Message::parseMessage`
 
 `public static function parseMessage(string $message): array`
@@ -364,28 +428,40 @@ The array contains the "start-line" key containing the start line of
 the message, "headers" key containing an associative array of header
 array values, and a "body" key containing the body of the message.
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> frontend/profile
 ## `GuzzleHttp\Psr7\Message::parseRequestUri`
 
 `public static function parseRequestUri(string $path, array $headers): string`
 
 Constructs a URI for an HTTP request message.
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> frontend/profile
 ## `GuzzleHttp\Psr7\Message::parseRequest`
 
 `public static function parseRequest(string $message): Request`
 
 Parses a request message string into a request object.
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> frontend/profile
 ## `GuzzleHttp\Psr7\Message::parseResponse`
 
 `public static function parseResponse(string $message): Response`
 
 Parses a response message string into a response object.
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> frontend/profile
 ## `GuzzleHttp\Psr7\Header::parse`
 
 `public static function parse(string|array $header): array`
@@ -395,7 +471,10 @@ array of associative arrays representing the header key value pair data
 of the header. When a parameter does not contain a value, but just
 contains a key, this function will inject a key with a '' string value.
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> frontend/profile
 ## `GuzzleHttp\Psr7\Header::splitList`
 
 `public static function splitList(string|string[] $header): string[]`
@@ -409,7 +488,10 @@ $knownEtags = Header::splitList($request->getHeader('if-none-match'));
 
 Example headers include `accept`, `cache-control` and `if-none-match`.
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> frontend/profile
 ## `GuzzleHttp\Psr7\Header::normalize` (deprecated)
 
 `public static function normalize(string|array $header): array`
@@ -421,7 +503,10 @@ documentation.
 Converts an array of header values that may contain comma separated
 headers into an array of headers with no comma separated values.
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> frontend/profile
 ## `GuzzleHttp\Psr7\Query::parse`
 
 `public static function parse(string $str, int|bool $urlEncoding = true): array`
@@ -433,7 +518,10 @@ value pair will become an array. This function does not parse nested
 PHP style arrays into an associative array (e.g., `foo[a]=1&foo[b]=2`
 will be parsed into `['foo[a]' => '1', 'foo[b]' => '2'])`.
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> frontend/profile
 ## `GuzzleHttp\Psr7\Query::build`
 
 `public static function build(array $params, int|false $encoding = PHP_QUERY_RFC3986, bool $treatBoolsAsInts = true): string`
@@ -444,14 +532,20 @@ This function can use the return value of `parse()` to build a query
 string. This function does not modify the provided keys when an array is
 encountered (like `http_build_query()` would).
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> frontend/profile
 ## `GuzzleHttp\Psr7\Utils::caselessRemove`
 
 `public static function caselessRemove(iterable<string> $keys, $keys, array $data): array`
 
 Remove the items given by the keys, case insensitively from the data.
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> frontend/profile
 ## `GuzzleHttp\Psr7\Utils::copyToStream`
 
 `public static function copyToStream(StreamInterface $source, StreamInterface $dest, int $maxLen = -1): void`
@@ -459,7 +553,10 @@ Remove the items given by the keys, case insensitively from the data.
 Copy the contents of a stream into another stream until the given number
 of bytes have been read.
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> frontend/profile
 ## `GuzzleHttp\Psr7\Utils::copyToString`
 
 `public static function copyToString(StreamInterface $stream, int $maxLen = -1): string`
@@ -467,7 +564,10 @@ of bytes have been read.
 Copy the contents of a stream into a string until the given number of
 bytes have been read.
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> frontend/profile
 ## `GuzzleHttp\Psr7\Utils::hash`
 
 `public static function hash(StreamInterface $stream, string $algo, bool $rawOutput = false): string`
@@ -477,7 +577,10 @@ Calculate a hash of a stream.
 This method reads the entire stream to calculate a rolling hash, based on
 PHP's `hash_init` functions.
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> frontend/profile
 ## `GuzzleHttp\Psr7\Utils::modifyRequest`
 
 `public static function modifyRequest(RequestInterface $request, array $changes): RequestInterface`
@@ -495,21 +598,30 @@ a message.
 - query: (string) Set the query string value of the URI.
 - version: (string) Set the protocol version.
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> frontend/profile
 ## `GuzzleHttp\Psr7\Utils::readLine`
 
 `public static function readLine(StreamInterface $stream, ?int $maxLength = null): string`
 
 Read a line from the stream up to the maximum allowed buffer length.
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> frontend/profile
 ## `GuzzleHttp\Psr7\Utils::redactUserInfo`
 
 `public static function redactUserInfo(UriInterface $uri): UriInterface`
 
 Redact the password in the user info part of a URI.
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> frontend/profile
 ## `GuzzleHttp\Psr7\Utils::streamFor`
 
 `public static function streamFor(resource|string|null|int|float|bool|StreamInterface|callable|\Iterator $resource = '', array $options = []): StreamInterface`
@@ -557,7 +669,10 @@ $generator = function ($bytes) {
 $stream = GuzzleHttp\Psr7\Utils::streamFor($generator(100));
 ```
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> frontend/profile
 ## `GuzzleHttp\Psr7\Utils::tryFopen`
 
 `public static function tryFopen(string $filename, string $mode): resource`
@@ -567,7 +682,10 @@ Safely opens a PHP stream resource using a filename.
 When fopen fails, PHP normally raises a warning. This function adds an
 error handler that checks for errors and throws an exception instead.
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> frontend/profile
 ## `GuzzleHttp\Psr7\Utils::tryGetContents`
 
 `public static function tryGetContents(resource $stream): string`
@@ -578,7 +696,10 @@ When stream_get_contents fails, PHP normally raises a warning. This
 function adds an error handler that checks for errors and throws an
 exception instead.
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> frontend/profile
 ## `GuzzleHttp\Psr7\Utils::uriFor`
 
 `public static function uriFor(string|UriInterface $uri): UriInterface`
@@ -589,25 +710,35 @@ This function accepts a string or UriInterface and returns a
 UriInterface for the given value. If the value is already a
 UriInterface, it is returned as-is.
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> frontend/profile
 ## `GuzzleHttp\Psr7\MimeType::fromFilename`
 
 `public static function fromFilename(string $filename): string|null`
 
 Determines the mimetype of a file by looking at its extension.
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> frontend/profile
 ## `GuzzleHttp\Psr7\MimeType::fromExtension`
 
 `public static function fromExtension(string $extension): string|null`
 
 Maps a file extensions to a mimetype.
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> frontend/profile
 ## Upgrading from Function API
 
 The static API was first introduced in 1.7.0, in order to mitigate problems with functions conflicting between global and local copies of the package. The function API was removed in 2.0.0. A migration table has been provided here for your convenience:
 
+<<<<<<< HEAD
 | Original Function | Replacement Method |
 |----------------|----------------|
 | `str` | `Message::toString` |
@@ -633,6 +764,32 @@ The static API was first introduced in 1.7.0, in order to mitigate problems with
 | `get_message_body_summary` | `Message::bodySummary` |
 | `_caseless_remove` | `Utils::caselessRemove` |
 
+=======
+| Original Function          | Replacement Method         |
+| -------------------------- | -------------------------- |
+| `str`                      | `Message::toString`        |
+| `uri_for`                  | `Utils::uriFor`            |
+| `stream_for`               | `Utils::streamFor`         |
+| `parse_header`             | `Header::parse`            |
+| `normalize_header`         | `Header::normalize`        |
+| `modify_request`           | `Utils::modifyRequest`     |
+| `rewind_body`              | `Message::rewindBody`      |
+| `try_fopen`                | `Utils::tryFopen`          |
+| `copy_to_string`           | `Utils::copyToString`      |
+| `copy_to_stream`           | `Utils::copyToStream`      |
+| `hash`                     | `Utils::hash`              |
+| `readline`                 | `Utils::readLine`          |
+| `parse_request`            | `Message::parseRequest`    |
+| `parse_response`           | `Message::parseResponse`   |
+| `parse_query`              | `Query::parse`             |
+| `build_query`              | `Query::build`             |
+| `mimetype_from_filename`   | `MimeType::fromFilename`   |
+| `mimetype_from_extension`  | `MimeType::fromExtension`  |
+| `_parse_message`           | `Message::parseMessage`    |
+| `_parse_request_uri`       | `Message::parseRequestUri` |
+| `get_message_body_summary` | `Message::bodySummary`     |
+| `_caseless_remove`         | `Utils::caselessRemove`    |
+>>>>>>> frontend/profile
 
 # Additional URI Methods
 
@@ -712,7 +869,10 @@ to be called manually but instead is used indirectly via `Psr\Http\Message\UriIn
 
 Creates a URI from a hash of [`parse_url`](https://www.php.net/manual/en/function.parse-url.php) components.
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> frontend/profile
 ### `GuzzleHttp\Psr7\Uri::withQueryValue`
 
 `public static function withQueryValue(UriInterface $uri, $key, $value): UriInterface`
@@ -800,6 +960,7 @@ of normalizations to apply. The following normalizations are available:
 
 - `UriNormalizer::PRESERVING_NORMALIZATIONS`
 
+<<<<<<< HEAD
     Default normalizations which only include the ones that preserve semantics.
 
 - `UriNormalizer::CAPITALIZE_PERCENT_ENCODING`
@@ -859,6 +1020,67 @@ of normalizations to apply. The following normalizations are available:
     of the URI.
 
     Example: `?lang=en&article=fred` → `?article=fred&lang=en`
+=======
+  Default normalizations which only include the ones that preserve semantics.
+
+- `UriNormalizer::CAPITALIZE_PERCENT_ENCODING`
+
+  All letters within a percent-encoding triplet (e.g., "%3A") are case-insensitive, and should be capitalized.
+
+  Example: `http://example.org/a%c2%b1b` → `http://example.org/a%C2%B1b`
+
+- `UriNormalizer::DECODE_UNRESERVED_CHARACTERS`
+
+  Decodes percent-encoded octets of unreserved characters. For consistency, percent-encoded octets in the ranges of
+  ALPHA (%41–%5A and %61–%7A), DIGIT (%30–%39), hyphen (%2D), period (%2E), underscore (%5F), or tilde (%7E) should
+  not be created by URI producers and, when found in a URI, should be decoded to their corresponding unreserved
+  characters by URI normalizers.
+
+  Example: `http://example.org/%7Eusern%61me/` → `http://example.org/~username/`
+
+- `UriNormalizer::CONVERT_EMPTY_PATH`
+
+  Converts the empty path to "/" for http and https URIs.
+
+  Example: `http://example.org` → `http://example.org/`
+
+- `UriNormalizer::REMOVE_DEFAULT_HOST`
+
+  Removes the default host of the given URI scheme from the URI. Only the "file" scheme defines the default host
+  "localhost". All of `file:/myfile`, `file:///myfile`, and `file://localhost/myfile` are equivalent according to
+  RFC 3986.
+
+  Example: `file://localhost/myfile` → `file:///myfile`
+
+- `UriNormalizer::REMOVE_DEFAULT_PORT`
+
+  Removes the default port of the given URI scheme from the URI.
+
+  Example: `http://example.org:80/` → `http://example.org/`
+
+- `UriNormalizer::REMOVE_DOT_SEGMENTS`
+
+  Removes unnecessary dot-segments. Dot-segments in relative-path references are not removed as it would
+  change the semantics of the URI reference.
+
+  Example: `http://example.org/../a/b/../c/./d.html` → `http://example.org/a/c/d.html`
+
+- `UriNormalizer::REMOVE_DUPLICATE_SLASHES`
+
+  Paths which include two or more adjacent slashes are converted to one. Webservers usually ignore duplicate slashes
+  and treat those URIs equivalent. But in theory those URIs do not need to be equivalent. So this normalization
+  may change the semantics. Encoded slashes (%2F) are not removed.
+
+  Example: `http://example.org//foo///bar.html` → `http://example.org/foo/bar.html`
+
+- `UriNormalizer::SORT_QUERY_PARAMETERS`
+
+  Sort query parameters with their values in alphabetical order. However, the order of parameters in a URI may be
+  significant (this is not defined by the standard). So this normalization is not safe and may change the semantics
+  of the URI.
+
+  Example: `?lang=en&article=fred` → `?article=fred&lang=en`
+>>>>>>> frontend/profile
 
 ### `GuzzleHttp\Psr7\UriNormalizer::isEquivalent`
 
@@ -869,17 +1091,26 @@ Whether two URIs can be considered equivalent. Both URIs are normalized automati
 This of course assumes they will be resolved against the same base URI. If this is not the case, determination of
 equivalence or difference of relative references does not mean anything.
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> frontend/profile
 ## Security
 
 If you discover a security vulnerability within this package, please send an email to security@tidelift.com. All security vulnerabilities will be promptly addressed. Please do not disclose security-related issues publicly until a fix has been announced. Please see [Security Policy](https://github.com/guzzle/psr7/security/policy) for more information.
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> frontend/profile
 ## License
 
 Guzzle is made available under the MIT License (MIT). Please see [License File](LICENSE) for more information.
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> frontend/profile
 ## For Enterprise
 
 Available as part of the Tidelift Subscription

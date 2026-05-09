@@ -254,14 +254,20 @@ Do not use 1.5.1.
 
 - For BC reasons, the old `Http\Discovery\NotFoundException` (extending the new exception) will be thrown until version 2.0
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> frontend/profile
 ## 0.9.1 - 2016-06-28
 
 ### Changed
 
 - Dropping PHP 5.4 support because we use the ::class constant.
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> frontend/profile
 ## 0.9.0 - 2016-06-25
 
 ### Added
@@ -274,14 +280,20 @@ Do not use 1.5.1.
 - Improved exceptions
 - **[BC] `NotFoundException` moved to `Http\Discovery\Exception\NotFoundException`**
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> frontend/profile
 ## 0.8.0 - 2016-02-11
 
 ### Changed
 
 - Puli composer plugin must be installed separately
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> frontend/profile
 ## 0.7.0 - 2016-01-15
 
 ### Added
@@ -298,35 +310,50 @@ Do not use 1.5.1.
 
 - Puli CLI dependency
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> frontend/profile
 ## 0.6.4 - 2016-01-07
 
 ### Fixed
 
 - Puli [not working](https://twitter.com/PuliPHP/status/685132540588507137) with the latest json-schema
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> frontend/profile
 ## 0.6.3 - 2016-01-04
 
 ### Changed
 
 - Adjust Puli dependencies
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> frontend/profile
 ## 0.6.2 - 2016-01-04
 
 ### Changed
 
 - Make Puli CLI a requirement
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> frontend/profile
 ## 0.6.1 - 2016-01-03
 
 ### Changed
 
 - More flexible Puli requirement
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> frontend/profile
 ## 0.6.0 - 2015-12-30
 
 ### Changed
@@ -334,14 +361,20 @@ Do not use 1.5.1.
 - Use [Puli](http://puli.io) for discovery
 - Improved exception messages
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> frontend/profile
 ## 0.5.0 - 2015-12-25
 
 ### Changed
 
 - Updated message factory dependency (php-http/message)
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> frontend/profile
 ## 0.4.0 - 2015-12-17
 
 ### Added
@@ -352,7 +385,10 @@ Do not use 1.5.1.
 
 - Message factories (moved to php-http/utils)
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> frontend/profile
 ## 0.3.0 - 2015-11-18
 
 ### Added
@@ -370,21 +406,30 @@ Do not use 1.5.1.
 
 - Improved docblocks for API documentation generation
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> frontend/profile
 ## 0.2.0 - 2015-10-31
 
 ### Changed
 
 - Renamed AdapterDiscovery to ClientDiscovery
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> frontend/profile
 ## 0.1.1 - 2015-06-13
 
 ### Fixed
 
 - Bad HTTP Adapter class name for Guzzle 5
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> frontend/profile
 ## 0.1.0 - 2015-06-12
 
 ### Added

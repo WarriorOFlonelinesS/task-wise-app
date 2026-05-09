@@ -27,7 +27,7 @@ class AuthController extends Controller
             $result = $this->authService->createUser($dto);
             $user = $result['user'];
             $token = $result['token'];
-            
+
             return response()->json([
                 'user' => $user,
                 'token' => $token,
@@ -35,10 +35,12 @@ class AuthController extends Controller
             ], 201);
         } catch (ValidationException $e) {
             return response()->json([
-                'errors' => $e->errors(),
+                'error' => 'Invalid input or internal error',
+                'message' => $e->getMessage(),
             ], 422);
         } catch (\Exception $e) {
             Log::error('Registration error: '.$e->getMessage());
+
             return response()->json([
                 'error' => 'Invalid input or internal error',
                 'message' => $e->getMessage(),
@@ -50,6 +52,7 @@ class AuthController extends Controller
     {
         try {
             $validData = $this->validation->validateLogin($this->request->all());
+
             $dto = new UserDTO($validData);
             $result = $this->authService->loginUser($dto);
             $user = $result['user'];
@@ -64,13 +67,45 @@ class AuthController extends Controller
             Log::error('Login authentication error: '.$e->getMessage());
 
             return response()->json([
-                'error' => 'Invalid input or internal error',
+                'error' => 'Wrong email or password',
+                'message' => $e->getMessage(),
             ], 401);
         } catch (\Exception $e) {
             Log::error('Login error: '.$e->getMessage());
 
             return response()->json([
-                'error' => 'Invalid input or internal error',
+                'error' => 'Login authentication error:',
+                'message' => $e->getMessage(),
+            ], 401);
+        }
+    }
+
+    public function loginWithToken()
+    {
+        try {
+            $validData = $this->validation->validateToken($this->request->all());
+            $dto = new UserDTO($validData);
+            $result = $this->authService->loginUserWithToken($dto);
+            $user = $result['user'];
+            $token = $result['token'];
+
+            return response()->json([
+                'user' => $user,
+                'token' => $token,
+                'message' => 'Welcome!',
+            ], 200);
+        } catch (AuthenticationException $e) {
+            Log::error('Login authentication error: '.$e->getMessage());
+
+            return response()->json([
+                'error' => 'Wrong email or password',
+                'message' => $e->getMessage(),
+            ], 401);
+        } catch (\Exception $e) {
+            Log::error('Login error: '.$e->getMessage());
+
+            return response()->json([
+                'error' => 'Login authentication error:',
                 'message' => $e->getMessage(),
             ], 401);
         }

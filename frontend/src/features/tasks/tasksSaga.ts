@@ -12,15 +12,17 @@ import {
   deleteTasksFailure,
   updateTasksSuccess,
   updateTasksFailure,
-  updateTasksRequest,
+  taskAnalyzeRequest,
 } from './tasksSlice';
+import { taskAnalyzeFailure, taskAnalyzeSuccess, updateTasksRequest } from './tasksAction';
+import { handleErrors } from '../../helpers/handleErrors';
 
 function* getTasksSaga(action: ReturnType<typeof getTasksRequest>) {
   try {
     const data = yield call(tasksApi.getTasks, action.payload);
     yield put(getTasksSuccess(data));
   } catch (e: any) {
-    yield put(getTasksFailure(e.message));
+    yield put(getTasksFailure(handleErrors(e)));
   }
 }
 
@@ -34,11 +36,11 @@ function* postTaskSaga(action: ReturnType<typeof postTasksRequest>) {
     const data = yield call(tasksApi.postTasks, action.payload, token);
     yield put(postTasksSuccess(data));
   } catch (e: any) {
-    yield put(postTasksFailure(e.message));
+    yield put(postTasksFailure(handleErrors(e)));
   }
 }
 
-function* deleteTaskSaga(action: ReturnType<typeof postTasksRequest>) {
+function* deleteTaskSaga(action: ReturnType<typeof deleteTasksRequest>) {
   const token = yield select((state) => state.auth.token);
   if (!token) {
     yield put(deleteTasksFailure('No auth token found'));
@@ -48,7 +50,7 @@ function* deleteTaskSaga(action: ReturnType<typeof postTasksRequest>) {
     yield call(tasksApi.deleteTasks, action.payload, token);
     yield put(deleteTasksSuccess(action.payload));
   } catch (e: any) {
-    yield put(deleteTasksFailure(e.message));
+    yield put(deleteTasksFailure(handleErrors(e)));
   }
 }
 
@@ -60,11 +62,22 @@ function* updateTaskSaga(action: ReturnType<typeof updateTasksRequest>) {
   }
   try {
     const data = yield call(tasksApi.updateTasks, action.payload, token);
-    // If API returns the updated task directly, use it; otherwise use the payload
     const updatedTask = data.task || data || action.payload;
     yield put(updateTasksSuccess(updatedTask));
   } catch (e: any) {
-    yield put(updateTasksFailure(e.message));
+    yield put(updateTasksFailure(handleErrors(e)));
+  }
+}
+
+function* taskAnalyzeSaga(action: ReturnType<typeof taskAnalyzeRequest>) {
+  try {
+    const { id, token } = action.payload;
+
+    const data = yield call(tasksApi.taskAnalyze, id, token);
+
+    yield put(taskAnalyzeSuccess(data));
+  } catch (e: any) {
+    yield put(taskAnalyzeFailure(handleErrors(e)));
   }
 }
 
@@ -73,4 +86,5 @@ export function* tasksSaga() {
   yield takeEvery(postTasksRequest.type, postTaskSaga);
   yield takeEvery(deleteTasksRequest.type, deleteTaskSaga);
   yield takeEvery(updateTasksRequest.type, updateTaskSaga);
+  yield takeEvery(taskAnalyzeRequest.type, taskAnalyzeSaga);
 }

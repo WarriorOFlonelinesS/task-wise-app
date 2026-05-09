@@ -4,6 +4,7 @@ import SignUpPage from './pages/SignUpPage';
 import React from 'react';
 
 import ProfilePage from './pages/ProfilePage';
+import StatisticPage from './pages/StatisticPage';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/statistic" element={<StatisticPage />} />
       </Routes>
     </BrowserRouter>
   );

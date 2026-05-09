@@ -57,3 +57,7 @@ Thumbs.db
 .vscode/
 *.swp
 *.swo 
+vendor
+/node_modules
+/.vite
+/dist

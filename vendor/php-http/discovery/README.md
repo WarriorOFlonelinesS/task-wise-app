@@ -9,16 +9,26 @@
 
 **This library provides auto-discovery and auto-installation of well-known PSR-17, PSR-18 and HTTPlug implementations.**
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> frontend/profile
 ## Install
 
 Via Composer
 
+<<<<<<< HEAD
 ``` bash
 composer require php-http/discovery
 ```
 
 
+=======
+```bash
+composer require php-http/discovery
+```
+
+>>>>>>> frontend/profile
 ## Usage as a library author
 
 Please see the [official documentation](http://php-http.readthedocs.org/en/latest/discovery.html).
@@ -64,7 +74,10 @@ $response = $client->sendRequest($request);
 Internally, this code will use whatever PSR-7, PSR-17 and PSR-18 implementations
 that your users have installed.
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> frontend/profile
 ## Usage as a library user
 
 If you use a library/SDK that requires `php-http/discovery`, you can configure
@@ -83,11 +96,19 @@ This will update your `composer.json` file to add the following configuration:
 
 ```json
 {
+<<<<<<< HEAD
     "extra": {
         "discovery": {
             "psr/http-factory-implementation": "GuzzleHttp\\Psr7\\HttpFactory"
         }
     }
+=======
+  "extra": {
+    "discovery": {
+      "psr/http-factory-implementation": "GuzzleHttp\\Psr7\\HttpFactory"
+    }
+  }
+>>>>>>> frontend/profile
 }
 ```
 
@@ -99,6 +120,7 @@ composer config allow-plugins.php-http/discovery true
 composer install
 ```
 
+<<<<<<< HEAD
 
 ## Testing
 
@@ -107,16 +129,30 @@ composer test
 ```
 
 
+=======
+## Testing
+
+```bash
+composer test
+```
+
+>>>>>>> frontend/profile
 ## Contributing
 
 Please see our [contributing guide](http://docs.php-http.org/en/latest/development/contributing.html).
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> frontend/profile
 ## Security
 
 If you discover any security related issues, please contact us at [security@php-http.org](mailto:security@php-http.org).
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> frontend/profile
 ## License
 
 The MIT License (MIT). Please see [License File](LICENSE) for more information.

@@ -1,9 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Task, TasksState } from './type';
-import { act } from 'react';
 
 const initialState: TasksState = {
   tasks: null,
+  taskAnalyze: [],
   token: null,
   loading: false,
   error: null,
@@ -27,11 +27,13 @@ const tasksSlice = createSlice({
       state,
       action: PayloadAction<{
         tasks: Task[];
+        analyzesOfTasks: any[];
       }>,
     ) {
       state.loading = false;
       state.error = null;
       state.tasks = action.payload.tasks;
+      state.taskAnalyze = action.payload.analyzesOfTasks;
     },
     getTasksFailure(state, action: PayloadAction<string>) {
       state.error = action.payload;
@@ -46,7 +48,6 @@ const tasksSlice = createSlice({
       state.error = null;
     },
     postTasksSuccess(state, action: PayloadAction<{ task: Task }>) {
-
       if (state.tasks) {
         state.tasks.push(action.payload.task);
       } else {
@@ -60,27 +61,67 @@ const tasksSlice = createSlice({
       state.error = null;
     },
     deleteTasksSuccess(state, action: PayloadAction<string>) {
-
       if (state.tasks) {
         state.tasks = state.tasks.filter((task) => task.id !== action.payload);
+      }
+
+      if (state.taskAnalyze) {
+        state.taskAnalyze = state.taskAnalyze.filter(
+          (analysis) => analysis.task_id !== action.payload,
+        );
       }
     },
     deleteTasksFailure(state, action: PayloadAction<string>) {
       state.error = action.payload;
     },
-    updateTasksRequest(state, action: PayloadAction<{id:string, title:string, description: string}>) {
+    updateTasksRequest(
+      state,
+      action: PayloadAction<{ id: string; title: string; description: string; status: string }>,
+    ) {
+      console.log(action.payload);
       state.error = null;
     },
     updateTasksSuccess(state, action: PayloadAction<Task>) {
-      console.log(action.payload.id)
       if (state.tasks) {
-        const index = state.tasks.findIndex(task => task.id === action.payload.id);
-        if(index !== -1){
+        const index = state.tasks.findIndex((task) => task.id === action.payload.id);
+
+        if (index !== -1) {
           state.tasks[index] = action.payload;
         }
       }
     },
     updateTasksFailure(state, action: PayloadAction<string>) {
+      state.error = action.payload;
+    },
+    taskAnalyzeRequest(
+      state,
+      action: PayloadAction<{
+        id: string;
+        token: string;
+      }>,
+    ) {
+      state.loading = true;
+      state.error = null;
+    },
+    taskAnalyzeSuccess(state, action: PayloadAction<any>) {
+      state.loading = false;
+      state.error = null;
+      if (state.taskAnalyze) {
+        const existingIndex = state.taskAnalyze.findIndex(
+          (item) => item.task_id === action.payload.task_id,
+        );
+        if (existingIndex !== -1) {
+          state.taskAnalyze[existingIndex] = action.payload;
+        } else {
+          state.taskAnalyze.push(action.payload);
+        }
+      } else {
+        state.taskAnalyze = [action.payload];
+      }
+    },
+
+    taskAnalyzeFailure(state, action: PayloadAction<string>) {
+      state.loading = false;
       state.error = action.payload;
     },
   },
@@ -99,5 +140,9 @@ export const {
   updateTasksRequest,
   updateTasksSuccess,
   updateTasksFailure,
+  taskAnalyzeRequest,
+  taskAnalyzeSuccess,
+  taskAnalyzeFailure,
+  tasksSortBySmartScore,
 } = tasksSlice.actions;
 export default tasksSlice.reducer;

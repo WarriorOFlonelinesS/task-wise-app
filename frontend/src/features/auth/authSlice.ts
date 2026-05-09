@@ -1,6 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AuthState } from './type';
-
 const initialState: AuthState = {
   user: null,
   token: null,
@@ -28,7 +27,7 @@ const authSlice = createSlice({
       state.loading = false;
       state.error = null;
       state.user = action.payload.user;
-      state.token = action.payload.token;
+      state.token = String(action.payload.token);
     },
 
     registerFailure(state, action: PayloadAction<string>) {
@@ -42,6 +41,16 @@ const authSlice = createSlice({
         name: string;
         email: string;
         password: string;
+        remember: boolean;
+      }>,
+    ) {
+      state.loading = true;
+      state.error = null;
+    },
+    loginRequestWithToken(
+      state,
+      action: PayloadAction<{
+        token: string;
       }>,
     ) {
       state.loading = true;
@@ -89,6 +98,7 @@ export const {
   registerSuccess,
   registerFailure,
   loginRequest,
+  loginRequestWithToken,
   loginFailure,
   loginSuccess,
   logoutSuccess,

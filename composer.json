@@ -3,7 +3,6 @@
     "laravel/pint": "^1.23"
   },
   "require": {
-    "fruitcake/laravel-cors": "^3.0",
     "guzzlehttp/guzzle": "^7.9",
     "google-gemini-php/client": "^2.5"
   },

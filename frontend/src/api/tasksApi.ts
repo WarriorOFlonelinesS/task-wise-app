@@ -20,8 +20,8 @@ export async function postTasks(data: { title: string; description: string }, to
   return response.data;
 }
 
-export async function deleteTasks(data: { id: string }, token: string) {
-  const response = await axios.delete(`${API_URL}/tasks/${data}`, {
+export async function deleteTasks(id: string, token: string) {
+  const response = await axios.delete(`${API_URL}/tasks/${id}`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -29,13 +29,27 @@ export async function deleteTasks(data: { id: string }, token: string) {
   return response.data;
 }
 
-export async function updateTasks(data: { id: string; title: string; description: string }, token: string) {
-  console.log(data)
-  const response = await axios.put(`${API_URL}/tasks/${data.id}`, {title: data.title, description: data.description}, {
+export async function updateTasks(
+  data: { id: string; title: string; description: string; status: string },
+  token: string,
+) {
+  const response = await axios.put(
+    `${API_URL}/tasks/${data.id}`,
+    { title: data.title, description: data.description, status: data.status },
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    },
+  );
+  return response.data;
+}
+
+export async function taskAnalyze(id: string, token: string) {
+  const response = await axios.get(`${API_URL}/ai-analyse/${id}`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
   });
   return response.data;
 }
-
