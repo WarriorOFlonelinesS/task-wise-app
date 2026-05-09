@@ -26,7 +26,8 @@ export default function Dashboard() {
   const [showLoader, setShowLoader] = useState(true);
   const [isSorted, setIsSorted] = useState(false);
   const sortedTasksList = useSelector(selectSortedTasks);
-  const buttonStyles = " backdrop-blur-md bg-white/5 px-3 py-1 backdrop-blur-xs rounded-md border duration-500 ease-in-out border-gray-500/70 hover:bg-[#00d1ff] hover:text-black hover:shadow-[0_0_25px_rgba(0,209,255,0.4)]  transition-colors";
+  const buttonStyles =
+    ' backdrop-blur-md bg-white/5 px-3 py-1 backdrop-blur-xs rounded-md border duration-500 ease-in-out border-gray-500/70 hover:bg-[#00d1ff] hover:text-black hover:shadow-[0_0_25px_rgba(0,209,255,0.4)]  transition-colors';
   const addToDo = (title, description) => {
     setIsSorted(false);
     dispatch(
@@ -94,9 +95,22 @@ export default function Dashboard() {
 
       <div className="flex justify-center">
         <div className="w-3/4 fixed bottom-0 left-1/2 transform -translate-x-1/2 backdrop-blur-md  px-6 py-2 backdrop-blur-xs rounded-md shadow-md border border-gray-500/70 flex items-center justify-around">
-          <Button onClick={()=> setIsOpen(true)} icon={<Plus className="h-9 w-9" />} styles={buttonStyles}/>
-          <Button onClick={sortTasks} icon={<SortDescIcon className="h-9 w-9" />} styles={buttonStyles}/>
-          <Button label={''} icon={<UserRound className="h-9 w-9" />} styles={buttonStyles} to='/profile'/>
+          <Button
+            onClick={() => setIsOpen(true)}
+            icon={<Plus className="h-9 w-9" />}
+            styles={buttonStyles}
+          />
+          <Button
+            onClick={sortTasks}
+            icon={<SortDescIcon className="h-9 w-9" />}
+            styles={buttonStyles}
+          />
+          <Button
+            label={''}
+            icon={<UserRound className="h-9 w-9" />}
+            styles={buttonStyles}
+            to="/profile"
+          />
         </div>
       </div>
     </div>

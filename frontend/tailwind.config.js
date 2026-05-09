@@ -28,6 +28,18 @@ export default {
           '15%': { opacity: '1' },
           '85%': { opacity: '1' },
           '100%': { transform: 'translateY(120%)', opacity: '0' }
+        },
+        'jarvisGlow': {
+          '0%, 100%': {
+            filter: 'drop-shadow(0 0 2px rgba(74, 222, 128, 0.8))',
+            opacity: '0.7',
+            transform: 'scale(1.1)',
+          },
+          '50%': {
+            filter: 'drop-shadow(0 0 15px rgba(74, 222, 128, 1))',
+            opacity: '1',
+            transform: 'scale(1.1)',
+          }
         }
       },
       animation: {
@@ -35,7 +47,8 @@ export default {
         'border-beam': 'borderBeam 8s linear infinite',
         'slow-spin': 'slowSpin 4s linear infinite',
         'status-glitch': 'statusGlitch 0.35s ease-out',
-        'scan-sweep': 'scanSweep 3.5s ease-in-out infinite'
+        'scan-sweep': 'scanSweep 3.5s ease-in-out infinite',
+        'jarvis-ai': 'jarvisGlow 2s ease-in-out infinite'
       },
     },
   },
