@@ -1,7 +1,7 @@
 services:
   app:
     build:
-      context: .
+      context: ./backend
       dockerfile: Dockerfile
     container_name: laravel_app
     env_file:
@@ -78,6 +78,8 @@ services:
       - app-network
     depends_on:
       - app
+    volumes:
+      - ./frontend:/app
 
 volumes:
   pgdata:

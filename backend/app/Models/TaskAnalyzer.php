@@ -11,15 +11,6 @@ class TaskAnalyzer extends Model
 
     protected $table = 'ai_task_analyzers';
 
-<<<<<<< HEAD
-    protected $fillable = [  
-        'task_id',
-        'content',
-        'is_done', 
-        'priority',
-        'due_date',
-        'smart_score'
-=======
     protected $fillable = [
         'user_id',
         'task_id',
@@ -28,7 +19,6 @@ class TaskAnalyzer extends Model
         'priority',
         'due_date',
         'smart_score',
->>>>>>> frontend/profile
     ];
 
     public function task()
