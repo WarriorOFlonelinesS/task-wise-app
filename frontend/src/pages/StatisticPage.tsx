@@ -5,6 +5,9 @@ import Button from '../components/Common/Button';
 import { LayoutDashboard, UserRound } from 'lucide-react';
 
 export default function StatisticPage() {
+  useEffect(()=> {
+    fetch().then(response => response).then(data => console.log(data));
+  }, [])
   const dashboardStats = [
     {
       label: 'Активні завдання',

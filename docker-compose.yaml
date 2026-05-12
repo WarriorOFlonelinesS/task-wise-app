@@ -80,6 +80,7 @@ services:
       - app
     volumes:
       - ./frontend:/app
+      - /app/node_modules 
 
 volumes:
   pgdata:
