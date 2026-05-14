@@ -78,7 +78,7 @@ const tasksSlice = createSlice({
       state,
       action: PayloadAction<{ id: string; title: string; description: string; status: string }>,
     ) {
-      console.log(action.payload);
+
       state.error = null;
     },
     updateTasksSuccess(state, action: PayloadAction<Task>) {

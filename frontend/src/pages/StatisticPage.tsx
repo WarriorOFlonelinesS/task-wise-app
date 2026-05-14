@@ -3,11 +3,33 @@ import { StatsRow } from '../components/Statistic/StatsRow';
 import { TaskChart } from '../components/Statistic/TaskChart';
 import Button from '../components/Common/Button';
 import { LayoutDashboard, UserRound } from 'lucide-react';
+import { getStatisticRequest } from '../features/statistic/statisticSlice';
+import { RootState } from '../store';
+import { useDispatch, useSelector } from 'react-redux';
+import Cookies from 'js-cookie';
+import { loginRequestWithToken } from '../features/auth/authSlice';
+
 
 export default function StatisticPage() {
-  useEffect(()=> {
-    fetch().then(response => response).then(data => console.log(data));
-  }, [])
+  const tokenFromCookie = Cookies.get('token');
+  const user = useSelector((state: RootState) => state.auth.user);
+  const statistic = useSelector((state: RootState) => state.statistic);
+  const token = useSelector((state: RootState) => state.auth.token);
+  console.log(statistic.insights)
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    if (tokenFromCookie !== undefined) {
+      dispatch(loginRequestWithToken(tokenFromCookie));
+    }
+  }, []);
+
+  useEffect(() => {
+    if (token) {
+      dispatch(getStatisticRequest(token));
+    }
+  }, [dispatch, token]);
+
   const dashboardStats = [
     {
       label: 'Активні завдання',

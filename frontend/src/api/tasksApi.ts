@@ -44,12 +44,3 @@ export async function updateTasks(
   );
   return response.data;
 }
-
-export async function taskAnalyze(id: string, token: string) {
-  const response = await axios.get(`${API_URL}/ai-analyse/${id}`, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
-  return response.data;
-}

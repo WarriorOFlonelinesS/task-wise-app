@@ -2,6 +2,7 @@ FROM php:8.3-fpm
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
+    postgresql-client \
     git \
     curl \
     libpng-dev \
@@ -53,7 +54,7 @@ COPY docker/supervisor.conf /etc/supervisor/conf.d/supervisord.conf
 COPY entrypoint.sh /usr/local/bin/entrypoint.sh
 RUN chmod +x /usr/local/bin/entrypoint.sh
 
-EXPOSE 8000
+EXPOSE 9000
 
 # Start Laravel via entrypoint
 CMD ["/usr/local/bin/entrypoint.sh"]

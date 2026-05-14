@@ -29,6 +29,7 @@ Route::middleware('throttle:20,1')->group(function () {
 
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
 
+
 Route::middleware('auth:sanctum')->group(function () {
 
     Route::get('/tasks/filter', [TaskController::class, 'filter']);

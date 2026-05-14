@@ -6,6 +6,8 @@ use App\DTO\TaskDTO;
 use App\Models\Task;
 use Illuminate\Http\Request;
 
+use function Illuminate\Log\log;
+
 class TaskService
 {
     protected TaskValidationService $validationService;
@@ -27,7 +29,7 @@ class TaskService
     }
 
     public function showTasks()
-    {
+    {   
         return Task::where('user_id', auth()->user()->id)
             ->get();
     }

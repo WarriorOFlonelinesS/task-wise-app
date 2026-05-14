@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Services\JarvisService;
 use App\Services\TaskService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log as FacadesLog;
 use Log;
 
 class AnalyticsController
@@ -27,7 +28,12 @@ class AnalyticsController
     {
         try {
             $tasks = $tasks = $this->taskService->showTasks();
-            $statistics = $this->jarvisService->analyzeStatistic($tasks);
+            Log::build([
+                'driver' => 'single',
+                'path' => storage_path('logs/ai_analysis.log'),
+              ])->debug($tasks->toArray());
+            $statistics = $this->jarvisService->analyzeStatistic($tasks->toArray());
+            Log::channel('ai')->info('Анализ завершен успешно');
 
             return response()->json([
                 'statistics' => $statistics,
@@ -36,7 +42,7 @@ class AnalyticsController
             Log::error('Error getting task: '.$e->getMessage());
 
             return response()->json([
-                'error' => 'I have gone to drink tea',
+                'error' => 'I have gone to drink tea for many times',
             ], 500);
         }
     }

@@ -20,8 +20,8 @@ export default function Card({ data }) {
   };
 
   const token = useSelector((state: any) => state.auth.token);
-  const taskAnalizeArray = useSelector((state: any) => state.tasks.taskAnalyze);
-
+  // const taskAnalizeArray = useSelector((state: any) => state.tasks.taskAnalyze);
+const taskAnalizeArray = [];
   const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(false);
   const taskAnalizeItem = taskAnalizeArray.filter(
@@ -63,7 +63,6 @@ export default function Card({ data }) {
     } else if (isDone) {
       nextStatus = 'pending';
     }
-    console.log(nextStatus);
     dispatch(updateTasksRequest({ ...data, status: nextStatus }));
   };
 

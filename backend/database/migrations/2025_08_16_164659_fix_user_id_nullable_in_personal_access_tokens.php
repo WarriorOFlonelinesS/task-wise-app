@@ -11,14 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-<<<<<<<< HEAD:backend/database/migrations/2025_07_24_200417_alter_priority_column_in_ai_task_analyzers_table.php
-        Schema::table('ai_task_analyzers', function (Blueprint $table) {
-            $table->string('priority')->change();
-========
-        Schema::table('personal_access_tokens', function (Blueprint $table) {
-            //
->>>>>>>> frontend/profile:backend/database/migrations/2025_08_16_164659_fix_user_id_nullable_in_personal_access_tokens.php
-        });
+        // Проверяем, существует ли таблица, чтобы не упасть с ошибкой
+        if (Schema::hasTable('ai_task_analyzers')) {
+            Schema::table('ai_task_analyzers', function (Blueprint $table) {
+                $table->string('priority')->change();
+            });
+        }
     }
 
     /**
@@ -26,14 +24,10 @@ return new class extends Migration
      */
     public function down(): void
     {
-<<<<<<<< HEAD:backend/database/migrations/2025_07_24_200417_alter_priority_column_in_ai_task_analyzers_table.php
-        Schema::table('ai_task_analyzers', function (Blueprint $table) {
-            $table->integer('priority')->change();
-========
-        Schema::table('personal_access_tokens', function (Blueprint $table) {
-            //
->>>>>>>> frontend/profile:backend/database/migrations/2025_08_16_164659_fix_user_id_nullable_in_personal_access_tokens.php
-        });
+        if (Schema::hasTable('ai_task_analyzers')) {
+            Schema::table('ai_task_analyzers', function (Blueprint $table) {
+                $table->integer('priority')->change();
+            });
+        }
     }
 };
-

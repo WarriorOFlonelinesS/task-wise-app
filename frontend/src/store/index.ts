@@ -3,6 +3,7 @@ import authReducer from '../features/auth/authSlice';
 import createSagaMiddleware from 'redux-saga';
 import rootSaga from './rootSaga';
 import tasksReducer from '../features/tasks/tasksSlice';
+import statisticReducer from '../features/statistic/statisticSlice';
 
 import profileReducer from '../features/profile/profileSlice';
 
@@ -14,6 +15,7 @@ export const store = configureStore({
     auth: authReducer,
     tasks: tasksReducer,
     profile: profileReducer,
+    statistic: statisticReducer
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
