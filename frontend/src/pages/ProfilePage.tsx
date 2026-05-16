@@ -16,8 +16,12 @@ function ProfilePage() {
     useSelector((state: RootState) => state.profile.profile?.avatar_url) ??
     '/immagine-removebg-preview.png';
   const navigate = useNavigate();
-  const buttonStyles =
-    'bg-red-800 px-2 py-1 my-2 w-32 flex justify-center backdrop-blur-md bg-white/5 px-3 py-1 backdrop-blur-xs rounded-md border duration-500 ease-in-out border-gray-500/70 hover:bg-[#00d1ff] hover:text-black hover:shadow-[0_0_25px_rgba(0,209,255,0.4)]  transition-colors';
+  const buttonStyles = `
+  p-2 rounded-xl border border-white/10 backdrop-blur-xl bg-white/5 
+  text-cyan-400 shadow-lg transition-all duration-300
+  hover:bg-cyan-500 hover:text-black hover:shadow-[0_0_20px_rgba(6,182,212,0.4)]
+  active:scale-95 mb-3
+`;
   useEffect(() => {
     dispatch(getProfileRequest(token));
     if (!user) {

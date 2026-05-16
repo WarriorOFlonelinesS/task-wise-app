@@ -1,17 +1,10 @@
 import React, { useEffect, useState } from 'react';
 
-export const StatsItem = ({
-  label,
-  value,
-  icon,
-  max = 100,
-  thresholds = { warning: 50, critical: 80 },
-}) => {
+export const StatsItem = ({ label, value, icon, max = 100, importance }) => {
   const [displayValue, setDisplayValue] = useState(0);
   const radius = 65;
   const circumference = 2 * Math.PI * radius;
 
-  const percentage = Math.min((value / max) * 100, 100);
   const offset = circumference - (displayValue / max) * circumference;
 
   useEffect(() => {
@@ -31,14 +24,14 @@ export const StatsItem = ({
 
     return () => clearInterval(timer);
   }, [value]);
-
   const getStatusColor = () => {
-    if (value >= thresholds.critical) return 'text-red-500 stroke-red-500';
-    if (value >= thresholds.warning) return 'text-yellow-400 stroke-yellow-400';
+    if (importance === 'Crucial') return 'text-red-500 stroke-red-500';
+    if (importance === 'Medium') return 'text-yellow-400 stroke-yellow-400';
     return 'text-green-500 stroke-green-500';
   };
 
   const statusClasses = getStatusColor();
+
   return (
     <div className="flex flex-col items-center justify-center backdrop-blur-md bg-white/5 border border-white/10 rounded-full w-33 h-33 shadow-2xl transition-all hover:bg-white/10 group">
       <svg className="w-48 h-48 transform -rotate-90">

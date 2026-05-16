@@ -1,7 +1,6 @@
 import axios from 'axios';
 import Cookies from 'js-cookie';
 
-
 const API_URL = 'http://localhost:8000/api';
 
 export async function login(credentials: { email: string; password: string }) {
@@ -31,7 +30,6 @@ export async function register(data: {
 }
 
 export async function logout(data: { token: string }) {
-
   const response = await axios.post(
     `${API_URL}/logout`,
     {},

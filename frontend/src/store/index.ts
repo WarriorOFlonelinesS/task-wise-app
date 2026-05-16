@@ -7,7 +7,6 @@ import statisticReducer from '../features/statistic/statisticSlice';
 
 import profileReducer from '../features/profile/profileSlice';
 
-
 const sagaMiddleware = createSagaMiddleware();
 
 export const store = configureStore({
@@ -15,7 +14,7 @@ export const store = configureStore({
     auth: authReducer,
     tasks: tasksReducer,
     profile: profileReducer,
-    statistic: statisticReducer
+    statistic: statisticReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

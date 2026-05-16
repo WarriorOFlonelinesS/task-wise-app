@@ -21,7 +21,7 @@ export default function Card({ data }) {
 
   const token = useSelector((state: any) => state.auth.token);
   // const taskAnalizeArray = useSelector((state: any) => state.tasks.taskAnalyze);
-const taskAnalizeArray = [];
+  const taskAnalizeArray = [];
   const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(false);
   const taskAnalizeItem = taskAnalizeArray.filter(
@@ -143,20 +143,49 @@ const taskAnalizeArray = [];
         <div className="flex justify-between mt-2 items-center">
           <div className="flex items-center gap-3">
             {!isInProgress && !isDone && (
-
-               <Button onClick={toggleStatus} styles="group transition-transform active:scale-95" icon={<Circle className="h-5 w-5 text-gray-500 group-hover:text-blue-400 transition-colors drop-shadow-[0_0_5px_rgba(255,255,255,0.1)]" />}/>
+              <Button
+                onClick={toggleStatus}
+                styles="group transition-transform active:scale-95"
+                icon={
+                  <Circle className="h-5 w-5 text-gray-500 group-hover:text-blue-400 transition-colors drop-shadow-[0_0_5px_rgba(255,255,255,0.1)]" />
+                }
+              />
             )}
             {isInProgress && (
-              <Button onClick={toggleStatus} styles="group transition-transform active:scale-95" icon={<RefreshCw className="h-5 w-5 animate-slow-spin text-[#00d1ff] drop-shadow-[0_0_8px_rgba(0,209,255,0.8)]" />}/>
+              <Button
+                onClick={toggleStatus}
+                styles="group transition-transform active:scale-95"
+                icon={
+                  <RefreshCw className="h-5 w-5 animate-slow-spin text-[#00d1ff] drop-shadow-[0_0_8px_rgba(0,209,255,0.8)]" />
+                }
+              />
             )}
             {isDone && (
-              <Button onClick={toggleStatus} styles="group transition-transform active:scale-95" icon={<CircleCheckBig className="h-5 w-5 text-[#00ff9f] drop-shadow-[0_0_10px_rgba(0,255,159,0.85)]" />}/>
+              <Button
+                onClick={toggleStatus}
+                styles="group transition-transform active:scale-95"
+                icon={
+                  <CircleCheckBig className="h-5 w-5 text-[#00ff9f] drop-shadow-[0_0_10px_rgba(0,255,159,0.85)]" />
+                }
+              />
             )}
           </div>
           <div className="flex justify-end space-x-2'">
-            <Button onClick={() => setIsOpen(true)} styles="hover:scale-110 mr-3" icon={<PencilIcon className="h-5 w-5 " />}/>
-            <Button onClick={() => deleteToDo(data.id)} styles="hover:scale-110 mr-3" icon={<TrashIcon className="h-5 w-5" />}/>
-            <Button onClick={() => taskAnalize(data.id)} styles={`transition-all duration-200 ${isAnalyzing ? 'animate-jarvis-ai' : 'hover:scale-110 animate-jarvis-ai'} `} icon={<Sparkles className="h-5 w-5" />}/>
+            <Button
+              onClick={() => setIsOpen(true)}
+              styles="hover:scale-110 mr-3"
+              icon={<PencilIcon className="h-5 w-5 " />}
+            />
+            <Button
+              onClick={() => deleteToDo(data.id)}
+              styles="hover:scale-110 mr-3"
+              icon={<TrashIcon className="h-5 w-5" />}
+            />
+            <Button
+              onClick={() => taskAnalize(data.id)}
+              styles={`transition-all duration-200 ${isAnalyzing ? 'animate-jarvis-ai' : 'hover:scale-110 animate-jarvis-ai'} `}
+              icon={<Sparkles className="h-5 w-5" />}
+            />
           </div>
         </div>
       </div>

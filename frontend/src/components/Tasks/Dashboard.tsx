@@ -13,7 +13,6 @@ import Magic from './Magic';
 import { Plus, SortAscIcon, SortDescIcon, UserRound } from 'lucide-react';
 import Button from '../Common/Button';
 
-
 export default function Dashboard() {
   const tasks = useSelector((state: RootState) => state.tasks.tasks);
   const token = useSelector((state: RootState) => state.auth.token);
@@ -84,8 +83,8 @@ export default function Dashboard() {
         {load ? (
           <Magic
             className={`fixed inset-0 flex items-center justify-center transition-opacity duration-1000 z-50
-            ${load ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}
-          `}
+              ${load ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}
+            `}
           />
         ) : listTasks.length ? (
           listTasks.map((task, index) => <Card data={task} key={task.id || `task-${index}`} />)
