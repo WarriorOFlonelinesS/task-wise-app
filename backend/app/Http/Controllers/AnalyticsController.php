@@ -54,6 +54,7 @@ class AnalyticsController
             $analyzeTask = $this->jarvisService->analyzeTask($tasks);
 
             return response()->json([
+                'task_id' => $id,
                 'analyzeTask' => $analyzeTask,
             ], 200);
         } catch (\Exception $e) {

@@ -52,7 +52,7 @@ class JarvisService
                         1. Звертайся "Сер". Використовуй британський гумор та уїдливість.
                         2. У metrics.value пиши тільки число (0-100).
                         3. У metrics.importance пиши рівень (Normal/Medium/Crucial).
-                        4. Якщо завдання в "pending" або "in_progress" висять занадто довго — підколюй Сера за лінощі.
+                        4. Якщо завдання в "pending" або "in_progress" висять занадто довго — підколюй Сера за лінощі, але пропонуй рішення.
                         5. В insights запропонуй почати з конкретного завдання за його назвою (title) з наданих даних.'
                     ],
                     [
@@ -61,7 +61,7 @@ class JarvisService
                     ]
                 ],
                 'response_format' => ['type' => 'json_object'],
-                'temperature' => 0.5, // Снижаем для еще большей точности формата
+                'temperature' => 0.5,
             ]);
     
         if ($response->failed()) {

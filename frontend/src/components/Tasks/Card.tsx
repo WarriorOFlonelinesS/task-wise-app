@@ -1,6 +1,6 @@
 import { PencilIcon, TrashIcon } from '@heroicons/react/24/outline';
-import { RefreshCw, CircleCheckBig, Circle, Sparkles } from 'lucide-react';
-import React, { useState } from 'react';
+import { RefreshCw, CircleCheckBig, Circle, Sparkles, Sparkle, SparkleIcon } from 'lucide-react';
+import React, { useEffect, useState } from 'react';
 import {
   deleteTasksRequest,
   taskAnalyzeRequest,
@@ -20,21 +20,41 @@ export default function Card({ data }) {
   };
 
   const token = useSelector((state: any) => state.auth.token);
-  // const taskAnalizeArray = useSelector((state: any) => state.tasks.taskAnalyze);
-  const taskAnalizeArray = [];
+  const taskAnalizeArray = useSelector((state: any) => state.tasks.taskAnalyze);
   const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(false);
-  const taskAnalizeItem = taskAnalizeArray.filter(
+  const [isAnalyzing, setIsAnalyzing] = useState(false);
+  const [selections, setSelections] = useState<string[]>([]);
+  const firstAnalyzeItem = (taskAnalizeArray || []).find(
     (task) => String(task.task_id) === String(data.id),
   );
+
+  useEffect(() => {
+    if (firstAnalyzeItem) {
+      setIsAnalyzing(false);
+    }
+  }, [firstAnalyzeItem]);
+
   const s = (data.status ?? '').trim().toLowerCase().replace(/\s+/g, ' ');
   const isDone = s === 'done';
   const isInProgress = s === 'in_progress';
 
-  const subtasks = taskAnalizeItem[0] ? JSON.parse(taskAnalizeItem[0].content).subtasks : null;
-  const priority = taskAnalizeItem[0] ? taskAnalizeItem[0].priority : null;
-  const [isAnalyzing, setIsAnalyzing] = useState(false);
-  const [selections, setSelections] = useState<string[]>([]);
+  const getSubtasks = () => {
+    if (!firstAnalyzeItem?.analyzeTask) return null;
+    try {
+      if (typeof firstAnalyzeItem.analyzeTask === 'object') {
+          return firstAnalyzeItem.analyzeTask.subtasks;
+      }
+      return JSON.parse(firstAnalyzeItem.analyzeTask).subtasks;
+    } catch (e) {
+      console.error("Ошибка парсинга JSON в таске:", e);
+      return null;
+    }
+  };
+
+  const subtasks = getSubtasks();
+  const priority = firstAnalyzeItem?.analyzeTask?.priority || null;
+
   const addSelection = (selectedText: string) => {
     const value = selectedText.trim();
     if (!value) return;
@@ -63,7 +83,8 @@ export default function Card({ data }) {
     } else if (isDone) {
       nextStatus = 'pending';
     }
-    dispatch(updateTasksRequest({ ...data, status: nextStatus }));
+    console.log(data.id)
+    dispatch(updateTasksRequest({ id: data.id, title: data.title, description: data.description, status: nextStatus }));
   };
 
   const deleteToDo = (id) => {
@@ -73,10 +94,6 @@ export default function Card({ data }) {
   const taskAnalize = (id) => {
     setIsAnalyzing(true);
     dispatch(taskAnalyzeRequest({ id, token }));
-
-    setTimeout(() => {
-      setIsAnalyzing(false);
-    }, 3000);
   };
 
   const closeUpdateModal = () => {
@@ -106,19 +123,7 @@ export default function Card({ data }) {
           {subtasks ? (
             <>
               <h3 className="font-bold text-green-400 mb-2 flex items-center gap-2">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09" />
-                </svg>
+                <SparkleIcon className="w-5 h-5 text-green-400 fill-green-400 animate-jarvis-ai" />
                 Subtasks
               </h3>
               <ol className="list-decimal ml-3 space-y-1">
@@ -129,9 +134,7 @@ export default function Card({ data }) {
                       className="text-sm subtask-item hover:bg-white/5 p-1 rounded transition-all duration-200"
                       style={{ animationDelay: `${index * 0.1}s` }}
                     >
-                      <ContextMenuApp onHighlight={addSelection}>
-                        <HiglihterContainer text={subtask} selection={selections} color="#FFD700" />
-                      </ContextMenuApp>
+                    {subtask}
                     </li>
                   );
                 })}
@@ -183,8 +186,8 @@ export default function Card({ data }) {
             />
             <Button
               onClick={() => taskAnalize(data.id)}
-              styles={`transition-all duration-200 ${isAnalyzing ? 'animate-jarvis-ai' : 'hover:scale-110 animate-jarvis-ai'} `}
-              icon={<Sparkles className="h-5 w-5" />}
+              styles={`transition-all duration-200 ${isAnalyzing ? 'animate-jarvis-ai' : 'hover:scale-110'} `}
+              icon={<Sparkles className={`h-5 w-5 ${isAnalyzing ? 'fill-green-400 text-green-400' : 'text-gray-400'}`} />}
             />
           </div>
         </div>

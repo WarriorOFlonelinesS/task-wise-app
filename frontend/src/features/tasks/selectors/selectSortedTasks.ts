@@ -9,9 +9,9 @@ export const selectSortedTasks = createSelector(
 
     const analysisMap = new Map();
     taskAnalyze.forEach((analysis) => {
-      if (analysis.task_id && analysis.smart_score !== null && analysis.smart_score !== undefined) {
+      if (analysis.task_id && analysis.analyzeTask.smart_score !== null && analysis.analyzeTask.smart_score !== undefined) {
         const taskId = String(analysis.task_id);
-        analysisMap.set(taskId, analysis);
+        analysisMap.set(taskId, analysis.analyzeTask);
       }
     });
 

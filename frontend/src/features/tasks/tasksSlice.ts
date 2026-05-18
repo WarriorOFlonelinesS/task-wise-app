@@ -1,5 +1,6 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, current, PayloadAction } from '@reduxjs/toolkit';
 import { Task, TasksState } from './type';
+import { act } from 'react';
 
 const initialState: TasksState = {
   tasks: null,
@@ -33,7 +34,6 @@ const tasksSlice = createSlice({
       state.loading = false;
       state.error = null;
       state.tasks = action.payload.tasks;
-      state.taskAnalyze = action.payload.analyzesOfTasks;
     },
     getTasksFailure(state, action: PayloadAction<string>) {
       state.error = action.payload;
@@ -76,7 +76,7 @@ const tasksSlice = createSlice({
     },
     updateTasksRequest(
       state,
-      action: PayloadAction<{ id: string; title: string; description: string; status: string }>,
+      action: PayloadAction<{ id: string; token:string; }>,
     ) {
       state.error = null;
     },
@@ -101,13 +101,15 @@ const tasksSlice = createSlice({
     ) {
       state.loading = true;
       state.error = null;
+     
     },
     taskAnalyzeSuccess(state, action: PayloadAction<any>) {
       state.loading = false;
       state.error = null;
+  
       if (state.taskAnalyze) {
         const existingIndex = state.taskAnalyze.findIndex(
-          (item) => item.task_id === action.payload.task_id,
+          (item) => Number(item.task_id) === Number(action.payload.task_id),
         );
         if (existingIndex !== -1) {
           state.taskAnalyze[existingIndex] = action.payload;

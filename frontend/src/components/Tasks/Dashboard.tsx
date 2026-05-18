@@ -78,7 +78,7 @@ export default function Dashboard() {
         <div className="bg-red-500 text-white px-4 py-2 rounded mb-4 text-center">{error}</div>
       )}
       {isOpen ? <AddTask onClose={onClose} addToDo={addToDo} /> : null}
-      <h1 className="text-3xl font-bold text-center mb-11 text-white">Dashboard</h1>
+      <h1 className="text-3xl font-bold text-center mb-11 text-white">Дошка</h1>
       <div className="max-h-[80%] w-full overflow-y-auto no-scrollbar max-w-md mx-auto">
         {load ? (
           <Magic
@@ -87,9 +87,9 @@ export default function Dashboard() {
             `}
           />
         ) : listTasks.length ? (
-          listTasks.map((task, index) => <Card data={task} key={task.id || `task-${index}`} />)
+          listTasks.map((task) => <Card data={task} key={task.id} />)
         ) : (
-          <h2 className="text-center">You don't have tasks</h2>
+          <h2 className="text-center">Завдання наразі відсутні</h2>
         )}
       </div>
 

@@ -1,4 +1,5 @@
 import * as tasksApi from '../../api/tasksApi';
+import * as analyticApi from '../../api/analycticApi'; 
 import { call, put, select, takeEvery } from 'redux-saga/effects';
 import {
   getTasksSuccess,
@@ -73,8 +74,8 @@ function* taskAnalyzeSaga(action: ReturnType<typeof taskAnalyzeRequest>) {
   try {
     const { id, token } = action.payload;
 
-    const data = yield call(tasksApi.taskAnalyze, id, token);
-
+    const data = yield call(analyticApi.taskAnalyze, id, token);
+    
     yield put(taskAnalyzeSuccess(data));
   } catch (e: any) {
     yield put(taskAnalyzeFailure(handleErrors(e)));

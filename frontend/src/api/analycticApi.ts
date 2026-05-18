@@ -13,6 +13,7 @@ export async function getTasksAnalitics(token: string) {
 }
 
 export async function taskAnalyze(id: string, token: string) {
+  
   const response = await axios.get(`${API_URL}/tasks-analytic/${id}`, {
     headers: {
       Authorization: `Bearer ${token}`,

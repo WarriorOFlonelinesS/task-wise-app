@@ -9,7 +9,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import Cookies from 'js-cookie';
 import { loginRequestWithToken } from '../features/auth/authSlice';
 import CyberInsight from '../components/AI/CyberInsight';
-import { actionChannel } from 'redux-saga/effects';
 
 export default function StatisticPage() {
   const buttonStyles = `
@@ -41,7 +40,6 @@ export default function StatisticPage() {
   }, [rawStatistic]);
   
   const dashboardStats = useMemo(
-    
     () => {
       const m = actualStats?.metrics;
      return [
