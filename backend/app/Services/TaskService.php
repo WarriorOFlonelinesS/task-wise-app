@@ -64,49 +64,4 @@ class TaskService
         $task->delete();
     }
 
-    public function filterTasks(Request $request)
-    {
-        $user = auth()->user();
-
-        if (! $user) {
-            return response()->json([
-                'error' => 'Unauthorized',
-            ], 401);
-        }
-
-        $query = Task::where('user_id', $user->id);
-
-        $validatedFilters = $this->validationService->validateFilters($request->all());
-
-        foreach ($validatedFilters as $key => $value) {
-            if ($key === 'title') {
-                $query->where('title', 'like', '%'.$value.'%');
-            } else {
-                $query->where($key, $value);
-            }
-        }
-
-        return $query->get();
-    }
-
-    // public function update(Request $request, $id)
-    // {
-    //     try {
-    //         $validData = $this->validationService->validateUpdate($request->all());
-    //         $task = Task::findOrFail($id);
-    //         $task->update($validData);
-
-    //         return response()->json($task, 200);
-    //     } catch (ValidationException $e) {
-    //         return response()->json([
-    //             'errors' => $e->errors(),
-    //         ], 422);
-    //     } catch (\Exception $e) {
-    //         \Log::error('Error updating task: '.$e->getMessage());
-
-    //         return response()->json([
-    //             'error' => 'Internal server error',
-    //         ], 500);
-    //     }
-    // }
 }

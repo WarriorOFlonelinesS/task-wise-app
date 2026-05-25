@@ -33,7 +33,7 @@ class AnalyticsController
                 'path' => storage_path('logs/ai_analysis.log'),
               ])->debug($tasks->toArray());
             $statistics = $this->jarvisService->analyzeStatistic($tasks->toArray());
-            Log::channel('ai')->info('Анализ завершен успешно');
+            Log::channel('ai')->info('Анализ завершено');
 
             return response()->json([
                 'statistics' => $statistics,
@@ -42,7 +42,7 @@ class AnalyticsController
             Log::error('Error getting task: '.$e->getMessage());
 
             return response()->json([
-                'error' => 'I have gone to drink tea for many times',
+                'error' => 'Щось пішло не так, тому піду вип\'ю чаю',
             ], 500);
         }
     }
@@ -61,7 +61,7 @@ class AnalyticsController
             Log::error('Error getting task: '.$e->getMessage());
 
             return response()->json([
-                'error' => 'I have gone to drink tea',
+                'error' => 'Щось пішло не так, тому піду вип\'ю чаю',
             ], 500);
         }
     }

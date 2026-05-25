@@ -69,7 +69,7 @@ class JarvisService
             return [
                 'metrics' => [],
                 'overall_importance' => 'Crucial',
-                'insights' => ['Дворецкий перерезал кабель связи, Сэр. Система недоступна.']
+                'insights' => ['Дворецький перерізав кабель зв\'язку, Сер. Система недоступна.']
             ];
         }
     
@@ -78,7 +78,7 @@ class JarvisService
         return $content ?? [
             'metrics' => [],
             'overall_importance' => 'Normal',
-            'insights' => ['Сэр, мой мыслительный процесс был прерван неопознанной ошибкой.']
+            'insights' => ['Сер, мій розумовий процес був перерваний невідомою помилкою.']
         ];
     }
         public function analyzeTask($task): array 
@@ -89,9 +89,10 @@ class JarvisService
                     'messages' => [
                         [
                             'role' => 'system',
-                            'content' => "Ты — аналитический модуль Jarvis. Разбей задачу на подзадачи. 
-                                        Верни ТОЛЬКО JSON с ключами: 'priority' (High, Medium, Low), 
-                                        'smart_score' (0-100), 'subtasks' (массив строк)."
+                            'content' => "
+                                        Ти – аналітичний модуль Jarvis. Розбий завдання на підзавдання. 
+                                        Поверни ТІЛЬКИ JSON з ключами: 'priority' (High, Medium, Low), 
+                                        'smart_score' (0-100), 'subtasks' (масив рядків)."
                         ],
                         [
                             'role' => 'user',
@@ -106,7 +107,7 @@ class JarvisService
                 return [
                     'priority' => 'Medium',
                     'smart_score' => 0,
-                    'subtasks' => ['Сэр, модуль Groq временно недоступен.'],
+                    'subtasks' => ['Сер, модуль Groq тимчасово недоступний.'],
                     'error' => true
                 ];
             }
