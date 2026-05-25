@@ -86,7 +86,7 @@ export default function RegisterForm() {
           <input
             type="text"
             name="name"
-            placeholder="Username"
+            placeholder="Ім'я користувача"
             value={formData.name}
             onChange={handleChange}
             className="w-full mb-3 px-4 py-2 bg-transparent text-white placeholder-gray-400 border border-gray-500 rounded focus:outline-none focus:ring-2 focus:ring-blue-400"
@@ -97,7 +97,7 @@ export default function RegisterForm() {
           <input
             type="email"
             name="email"
-            placeholder="Email"
+            placeholder="Пошта"
             value={formData.email}
             onChange={handleChange}
             className="w-full mb-3 px-4 py-2 bg-transparent text-white placeholder-gray-400 border border-gray-500 rounded focus:outline-none focus:ring-2 focus:ring-blue-400"
@@ -108,7 +108,7 @@ export default function RegisterForm() {
           <input
             type={type}
             name="password"
-            placeholder="Password"
+            placeholder="Пароль"
             value={formData.password}
             onChange={handleChange}
             className="w-full mb-1 px-4  bg-transparent text-white placeholder-gray-400 focus:outline-none"
@@ -122,7 +122,7 @@ export default function RegisterForm() {
           <input
             type={typeConfPass}
             name="passwordConfirmation"
-            placeholder="Confirmation password"
+            placeholder="Підтверждення паролю"
             value={formData.passwordConfirmation}
             onChange={handleChange}
             className="w-full mb-1 px-4  bg-transparent text-white placeholder-gray-400 focus:outline-none"
@@ -141,12 +141,12 @@ export default function RegisterForm() {
             name="remember"
             onChange={handleChangeChecked}
           />{' '}
-          Remember me
+          Запам'ятати мене
         </div>
 
-        <p className="text-center font-thin italic py-2">Minimum 8 symbols, maximum 225</p>
-        <Button label={'Sign up'} styles={buttonStyles} to="/signup">
-          {loading ? 'Loading...' : 'Sign up'}
+        <p className="text-center font-thin italic py-2">Мінімум 8 символів, максимум - 255</p>
+        <Button label={'Зареєструватися'} styles={buttonStyles} to="/signup">
+          {loading ? 'Завантаження...' : 'Зареєструватися'}
         </Button>
         {error && <p className="text-red-600 text-sm text-center">{error}</p>}
       </form>
