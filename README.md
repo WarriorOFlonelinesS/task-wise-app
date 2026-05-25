@@ -5,19 +5,17 @@
 
 🔗 **Live Demo:** [https://task-wise-ai-app.netlify.app](https://task-wise-ai-app.netlify.app)
 
-<<<<<<< HEAD
 - User Registration / Authentication
 - Creating, Editing, and Deleting Tasks
 - Task Grouping by Projects / Categories
 - Task States: In Progress, Completed, Postponed
 - Due Dates and Notifications
-=======
 ![TaskWise Logo](https://img.shields.io/badge/TaskWise-AI%20Powered-blue?style=for-the-badge&logo=openai)
 ![Laravel](https://img.shields.io/badge/Laravel-12.x-red?style=for-the-badge&logo=laravel)
 ![React](https://img.shields.io/badge/React-19.x-blue?style=for-the-badge&logo=react)
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-15-blue?style=for-the-badge&logo=postgresql)
 ![Docker](https://img.shields.io/badge/Docker-Containerized-blue?style=for-the-badge&logo=docker)
->>>>>>> frontend/profile
+
 
 **Bringing your tasks to the next level with AI**
 
@@ -25,36 +23,32 @@
 
 </div>
 
-<<<<<<< HEAD
 - **Redis:** For caching, session storage, and background job queues.
 - **Apache Kafka:** For event-driven task processing, especially if evolving towards a microservice architecture.
 - **Docker:** For containerization, ensuring consistent development and deployment environments.
 - **TailwindCSS:** For modern and utility-first frontend styling.
 - **Laravel Horizon:** For robust monitoring and management of Redis queues.
 - **Laravel Passport or Sanctum:** For API authentication, depending on the type of clients (e.g., first-party SPA, mobile apps, third-party consumers).
-=======
->>>>>>> frontend/profile
+
 
 ## ✨ Features
 
 ### 🎯 Core
 
-<<<<<<< HEAD
+
 - PHP >= 8.2 (with extensions like pdo_pgsql, redis, etc., as needed)
 - Composer
 - Node.js and npm (or yarn)
 - A database server (e.g., PostgreSQL)
 - Redis server
-=======
 - ✅ User Authentication (Laravel Sanctum)
 - ✅ Task CRUD operations
 - ✅ Responsive UI (desktop & mobile)
 - ✅ Smooth animations & transitions
->>>>>>> frontend/profile
+
 
 ### 🤖 AI-Powered
 
-<<<<<<< HEAD
 1.  **Clone the repository:**
     ```bash
     git clone <your-repository-url>
@@ -102,15 +96,14 @@
     - This typically starts the PHP development server, queue listener, Pail for logs, and the Vite development server for the frontend (if configured in `package.json`).
     - Alternatively, serve with: `php artisan serve`
     - Run queue worker (if using queues): `php artisan queue:work`
-=======
+
 - ✅ AI task analysis with Google Gemini
 - ✅ Automatic subtask generation
 - ✅ Context-aware suggestions
->>>>>>> frontend/profile
+
 
 ### 🎨 UI/UX
 
-<<<<<<< HEAD
 _If the frontend is part of the Laravel project (e.g., using Vite with Blade), these steps would be run from the `backend` directory or project root._
 
 1.  **Navigate to the frontend directory (e.g., `cd ../frontend` or stay in project root if integrated):**
@@ -127,21 +120,18 @@ _If the frontend is part of the Laravel project (e.g., using Vite with Blade), t
     # or
     yarn dev
     ```
-=======
+
 - ✅ Modern design (glassmorphism & gradients)
 - ✅ Loading states for AI actions
 - ✅ Animated subtask transitions
 
 ### 🔒 Security
->>>>>>> frontend/profile
-
 - ✅ Rate limiting
 - ✅ CORS protection
 - ✅ Security headers
 - ✅ Strong password policy
 - ✅ Input validation
 
-<<<<<<< HEAD
 - **Backend Tests (PHPUnit):**
   ```bash
   cd backend
@@ -155,13 +145,10 @@ _If the frontend is part of the Laravel project (e.g., using Vite with Blade), t
   # or
   yarn test
   ```
-=======
 ---
->>>>>>> frontend/profile
 
 ## 🏟️ Architecture
 
-<<<<<<< HEAD
 - **Backend (PHP):** Adhere to PSR-12. Use Laravel Pint for automatic formatting:
   ```bash
   cd backend
@@ -170,7 +157,7 @@ _If the frontend is part of the Laravel project (e.g., using Vite with Blade), t
 - **Frontend (JavaScript/TypeScript):** Follow project-configured ESLint/Prettier rules.
 
 ---
-=======
+
 ```
 task-wise-app/
 ├── backend/                 # Laravel 12.x API
@@ -445,4 +432,3 @@ MIT License – see `LICENSE`
 **Made with ❤️ by the TaskWise Team**
 
 </div>
->>>>>>> frontend/profile
