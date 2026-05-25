@@ -10,7 +10,7 @@ export default function SignUpPage() {
       <h1 className="text-3xl font-bold text-center mb-8 text-white">Реєстрація</h1>
       <RegisterForm />
 
-      <p className="text-center">Вже є акаунт?</p>
+      <p className="text-center">Вже є акаунт?</p> 
 
       <Button label={'Login'} icon="" styles={buttonStyles} to="/" />
     </div>
