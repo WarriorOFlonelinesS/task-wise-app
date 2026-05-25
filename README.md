@@ -5,7 +5,6 @@
 
 🔗 **Live Demo:** [https://task-wise-ai-app.netlify.app](https://task-wise-ai-app.netlify.app)
 
-<<<<<<< HEAD
 - User Registration / Authentication
 - Creating, Editing, and Deleting Tasks
 - Task Grouping by Projects / Categories
@@ -445,4 +444,3 @@ MIT License – see `LICENSE`
 **Made with ❤️ by the TaskWise Team**
 
 </div>
->>>>>>> frontend/profile
