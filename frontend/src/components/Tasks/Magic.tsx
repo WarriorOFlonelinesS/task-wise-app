@@ -8,7 +8,7 @@ interface MagicProps {
 
 export default function Magic({
   className = '',
-  message = "Magic is happening now, it's time to grab a coffee.",
+  message = "Відбувається магія, час зробити каву.",
 }: MagicProps) {
   return (
     <div className={`${className} flex justify-center flex-col items-center text-white`}>

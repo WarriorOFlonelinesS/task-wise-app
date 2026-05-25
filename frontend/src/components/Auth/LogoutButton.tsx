@@ -25,7 +25,7 @@ export const LogoutButton = () => {
           disabled={loading}
           className="backdrop-blur-md bg-red-800 px-2 py-1 rounded-md border border-gray-500/70  transition-all duration-300 hover:bg-red-700  hover:shadow-[0_0_20px_5px_rgba(239,68,68,0.5)]"
         >
-          {loading ? 'Loading...' : 'Log out'}
+          {loading ? 'Завантаження...' : 'Вихід з акаунту'}
         </button>
         {error && <p className="text-red-600 text-sm text-center">{error}</p>}
       </form>

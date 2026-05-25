@@ -17,7 +17,7 @@ export default function AddTask({ onClose, addToDo }) {
 
         <input
           type="text"
-          placeholder="Add a new task"
+          placeholder="Додати нове завдання"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           className="w-full mb-3 px-4 py-2 bg-transparent text-white placeholder-gray-400 border border-gray-500 rounded focus:outline-none focus:ring-2 focus:ring-blue-400"
@@ -25,7 +25,7 @@ export default function AddTask({ onClose, addToDo }) {
         />
         <input
           type="text"
-          placeholder="Add a new description"
+          placeholder="Додати новий опис"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
           className="w-full mb-3 px-4 py-2 bg-transparent text-white placeholder-gray-400 border border-gray-500 rounded focus:outline-none focus:ring-2 focus:ring-blue-400"
@@ -42,7 +42,7 @@ export default function AddTask({ onClose, addToDo }) {
           }}
           disabled={title.length === 0 && description.length === 0}
         >
-          ADD TASK
+          ДОДАТИ ЗАВДАННЯ
         </button>
       </div>
     </div>

@@ -33,18 +33,18 @@ function ProfilePage() {
 
   return (
     <div className="flex flex-col w-full justify-center items-center min-h-screen bg-gradient-to-br from-[#0f3936] to-[#184e4a] text-white py-10 px-4">
-      <h1 className="text-3xl font-bold text-center mb-8 text-white">Profile</h1>
+      <h1 className="text-3xl font-bold text-center mb-8 text-white">Профіль</h1>
       <img className="h-20 w-20 self-center mb-8" src={profileImage} alt="" />
-      <h2 className="text-2xl font-bold text-center  text-white">Welcome, {user.name}</h2>
-      <p className="text-center">{user.email}</p>
+      <h2 className="text-2xl mb-5 font-bold text-center  text-white">Ласкаво просимо, {user.name}</h2>
+      <p className="text-center mb-5">{user.email}</p>
       <Button
-        label={'Statistic'}
+        label={'Статистика'}
         icon={<ChartColumnStacked className="w-5 h-5 mr-1" />}
         styles={buttonStyles}
         to="/statistic"
       />
       <Button
-        label={'Dashboard'}
+        label={'Дошка завдань'}
         icon={<LayoutDashboard className="w-5 h-5 mr-1" />}
         styles={buttonStyles}
         to="/"

@@ -8,8 +8,6 @@ import {
 } from '../../features/tasks/tasksAction';
 import { useDispatch, useSelector } from 'react-redux';
 import UpdateTask from './UpdateTask';
-import ContextMenuApp from '../Tasks/ContextMenu';
-import { HiglihterContainer } from './Highliter/HighlighterContainer';
 import Button from '../Common/Button';
 
 export default function Card({ data }) {
@@ -83,7 +81,7 @@ export default function Card({ data }) {
     } else if (isDone) {
       nextStatus = 'pending';
     }
-    console.log(data.id)
+
     dispatch(updateTasksRequest({ id: data.id, title: data.title, description: data.description, status: nextStatus }));
   };
 
@@ -109,22 +107,18 @@ export default function Card({ data }) {
           <UpdateTask onClose={closeUpdateModal} updateToDo={updateToDo} data={data} />
         ) : null}
         <h3 className="text-lg font-semibold mb-2">
-          <ContextMenuApp onHighlight={addSelection}>
-            <HiglihterContainer text={data.title} selection={selections} color="#FFD700" />
-          </ContextMenuApp>
+          {data.title}
         </h3>
 
         <div className="text-sm mb-4">
-          <ContextMenuApp onHighlight={addSelection}>
-            <HiglihterContainer text={data.description} selection={selections} color="#FFD700" />
-          </ContextMenuApp>
+          {data.description}
         </div>
         <div className="animate-slideDown">
           {subtasks ? (
             <>
               <h3 className="font-bold text-green-400 mb-2 flex items-center gap-2">
                 <SparkleIcon className="w-5 h-5 text-green-400 fill-green-400 animate-jarvis-ai" />
-                Subtasks
+                Підзавдання
               </h3>
               <ol className="list-decimal ml-3 space-y-1">
                 {subtasks.map((subtask: string, index: number) => {

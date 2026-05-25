@@ -50,14 +50,14 @@ export default function LoginForm() {
 
   return (
     <>
-      <h1 className="text-3xl font-bold text-center mb-8 text-white">Welcome to TaskWise</h1>
+      <h1 className="text-3xl font-bold text-center mb-8 text-white">TaskWise</h1>
       <div className="w-96 mx-auto p-6 rounded-lg">
         <form onSubmit={handleSubmit} className="space-y-1">
           <div>
             <input
               type="email"
               name="email"
-              placeholder="Email"
+              placeholder="Пошта"
               value={formData.email}
               onChange={handleChange}
               className="w-full mb-3 px-4 py-2 bg-transparent text-white placeholder-gray-400 border border-gray-500 rounded focus:outline-none focus:ring-2 focus:ring-blue-400"
@@ -69,7 +69,7 @@ export default function LoginForm() {
             <input
               type={type}
               name="password"
-              placeholder="Password"
+              placeholder="Пароль"
               value={formData.password}
               onChange={handleChange}
               className="w-full mb-1 px-4  bg-transparent text-white placeholder-gray-400 focus:outline-none"
@@ -80,7 +80,7 @@ export default function LoginForm() {
             </span>
           </div>
 
-          <Button label={loading ? 'Loading' : 'Login'} styles={buttonStyles} to="/" />
+          <Button label={loading ? 'Завантаження...' : 'Login'} styles={buttonStyles} to="/" />
           <div className="p-5 text-center flex justify-center flex-col">
             <div className="justify-center flex items-center">
               <input
@@ -90,9 +90,9 @@ export default function LoginForm() {
                 name="remember"
                 onChange={handleChangeChecked}
               />{' '}
-              Remember me
+              Запам'ятати мене
             </div>
-            <p className="p-5 ">if you don't have an account</p>
+            <p className="p-5 ">Не маете аккаунт?</p>
             <Button label={'Sign up'} styles={buttonStyles} to="/signup" />
             {error && <p className="text-red-600 text-sm text-center">{error}</p>}
           </div>
