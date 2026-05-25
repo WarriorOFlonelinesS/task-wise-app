@@ -1,8 +1,11 @@
 <?php
 
+use App\Http\Controllers\AnalyticsController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\GeminiController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TaskController;
+use App\Services\JarvisService;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/ping', function () {
@@ -26,6 +29,7 @@ Route::middleware('throttle:20,1')->group(function () {
 
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
 
+
 Route::middleware('auth:sanctum')->group(function () {
 
     Route::get('/tasks/filter', [TaskController::class, 'filter']);
@@ -40,5 +44,13 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::delete('/tasks/{id}', [TaskController::class, 'destroy']);
 
-    Route::get('/ai-analyse/{id}', [GeminiController::class, 'analyzeData']);
+    Route::get('/tasks-analytic/{id}', [AnalyticsController::class, 'taskAnalyze']);
+    
+    Route::get('/tasks-analytic', [AnalyticsController::class, 'tasksStatistic']);
+
+    Route::get('/profile/{id}', [ProfileController::class, 'show']);
+
+    Route::put('/profile/{id}', [ProfileController::class, 'update']);
+
+    Route::delete('/profile/{id}', [ProfileController::class, 'destroy']);
 });

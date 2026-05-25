@@ -1,6 +1,7 @@
 {
   "packages": [
     {
+<<<<<<< HEAD
       "name": "carbonphp/carbon-doctrine-types",
       "version": "3.2.0",
       "version_normalized": "3.2.0.0",
@@ -324,6 +325,8 @@
       "install-path": "../fruitcake/php-cors"
     },
     {
+=======
+>>>>>>> frontend/profile
       "name": "google-gemini-php/client",
       "version": "2.5.0",
       "version_normalized": "2.5.0.0",
@@ -729,6 +732,7 @@
       "install-path": "../guzzlehttp/psr7"
     },
     {
+<<<<<<< HEAD
       "name": "illuminate/collections",
       "version": "v9.52.16",
       "version_normalized": "9.52.16.0",
@@ -1010,6 +1014,81 @@
       "install-path": "../illuminate/support"
     },
     {
+=======
+>>>>>>> frontend/profile
+      "name": "laravel/pint",
+      "version": "v1.23.0",
+      "version_normalized": "1.23.0.0",
+      "source": {
+        "type": "git",
+        "url": "https://github.com/laravel/pint.git",
+        "reference": "9ab851dba4faa51a3c3223dd3d07044129021024"
+      },
+      "dist": {
+        "type": "zip",
+        "url": "https://api.github.com/repos/laravel/pint/zipball/9ab851dba4faa51a3c3223dd3d07044129021024",
+        "reference": "9ab851dba4faa51a3c3223dd3d07044129021024",
+        "shasum": ""
+      },
+      "require": {
+        "ext-json": "*",
+        "ext-mbstring": "*",
+        "ext-tokenizer": "*",
+        "ext-xml": "*",
+        "php": "^8.2.0"
+      },
+      "require-dev": {
+        "friendsofphp/php-cs-fixer": "^3.76.0",
+        "illuminate/view": "^11.45.1",
+        "larastan/larastan": "^3.5.0",
+        "laravel-zero/framework": "^11.45.0",
+        "mockery/mockery": "^1.6.12",
+        "nunomaduro/termwind": "^2.3.1",
+        "pestphp/pest": "^2.36.0"
+      },
+      "time": "2025-07-03T10:37:47+00:00",
+      "bin": [
+        "builds/pint"
+      ],
+      "type": "project",
+      "installation-source": "dist",
+      "autoload": {
+        "files": [
+          "overrides/Runner/Parallel/ProcessFactory.php"
+        ],
+        "psr-4": {
+          "App\\": "app/",
+          "Database\\Seeders\\": "database/seeders/",
+          "Database\\Factories\\": "database/factories/"
+        }
+      },
+      "notification-url": "https://packagist.org/downloads/",
+      "license": [
+        "MIT"
+      ],
+      "authors": [
+        {
+          "name": "Nuno Maduro",
+          "email": "enunomaduro@gmail.com"
+        }
+      ],
+      "description": "An opinionated code formatter for PHP.",
+      "homepage": "https://laravel.com",
+      "keywords": [
+        "format",
+        "formatter",
+        "lint",
+        "linter",
+        "php"
+      ],
+      "support": {
+        "issues": "https://github.com/laravel/pint/issues",
+        "source": "https://github.com/laravel/pint"
+      },
+      "install-path": "../laravel/pint"
+    },
+    {
+<<<<<<< HEAD
       "name": "nesbot/carbon",
       "version": "2.73.0",
       "version_normalized": "2.73.0.0",
@@ -1120,6 +1199,8 @@
       "install-path": "../nesbot/carbon"
     },
     {
+=======
+>>>>>>> frontend/profile
       "name": "php-http/discovery",
       "version": "1.20.0",
       "version_normalized": "1.20.0.0",
@@ -1202,6 +1283,7 @@
       "install-path": "../php-http/discovery"
     },
     {
+<<<<<<< HEAD
       "name": "psr/clock",
       "version": "1.0.0",
       "version_normalized": "1.0.0.0",
@@ -1309,6 +1391,8 @@
       "install-path": "../psr/container"
     },
     {
+=======
+>>>>>>> frontend/profile
       "name": "psr/http-client",
       "version": "1.0.3",
       "version_normalized": "1.0.3.0",
@@ -1478,6 +1562,7 @@
       "install-path": "../psr/http-message"
     },
     {
+<<<<<<< HEAD
       "name": "psr/simple-cache",
       "version": "3.0.0",
       "version_normalized": "3.0.0.0",
@@ -1532,6 +1617,8 @@
       "install-path": "../psr/simple-cache"
     },
     {
+=======
+>>>>>>> frontend/profile
       "name": "ralouphie/getallheaders",
       "version": "3.0.3",
       "version_normalized": "3.0.3.0",
@@ -1647,6 +1734,7 @@
         }
       ],
       "install-path": "../symfony/deprecation-contracts"
+<<<<<<< HEAD
     },
     {
       "name": "symfony/http-foundation",
@@ -2231,8 +2319,12 @@
         }
       ],
       "install-path": "../voku/portable-ascii"
+=======
+>>>>>>> frontend/profile
     }
   ],
-  "dev": false,
-  "dev-package-names": []
+  "dev": true,
+  "dev-package-names": [
+    "laravel/pint"
+  ]
 }

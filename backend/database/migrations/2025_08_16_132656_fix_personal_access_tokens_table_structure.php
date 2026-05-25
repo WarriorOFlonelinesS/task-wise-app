@@ -19,9 +19,9 @@ return new class extends Migration
             if (Schema::hasColumn('personal_access_tokens', 'tokenable_id')) {
                 $table->dropColumn('tokenable_id');
             }
-            
+
             // Add the user_id column if it doesn't exist
-            if (!Schema::hasColumn('personal_access_tokens', 'user_id')) {
+            if (! Schema::hasColumn('personal_access_tokens', 'user_id')) {
                 $table->foreignId('user_id')->constrained()->onDelete('cascade');
             }
         });
@@ -38,7 +38,7 @@ return new class extends Migration
                 $table->dropForeign(['user_id']);
                 $table->dropColumn('user_id');
             }
-            
+
             // Add back the polymorphic columns
             $table->morphs('tokenable');
         });

@@ -8,9 +8,47 @@ export default {
           '0%': { opacity: '0', transform: 'translateY(-20px)' },
           '100%': { opacity: '1', transform: 'translateY(0)' },
         },
+        borderBeam: {
+          '0%': { transform: 'rotate(0deg)' },
+          '100%': { transform: 'rotate(360deg)' },
+        },
+        slowSpin: {
+          '0%': { transform: 'rotate(0deg)' },
+          '100%': { transform: 'rotate(360deg)'},
+        },
+        statusGlitch: {
+          '0%, 100%': { filter: 'brightness(1)', transform: 'translate(0, 0)'},
+          '20%': { filter: 'brightness(1.35)', transform: 'translate(1px, 0)'},
+          '40%': { filter: 'brightness(1.2)', transform: 'translate(-1px, 0)'},
+          '60%': { filter: 'brightness(1.3)', transform: 'translate(0, 1px)'},
+          '80%': {filter: 'brightness(1.15)', transform: 'translate(0, 1px)' }
+        },
+        scanSweep: {
+          '0%': { transform: 'translateY(-120%)', opacity: '0' },
+          '15%': { opacity: '1' },
+          '85%': { opacity: '1' },
+          '100%': { transform: 'translateY(120%)', opacity: '0' }
+        },
+        'jarvisGlow': {
+          '0%, 100%': {
+            filter: 'drop-shadow(0 0 2px rgba(74, 222, 128, 0.8))',
+            opacity: '0.7',
+            transform: 'scale(1.1)',
+          },
+          '50%': {
+            filter: 'drop-shadow(0 0 15px rgba(74, 222, 128, 1))',
+            opacity: '1',
+            transform: 'scale(1.1)',
+          }
+        }
       },
       animation: {
         slideDown: 'slideDown 0.5s ease-out',
+        'border-beam': 'borderBeam 8s linear infinite',
+        'slow-spin': 'slowSpin 4s linear infinite',
+        'status-glitch': 'statusGlitch 0.35s ease-out',
+        'scan-sweep': 'scanSweep 3.5s ease-in-out infinite',
+        'jarvis-ai': 'jarvisGlow 2s ease-in-out infinite'
       },
     },
   },

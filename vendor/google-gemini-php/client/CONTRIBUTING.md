@@ -12,15 +12,25 @@ Please review these guidelines before submitting any pull requests.
 
 ## Guidelines
 
+<<<<<<< HEAD
+* Please ensure the coding style running `composer lint`.
+* Send a coherent commit history, making sure each individual commit in your pull request is meaningful.
+* You may need to [rebase](https://git-scm.com/book/en/v2/Git-Branching-Rebasing) to avoid merge conflicts.
+* Please remember that we follow [SemVer](http://semver.org/).
+=======
 - Please ensure the coding style running `composer lint`.
 - Send a coherent commit history, making sure each individual commit in your pull request is meaningful.
 - You may need to [rebase](https://git-scm.com/book/en/v2/Git-Branching-Rebasing) to avoid merge conflicts.
 - Please remember that we follow [SemVer](http://semver.org/).
+>>>>>>> frontend/profile
 
 ## Setup
 
 Clone your fork, then install the dev dependencies:
+<<<<<<< HEAD
+=======
 
+>>>>>>> frontend/profile
 ```bash
 composer install
 ```
@@ -28,7 +38,10 @@ composer install
 ## Lint
 
 Lint your code:
+<<<<<<< HEAD
+=======
 
+>>>>>>> frontend/profile
 ```bash
 composer lint
 ```
@@ -36,19 +49,28 @@ composer lint
 ## Tests
 
 Run all tests:
+<<<<<<< HEAD
+=======
 
+>>>>>>> frontend/profile
 ```bash
 composer test
 ```
 
 Check types:
+<<<<<<< HEAD
+=======
 
+>>>>>>> frontend/profile
 ```bash
 composer test:types
 ```
 
 Unit tests:
+<<<<<<< HEAD
+=======
 
+>>>>>>> frontend/profile
 ```bash
 composer test:unit
 ```

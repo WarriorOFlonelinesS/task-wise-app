@@ -122,5 +122,11 @@ return [
         'driver' => env('APP_MAINTENANCE_DRIVER', 'file'),
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
-
+    'channels' => [
+        'ai' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/ai.log'),
+            'level' => 'debug',
+        ],
+    ],
 ];

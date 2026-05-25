@@ -17,11 +17,10 @@ class AuthService
             'email' => $dto->email,
             'password' => Hash::make($dto->password),
         ]);
-      
-            $token = $user->createToken('auth_token')->plainTextToken;
-    
 
-        return ['user' => $user, 'token'=>$token];
+        $token = $user->createToken('auth_token')->plainTextToken;
+
+        return ['user' => $user, 'token' => $token];
     }
 
     public function loginUser(UserDTO $dto)
@@ -31,26 +30,25 @@ class AuthService
             throw new AuthenticationException('Invalid credentials');
         }
         $token = $user->createToken('auth_token')->plainTextToken;
-       
-     
+
         return ['user' => $user, 'token' => $token];
     }
 
-    public function loginUserWithToken(UserDTO $dto){
+    public function loginUserWithToken(UserDTO $dto)
+    {
 
         [$id, $plainToken] = explode('|', $dto->token, 2);
         $id = (int) trim($id);
         $plainToken = trim($plainToken);
-    
+
         $hashed = hash('sha256', $plainToken);
         $tokenRecord = PersonalAccessToken::where('id', $id)
-        ->where('token', $hashed)
-        ->first();
-    
-    
-          $user = User::find($tokenRecord->tokenable_id);
-      
-          return ['user' => $user, 'token' =>  $plainToken];
+            ->where('token', $hashed)
+            ->first();
+
+        $user = User::find($tokenRecord->tokenable_id);
+
+        return ['user' => $user, 'token' => $plainToken];
     }
 
     public function logoutUser()

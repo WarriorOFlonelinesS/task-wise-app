@@ -13,13 +13,13 @@ return new class extends Migration
     {
         Schema::table('personal_access_tokens', function (Blueprint $table) {
             // Add polymorphic columns that Laravel Sanctum expects
-            if (!Schema::hasColumn('personal_access_tokens', 'tokenable_type')) {
+            if (! Schema::hasColumn('personal_access_tokens', 'tokenable_type')) {
                 $table->string('tokenable_type')->nullable();
             }
-            if (!Schema::hasColumn('personal_access_tokens', 'tokenable_id')) {
+            if (! Schema::hasColumn('personal_access_tokens', 'tokenable_id')) {
                 $table->unsignedBigInteger('tokenable_id')->nullable();
             }
-            
+
             // Add index for polymorphic columns
             $table->index(['tokenable_type', 'tokenable_id']);
         });

@@ -1,4 +1,9 @@
+<<<<<<< HEAD
+getallheaders
+=============
+=======
 # getallheaders
+>>>>>>> frontend/profile
 
 PHP `getallheaders()` polyfill. Compatible with PHP >= 5.3.
 
@@ -8,6 +13,10 @@ PHP `getallheaders()` polyfill. Compatible with PHP >= 5.3.
 [![Latest Unstable Version](https://poser.pugx.org/ralouphie/getallheaders/v/unstable.png)](https://packagist.org/packages/ralouphie/getallheaders)
 [![License](https://poser.pugx.org/ralouphie/getallheaders/license.png)](https://packagist.org/packages/ralouphie/getallheaders)
 
+<<<<<<< HEAD
+
+=======
+>>>>>>> frontend/profile
 This is a simple polyfill for [`getallheaders()`](http://www.php.net/manual/en/function.getallheaders.php).
 
 ## Install

@@ -26,16 +26,27 @@ class UserValidationService
     public function validateLogin(array $data)
     {
         return validator($data, [
-            'email'    => 'required_without:token|string|email|max:255',
+            'email' => 'required_without:token|string|email|max:255',
             'password' => 'required_with:email|string|min:8|max:255',
-            'token'    => ['required_without:email','string'],
+            'token' => ['required_without:email', 'string'],
         ])->validate();
     }
 
     public function validateToken(array $data)
     {
         return validator($data, [
-'token' => ['sometimes', 'string']
-       ])->validate();
+            'token' => ['sometimes', 'string'],
+        ])->validate();
+    }
+
+    public function validateProfileData(array $data)
+    {
+        return validator($data, [
+            'avatar_url' => 'sometimes|string',
+            'name' => 'sometimes|string|max:255|regex:/^[a-zA-Zа-яА-Я\s]+$/',
+        ], [
+            'name.regex' => 'Name can only contain letters and spaces.',
+        ])->validate();
+
     }
 }

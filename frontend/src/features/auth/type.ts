@@ -4,3 +4,10 @@ export interface AuthState {
   loading: boolean;
   error: string | null;
 }
+
+export interface User {
+  id: number;
+  name: string;
+  email: string;
+  avatar_url: string;
+}

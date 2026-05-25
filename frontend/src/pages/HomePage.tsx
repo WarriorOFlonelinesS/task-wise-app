@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-
 import Loader from '../components/Common/Loader';
 import LoginForm from '../components/Auth/LoginForm';
 import { RootState } from '../store';
@@ -9,8 +8,7 @@ import { loginRequestWithToken } from '../features/auth/authSlice';
 import Cookies from 'js-cookie';
 
 export default function HomePage() {
-  const token = useSelector((state: RootState) => state.auth.token)
-  const tokenFromCookie = Cookies.get('token')
+  const tokenFromCookie = Cookies.get('token');
 
   const user = useSelector((state: RootState) => state.auth.user);
   const [showLoader, setShowLoader] = useState(true);
@@ -21,6 +19,7 @@ export default function HomePage() {
     if (tokenFromCookie !== undefined) {
       dispatch(loginRequestWithToken(tokenFromCookie));
     }
+
     const timer = setTimeout(() => {
       setFade(true);
       setTimeout(() => setShowLoader(false), 1000);
@@ -40,7 +39,7 @@ export default function HomePage() {
         </div>
       )}
 
-      <div className=" mx-auto px-4 py-1 flex w-full justify-center">
+      <div className=" mx-auto px-4 py-1 bg-gradient-to-br from-[#0f3936] to-[#184e4a] flex w-full justify-center">
         <div className="flex flex-col h-screen w-full items-center overflow-hidden">
           {user ? <Dashboard /> : <LoginForm />}
         </div>

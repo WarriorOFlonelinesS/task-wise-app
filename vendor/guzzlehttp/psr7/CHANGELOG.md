@@ -26,7 +26,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+<<<<<<< HEAD
+- Make `StreamWrapper::stream_stat()` return `false` if inner stream's size is `null` 
+=======
 - Make `StreamWrapper::stream_stat()` return `false` if inner stream's size is `null`
+>>>>>>> frontend/profile
 
 ### Changed
 
@@ -232,12 +236,20 @@ Identical to the RC release.
 
 - Restored partial HHVM 3 support
 
+<<<<<<< HEAD
+
+=======
+>>>>>>> frontend/profile
 ## [1.6.1] - 2019-07-02
 
 ### Fixed
 
 - Accept null and bool header values again
 
+<<<<<<< HEAD
+
+=======
+>>>>>>> frontend/profile
 ## [1.6.0] - 2019-06-30
 
 ### Added
@@ -257,18 +269,30 @@ Identical to the RC release.
 - Fixed readable/writable detection for certain stream modes (#248)
 - Fixed encoding of special characters in the `userInfo` component of an URI (#253)
 
+<<<<<<< HEAD
+
+=======
+>>>>>>> frontend/profile
 ## [1.5.2] - 2018-12-04
 
 ### Fixed
 
 - Check body size when getting the message summary
 
+<<<<<<< HEAD
+
+=======
+>>>>>>> frontend/profile
 ## [1.5.1] - 2018-12-04
 
 ### Fixed
 
 - Get the summary of a body only if it is readable
 
+<<<<<<< HEAD
+
+=======
+>>>>>>> frontend/profile
 ## [1.5.0] - 2018-12-03
 
 ### Added
@@ -292,8 +316,15 @@ Identical to the RC release.
 - `InflateStream` preserves `isSeekable` attribute of the underlying stream
 - `ServerRequest::getUriFromGlobals` to support URLs in query parameters
 
+<<<<<<< HEAD
+
 Several other fixes and improvements.
 
+
+=======
+Several other fixes and improvements.
+
+>>>>>>> frontend/profile
 ## [1.4.2] - 2017-03-20
 
 ### Fixed
@@ -301,6 +332,10 @@ Several other fixes and improvements.
 - Reverted BC break to `Uri::resolve` and `Uri::removeDotSegments` by removing
   calls to `trigger_error` when deprecated methods are invoked.
 
+<<<<<<< HEAD
+
+=======
+>>>>>>> frontend/profile
 ## [1.4.1] - 2017-02-27
 
 ### Added
@@ -313,6 +348,10 @@ Several other fixes and improvements.
   relative path and an authority by adding a leading slash to the path. It's only
   deprecated now.
 
+<<<<<<< HEAD
+
+=======
+>>>>>>> frontend/profile
 ## [1.4.0] - 2017-02-21
 
 ### Added
@@ -352,6 +391,10 @@ Several other fixes and improvements.
 - `ServerRequest::getUriFromGlobals` when `Host` header contains port.
 - Compatibility of URIs with `file` scheme and empty host.
 
+<<<<<<< HEAD
+
+=======
+>>>>>>> frontend/profile
 ## [1.3.1] - 2016-06-25
 
 ### Fixed
@@ -371,6 +414,10 @@ Several other fixes and improvements.
   consistent with withPath, withQuery etc.
 - `ServerRequest::withoutAttribute` when attribute value is null.
 
+<<<<<<< HEAD
+
+=======
+>>>>>>> frontend/profile
 ## [1.3.0] - 2016-04-13
 
 ### Added
@@ -384,8 +431,13 @@ Several other fixes and improvements.
 - Can now extend Uri.
 
 ### Fixed
+<<<<<<< HEAD
+- A bug in validating request methods by making it more permissive.
+
+=======
 
 - A bug in validating request methods by making it more permissive.
+>>>>>>> frontend/profile
 
 ## [1.2.3] - 2016-02-18
 
@@ -395,6 +447,10 @@ Several other fixes and improvements.
   streams, which can sometimes return fewer bytes than requested with `fread`.
 - Handling of gzipped responses with FNAME headers.
 
+<<<<<<< HEAD
+
+=======
+>>>>>>> frontend/profile
 ## [1.2.2] - 2016-01-22
 
 ### Added
@@ -404,12 +460,20 @@ Several other fixes and improvements.
 - Support for using '0' as a filename.
 - Support for including non-standard ports in Host headers.
 
+<<<<<<< HEAD
+
+=======
+>>>>>>> frontend/profile
 ## [1.2.1] - 2015-11-02
 
 ### Changes
 
 - Now supporting negative offsets when seeking to SEEK_END.
 
+<<<<<<< HEAD
+
+=======
+>>>>>>> frontend/profile
 ## [1.2.0] - 2015-08-15
 
 ### Changed
@@ -421,6 +485,10 @@ Several other fixes and improvements.
 - functions.php is now conditionally required.
 - user-info is no longer dropped when resolving URIs.
 
+<<<<<<< HEAD
+
+=======
+>>>>>>> frontend/profile
 ## [1.1.0] - 2015-06-24
 
 ### Changed
@@ -428,10 +496,18 @@ Several other fixes and improvements.
 - URIs can now be relative.
 - `multipart/form-data` headers are now overridden case-insensitively.
 - URI paths no longer encode the following characters because they are allowed
+<<<<<<< HEAD
+  in URIs: "(", ")", "*", "!", "'"
+- A port is no longer added to a URI when the scheme is missing and no port is
+  present.
+
+
+=======
   in URIs: "(", ")", "\*", "!", "'"
 - A port is no longer added to a URI when the scheme is missing and no port is
   present.
 
+>>>>>>> frontend/profile
 ## 1.0.0 - 2015-05-19
 
 Initial release.
@@ -441,6 +517,11 @@ Currently unsupported:
 - `Psr\Http\Message\ServerRequestInterface`
 - `Psr\Http\Message\UploadedFileInterface`
 
+<<<<<<< HEAD
+
+
+=======
+>>>>>>> frontend/profile
 [1.6.0]: https://github.com/guzzle/psr7/compare/1.5.2...1.6.0
 [1.5.2]: https://github.com/guzzle/psr7/compare/1.5.1...1.5.2
 [1.5.1]: https://github.com/guzzle/psr7/compare/1.5.0...1.5.1

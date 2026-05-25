@@ -4,9 +4,11 @@ import { registerRequest } from '../../features/auth/authSlice';
 import { useNavigate } from 'react-router-dom';
 import { RootState } from '../../store';
 import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline';
-
+import Button from '../Common/Button';
 
 export default function RegisterForm() {
+  const buttonStyles =
+    'w-full bg-red-800 px-2 py-1 my-2 w-32 flex justify-center backdrop-blur-md bg-white/5 px-3 py-1 backdrop-blur-xs rounded-md border duration-500 ease-in-out border-gray-500/70 hover:bg-[#00d1ff] hover:text-black hover:shadow-[0_0_25px_rgba(0,209,255,0.4)]  transition-colors';
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { loading, error, user } = useSelector((state: RootState) => state.auth);
@@ -21,9 +23,8 @@ export default function RegisterForm() {
     password: '',
     passwordConfirmation: '',
   });
-  
+
   const showPassword = () => {
-;
     if (type === 'password') {
       setHidden(true);
       setType('text');
@@ -55,7 +56,7 @@ export default function RegisterForm() {
       setShowSuccess(true);
       setTimeout(() => {
         navigate('/');
-      }, 2000); 
+      }, 2000);
     }
   }, [user, navigate]);
 
@@ -65,7 +66,6 @@ export default function RegisterForm() {
       ['remember']: e.target.checked,
     }));
   };
-
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -133,20 +133,21 @@ export default function RegisterForm() {
             {hiddenConfPassword ? <EyeSlashIcon className="w-6" /> : <EyeIcon className="w-6" />}
           </span>
         </div>
-        <div className='justify-center flex items-center'>
-          <input id="default-checkbox" type="checkbox" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 mr-2"
-          name='remember'
-          onChange={handleChangeChecked}/> Remember me
-          </div>
+        <div className="justify-center flex items-center">
+          <input
+            id="default-checkbox"
+            type="checkbox"
+            className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 mr-2"
+            name="remember"
+            onChange={handleChangeChecked}
+          />{' '}
+          Remember me
+        </div>
 
         <p className="text-center font-thin italic py-2">Minimum 8 symbols, maximum 225</p>
-        <button
-          type="submit"
-          disabled={loading}
-          className="w-full backdrop-blur-md bg-white/5 px-6 py-3 backdrop-blur-xs rounded-md border border-gray-300 hover:bg-gray-100 transition-colors"
-        >
+        <Button label={'Sign up'} styles={buttonStyles} to="/signup">
           {loading ? 'Loading...' : 'Sign up'}
-        </button>
+        </Button>
         {error && <p className="text-red-600 text-sm text-center">{error}</p>}
       </form>
     </div>

@@ -11,9 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('personal_access_tokens', function (Blueprint $table) {
-            //
-        });
+        // Проверяем, существует ли таблица, чтобы не упасть с ошибкой
+        if (Schema::hasTable('ai_task_analyzers')) {
+            Schema::table('ai_task_analyzers', function (Blueprint $table) {
+                $table->string('priority')->change();
+            });
+        }
     }
 
     /**
@@ -21,8 +24,10 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('personal_access_tokens', function (Blueprint $table) {
-            //
-        });
+        if (Schema::hasTable('ai_task_analyzers')) {
+            Schema::table('ai_task_analyzers', function (Blueprint $table) {
+                $table->integer('priority')->change();
+            });
+        }
     }
 };

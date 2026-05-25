@@ -15,7 +15,7 @@ return [
      * You can enable CORS for 1 or multiple paths.
      * Example: ['api/*']
      */
-    'paths' => ['api/*'],
+    'paths' => ['api/*', 'sanctum/csrf-cookie'],
 
     /*
      * Matches the request method. Only allow necessary methods.
@@ -31,8 +31,7 @@ return [
         'http://127.0.0.1:3000',
         'http://127.0.0.1:5173',
         'https://task-wise-ai-app.netlify.app/',
-        // Add your production domain here
-        // 'https://yourdomain.com',
+        
     ],
 
     /*

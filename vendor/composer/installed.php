@@ -3,22 +3,31 @@
         'name' => '__root__',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => 'cf724216f67d788a052c2adda459c10233d30bc3',
+<<<<<<< HEAD
+        'reference' => 'acdf89a39a2b9a10aebc856d3e6069b0afa6eb8e',
+=======
+        'reference' => '063a93e9f6d4d2964769ce5f5dd9da7705f631ae',
+>>>>>>> frontend/profile
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'dev' => false,
+        'dev' => true,
     ),
     'versions' => array(
         '__root__' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => 'cf724216f67d788a052c2adda459c10233d30bc3',
+<<<<<<< HEAD
+            'reference' => 'acdf89a39a2b9a10aebc856d3e6069b0afa6eb8e',
+=======
+            'reference' => '063a93e9f6d4d2964769ce5f5dd9da7705f631ae',
+>>>>>>> frontend/profile
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
             'dev_requirement' => false,
         ),
+<<<<<<< HEAD
         'carbonphp/carbon-doctrine-types' => array(
             'pretty_version' => '3.2.0',
             'version' => '3.2.0.0',
@@ -55,6 +64,8 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
+=======
+>>>>>>> frontend/profile
         'google-gemini-php/client' => array(
             'pretty_version' => '2.5.0',
             'version' => '2.5.0.0',
@@ -91,6 +102,7 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
+<<<<<<< HEAD
         'illuminate/collections' => array(
             'pretty_version' => 'v9.52.16',
             'version' => '9.52.16.0',
@@ -136,6 +148,18 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
+=======
+>>>>>>> frontend/profile
+        'laravel/pint' => array(
+            'pretty_version' => 'v1.23.0',
+            'version' => '1.23.0.0',
+            'reference' => '9ab851dba4faa51a3c3223dd3d07044129021024',
+            'type' => 'project',
+            'install_path' => __DIR__ . '/../laravel/pint',
+            'aliases' => array(),
+            'dev_requirement' => true,
+        ),
+<<<<<<< HEAD
         'nesbot/carbon' => array(
             'pretty_version' => '2.73.0',
             'version' => '2.73.0.0',
@@ -145,6 +169,8 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
+=======
+>>>>>>> frontend/profile
         'php-http/async-client-implementation' => array(
             'dev_requirement' => false,
             'provided' => array(
@@ -166,6 +192,7 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
+<<<<<<< HEAD
         'psr/clock' => array(
             'pretty_version' => '1.0.0',
             'version' => '1.0.0.0',
@@ -190,6 +217,8 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
+=======
+>>>>>>> frontend/profile
         'psr/http-client' => array(
             'pretty_version' => '1.0.3',
             'version' => '1.0.3.0',
@@ -238,6 +267,7 @@
                 1 => '*',
             ),
         ),
+<<<<<<< HEAD
         'psr/simple-cache' => array(
             'pretty_version' => '3.0.0',
             'version' => '3.0.0.0',
@@ -247,6 +277,8 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
+=======
+>>>>>>> frontend/profile
         'ralouphie/getallheaders' => array(
             'pretty_version' => '3.0.3',
             'version' => '3.0.3.0',
@@ -265,6 +297,7 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
+<<<<<<< HEAD
         'symfony/http-foundation' => array(
             'pretty_version' => 'v7.3.1',
             'version' => '7.3.1.0',
@@ -334,5 +367,7 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
+=======
+>>>>>>> frontend/profile
     ),
 );

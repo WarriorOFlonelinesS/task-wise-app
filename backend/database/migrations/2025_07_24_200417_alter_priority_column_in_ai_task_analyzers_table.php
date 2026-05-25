@@ -12,6 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('ai_task_analyzers', function (Blueprint $table) {
+            // Сэр, убедитесь, что пакет doctrine/dbal установлен, 
+            // иначе смена типа колонки может выдать ошибку в старых версиях Laravel
             $table->string('priority')->change();
         });
     }

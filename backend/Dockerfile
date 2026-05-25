@@ -1,7 +1,8 @@
-FROM php:8.2-fpm
+FROM php:8.3-fpm
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
+    postgresql-client \
     git \
     curl \
     libpng-dev \
@@ -11,6 +12,7 @@ RUN apt-get update && apt-get install -y \
     unzip \
     libpq-dev \
     supervisor
+
 
 # Clean up
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
@@ -28,7 +30,11 @@ WORKDIR /var/www
 COPY composer.json composer.lock ./
 
 # Install PHP dependencies
-RUN composer install --no-dev --optimize-autoloader --no-scripts
+RUN COMPOSER_MEMORY_LIMIT=-1 composer install \
+    --no-dev \
+    --optimize-autoloader \
+    --no-scripts \
+    --no-interaction
 
 # Copy application code
 COPY . .
@@ -48,7 +54,7 @@ COPY docker/supervisor.conf /etc/supervisor/conf.d/supervisord.conf
 COPY entrypoint.sh /usr/local/bin/entrypoint.sh
 RUN chmod +x /usr/local/bin/entrypoint.sh
 
-EXPOSE 8000
+EXPOSE 9000
 
 # Start Laravel via entrypoint
 CMD ["/usr/local/bin/entrypoint.sh"]

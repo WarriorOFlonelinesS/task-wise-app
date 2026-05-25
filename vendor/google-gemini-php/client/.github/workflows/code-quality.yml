@@ -1,6 +1,10 @@
 name: Code Quality
 
+<<<<<<< HEAD
+on: ['push', 'pull_request']
+=======
 on: ["push", "pull_request"]
+>>>>>>> frontend/profile
 
 jobs:
   ci:
@@ -16,6 +20,10 @@ jobs:
     name: Formats P${{ matrix.php }} - ${{ matrix.os }} - ${{ matrix.dependency-version }}
 
     steps:
+<<<<<<< HEAD
+
+=======
+>>>>>>> frontend/profile
       - name: Checkout
         uses: actions/checkout@v4
 

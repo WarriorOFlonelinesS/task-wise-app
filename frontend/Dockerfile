@@ -1,26 +1,16 @@
-# Use Node.js 18 Alpine as base image
-FROM node:18-alpine
+FROM node:20-alpine
 
-# Set working directory
 WORKDIR /app
 
-# Copy package files
-COPY package*.json ./
+# Копируем только файлы зависимостей
+COPY package.json package-lock.json ./
 
-# Install dependencies
-RUN npm ci --only=production
+# Устанавливаем зависимости
+RUN npm install
 
-# Copy source code
+# Копируем остальной код
 COPY . .
 
-# Build the application
-RUN npm run build
+EXPOSE 5173
 
-# Install serve to run the built app
-RUN npm install -g serve
-
-# Expose port 3000
-EXPOSE 3000
-
-# Start the application
-CMD ["serve", "-s", "dist", "-l", "3000"] 
+CMD ["npm", "run", "dev"]

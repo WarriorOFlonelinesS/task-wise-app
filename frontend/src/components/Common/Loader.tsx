@@ -3,9 +3,9 @@ import React from 'react';
 export default function Loader() {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center text-[#c9e7e2] font-sans bg-gradient-to-br from-[#0f3936] to-[#184e4a] w-screen">
-      <h1 className="text-5xl font-bold text-[#e6f7f3] m-0">Task Wise AI</h1>
+      <h1 className="text-5xl font-bold text-[#e6f7f3] m-0">Task Wise</h1>
       <p className="text-2xl font-normal text-[#a3cfc7] mt-4 mb-12 text-center leading-snug">
-        Bringing your tasks to the next level
+        Ваші завдання на новому рівні
         <br />
         with AI
       </p>
@@ -18,7 +18,7 @@ export default function Loader() {
           />
         </div>
       </div>
-      <div className="mt-10 text-2xl text-[#e6f7f3] tracking-wide">Loading...</div>
+      <div className="mt-10 text-2xl text-[#e6f7f3] tracking-wide">Завантаження...</div>
     </div>
   );
 }

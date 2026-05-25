@@ -1,4 +1,9 @@
+<<<<<<< HEAD
+HTTP Client
+===========
+=======
 # HTTP Client
+>>>>>>> frontend/profile
 
 This repository holds all the common code related to [PSR-18 (HTTP Client)][psr-url].
 

@@ -21,7 +21,9 @@ export const deleteTasksSuccess = createAction<string>('tasks/deleteTasksSuccess
 
 export const deleteTasksFailed = createAction<string>('tasks/deleteTasksFailed');
 
-export const updateTasksRequest = createAction<{ id: string; title: string; description: string }>('tasks/updateTasksRequest');
+export const updateTasksRequest = createAction<{ id: string; title: string; description: string }>(
+  'tasks/updateTasksRequest',
+);
 
 export const updateTasksSuccess = createAction<Task>('tasks/updateTasksSuccess');
 

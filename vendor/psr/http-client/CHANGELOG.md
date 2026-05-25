@@ -21,8 +21,13 @@ First stable release. No changes since 0.3.0.
 ## 0.3.0
 
 Added Interface suffix on exceptions
+<<<<<<< HEAD
+ 
+## 0.2.0 
+=======
 
 ## 0.2.0
+>>>>>>> frontend/profile
 
 All exceptions are in `Psr\Http\Client` namespace
 

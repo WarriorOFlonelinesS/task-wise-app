@@ -2,47 +2,67 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\JarvisService;
+use App\Services\TaskService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log as FacadesLog;
+use Log;
 
 class AnalyticsController
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    protected Request $request;
+
+    protected TaskService $taskService;
+
+    protected JarvisService $jarvisService;
+
+    public function __construct(Request $request, TaskService $taskService, JarvisService $jarvisService)
     {
-        //
+        $this->request = $request;
+        $this->taskService = $taskService;
+        $this->jarvisService = $jarvisService;
+
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function tasksStatistic()
     {
-        //
+        try {
+            $tasks = $tasks = $this->taskService->showTasks();
+            Log::build([
+                'driver' => 'single',
+                'path' => storage_path('logs/ai_analysis.log'),
+              ])->debug($tasks->toArray());
+            $statistics = $this->jarvisService->analyzeStatistic($tasks->toArray());
+            Log::channel('ai')->info('Анализ завершен успешно');
+
+            return response()->json([
+                'statistics' => $statistics,
+            ], 200);
+        } catch (\Exception $e) {
+            Log::error('Error getting task: '.$e->getMessage());
+
+            return response()->json([
+                'error' => 'I have gone to drink tea for many times',
+            ], 500);
+        }
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function taskAnalyze(string $id)
     {
-        //
-    }
+        try {
+            $tasks = $tasks = $this->taskService->showTask($id);
+            $analyzeTask = $this->jarvisService->analyzeTask($tasks);
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
+            return response()->json([
+                'task_id' => $id,
+                'analyzeTask' => $analyzeTask,
+            ], 200);
+        } catch (\Exception $e) {
+            Log::error('Error getting task: '.$e->getMessage());
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+            return response()->json([
+                'error' => 'I have gone to drink tea',
+            ], 500);
+        }
     }
 }

@@ -41,7 +41,7 @@ const authSlice = createSlice({
         name: string;
         email: string;
         password: string;
-        remember: boolean
+        remember: boolean;
       }>,
     ) {
       state.loading = true;
@@ -50,10 +50,9 @@ const authSlice = createSlice({
     loginRequestWithToken(
       state,
       action: PayloadAction<{
-        token:string
+        token: string;
       }>,
     ) {
-
       state.loading = true;
       state.error = null;
     },
@@ -63,7 +62,6 @@ const authSlice = createSlice({
       state.error = null;
       state.user = action.payload.user;
       state.token = action.payload.token;
-     
     },
 
     loginFailure(state, action: PayloadAction<string>) {

@@ -7,6 +7,7 @@ namespace Composer\Autoload;
 class ComposerStaticInit6713b9aa2f73c994da35d4aa2f49cb8d
 {
     public static $files = array (
+<<<<<<< HEAD
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
         '6e3fae29631ef280660b3cdad06f25a8' => __DIR__ . '/..' . '/symfony/deprecation-contracts/function.php',
         'a4a119a56e50fbb293281d9a48007e0e' => __DIR__ . '/..' . '/symfony/polyfill-php80/bootstrap.php',
@@ -15,11 +16,17 @@ class ComposerStaticInit6713b9aa2f73c994da35d4aa2f49cb8d
         '60799491728b879e74601d83e38b2cad' => __DIR__ . '/..' . '/illuminate/collections/helpers.php',
         '7b11c4dc42b3b3023073cb14e519683c' => __DIR__ . '/..' . '/ralouphie/getallheaders/src/getallheaders.php',
         '72579e7bd17821bb1321b87411366eae' => __DIR__ . '/..' . '/illuminate/support/helpers.php',
+=======
+        '7b11c4dc42b3b3023073cb14e519683c' => __DIR__ . '/..' . '/ralouphie/getallheaders/src/getallheaders.php',
+        '6e3fae29631ef280660b3cdad06f25a8' => __DIR__ . '/..' . '/symfony/deprecation-contracts/function.php',
+>>>>>>> frontend/profile
         'e4c9b2466af4057cc73ca0bb2fbccd8a' => __DIR__ . '/..' . '/google-gemini-php/client/src/Gemini.php',
         '37a3dc5111fe8f707ab4c132ef1dbc62' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/functions_include.php',
+        '062a54fe8f6f91078b197f2922521dd9' => __DIR__ . '/..' . '/laravel/pint/overrides/Runner/Parallel/ProcessFactory.php',
     );
 
     public static $prefixLengthsPsr4 = array (
+<<<<<<< HEAD
         'v' => 
         array (
             'voku\\' => 5,
@@ -45,6 +52,12 @@ class ComposerStaticInit6713b9aa2f73c994da35d4aa2f49cb8d
         array (
             'Illuminate\\Support\\' => 19,
             'Illuminate\\Contracts\\' => 21,
+=======
+        'P' => 
+        array (
+            'Psr\\Http\\Message\\' => 17,
+            'Psr\\Http\\Client\\' => 16,
+>>>>>>> frontend/profile
         ),
         'H' => 
         array (
@@ -57,6 +70,7 @@ class ComposerStaticInit6713b9aa2f73c994da35d4aa2f49cb8d
             'GuzzleHttp\\' => 11,
             'Gemini\\' => 7,
         ),
+<<<<<<< HEAD
         'F' => 
         array (
             'Fruitcake\\Cors\\' => 15,
@@ -64,15 +78,29 @@ class ComposerStaticInit6713b9aa2f73c994da35d4aa2f49cb8d
         'D' => 
         array (
             'Doctrine\\Inflector\\' => 19,
+            'Database\\Seeders\\' => 17,
+            'Database\\Factories\\' => 19,
         ),
         'C' => 
         array (
             'Carbon\\Doctrine\\' => 16,
             'Carbon\\' => 7,
         ),
+=======
+        'D' => 
+        array (
+            'Database\\Seeders\\' => 17,
+            'Database\\Factories\\' => 19,
+        ),
+>>>>>>> frontend/profile
+        'A' => 
+        array (
+            'App\\' => 4,
+        ),
     );
 
     public static $prefixDirsPsr4 = array (
+<<<<<<< HEAD
         'voku\\' => 
         array (
             0 => __DIR__ . '/..' . '/voku/portable-ascii/src/voku',
@@ -105,6 +133,8 @@ class ComposerStaticInit6713b9aa2f73c994da35d4aa2f49cb8d
         array (
             0 => __DIR__ . '/..' . '/psr/simple-cache/src',
         ),
+=======
+>>>>>>> frontend/profile
         'Psr\\Http\\Message\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/http-factory/src',
@@ -114,6 +144,7 @@ class ComposerStaticInit6713b9aa2f73c994da35d4aa2f49cb8d
         array (
             0 => __DIR__ . '/..' . '/psr/http-client/src',
         ),
+<<<<<<< HEAD
         'Psr\\Container\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/container/src',
@@ -133,6 +164,8 @@ class ComposerStaticInit6713b9aa2f73c994da35d4aa2f49cb8d
         array (
             0 => __DIR__ . '/..' . '/illuminate/contracts',
         ),
+=======
+>>>>>>> frontend/profile
         'Http\\Discovery\\' => 
         array (
             0 => __DIR__ . '/..' . '/php-http/discovery/src',
@@ -153,6 +186,7 @@ class ComposerStaticInit6713b9aa2f73c994da35d4aa2f49cb8d
         array (
             0 => __DIR__ . '/..' . '/google-gemini-php/client/src',
         ),
+<<<<<<< HEAD
         'Fruitcake\\Cors\\' => 
         array (
             0 => __DIR__ . '/..' . '/fruitcake/laravel-cors/src',
@@ -162,6 +196,17 @@ class ComposerStaticInit6713b9aa2f73c994da35d4aa2f49cb8d
         array (
             0 => __DIR__ . '/..' . '/doctrine/inflector/lib/Doctrine/Inflector',
         ),
+=======
+>>>>>>> frontend/profile
+        'Database\\Seeders\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/laravel/pint/database/seeders',
+        ),
+        'Database\\Factories\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/laravel/pint/database/factories',
+        ),
+<<<<<<< HEAD
         'Carbon\\Doctrine\\' => 
         array (
             0 => __DIR__ . '/..' . '/carbonphp/carbon-doctrine-types/src/Carbon/Doctrine',
@@ -170,9 +215,16 @@ class ComposerStaticInit6713b9aa2f73c994da35d4aa2f49cb8d
         array (
             0 => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon',
         ),
+=======
+>>>>>>> frontend/profile
+        'App\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/laravel/pint/app',
+        ),
     );
 
     public static $classMap = array (
+<<<<<<< HEAD
         'Attribute' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
         'DateError' => __DIR__ . '/..' . '/symfony/polyfill-php83/Resources/stubs/DateError.php',
@@ -190,6 +242,9 @@ class ComposerStaticInit6713b9aa2f73c994da35d4aa2f49cb8d
         'Stringable' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Stringable.php',
         'UnhandledMatchError' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/UnhandledMatchError.php',
         'ValueError' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/ValueError.php',
+=======
+        'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
+>>>>>>> frontend/profile
     );
 
     public static function getInitializer(ClassLoader $loader)

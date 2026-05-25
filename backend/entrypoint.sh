@@ -16,4 +16,5 @@ php artisan view:clear
 
 php artisan migrate --force
 
-exec php -S 0.0.0.0:8000 -t public
+echo "🚀 Starting PHP-FPM..."
+exec php-fpm
