@@ -26,6 +26,7 @@ return [
      * Matches the request origin. Restrict to specific domains in production.
      */
     'allowed_origins' => [
+        'http://localhost:3001',
         'http://localhost:3000',
         'http://localhost:5173',
         'http://127.0.0.1:3000',
